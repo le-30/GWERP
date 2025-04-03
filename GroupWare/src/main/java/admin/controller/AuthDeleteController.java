@@ -14,28 +14,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import admin.model.AuthInfoDao;
 import admin.model.CmmCodeDao;
 
 @Controller
-public class CmmCodeDeleteController {
+public class AuthDeleteController {
 	
-	private final String command ="cmmCode_delete.erp";
+	private final String command ="auth_delete.erp";
 	
 	@Autowired
-	CmmCodeDao cmmCodeDao;
+	AuthInfoDao authInfoDao;
 	
 	
 	@RequestMapping(value=command, method=RequestMethod.GET)
-	public void doAction(@RequestParam("cmm_class") String cmm_class,
-								 @RequestParam("cmm_cd") String cmm_cd,
-								 HttpServletResponse response) throws IOException {
-		
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("cmm_cd", cmm_cd);
-		map.put("cmm_class", cmm_class);
+	public void doAction(@RequestParam("auth_cd") String auth_cd,
+						 HttpServletResponse response) throws IOException {
 		
 		
-		int cnt = cmmCodeDao.deleteCmmCode(map);
+		
+		int cnt = authInfoDao.deleteAuInfo(auth_cd);
 		response.setContentType("text/plain;charset=UTF-8");
 		response.getWriter().write("OK");
 	}

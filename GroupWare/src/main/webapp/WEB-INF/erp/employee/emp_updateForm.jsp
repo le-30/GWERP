@@ -4,7 +4,7 @@
 
 <form:form commandName="empBean" action="emp_update.erp" method="post" id="empUpdateForm">
 
-<input type="hidden" name="redirectPage" value="emp_detail.erp?id=${empBean.emp_no }">
+<input type="hidden" name="redirectPage" value="emp_detail.erp?no=${empBean.emp_no }">
 
 사원번호:<input type="text" name="emp_no" value="${empBean.emp_no}">
 <form:errors path="emp_no"/>

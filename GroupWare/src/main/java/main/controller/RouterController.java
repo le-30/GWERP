@@ -35,13 +35,13 @@ public class RouterController {
 		if ("emp".equals(page)) {
 		    return "redirect:/lsh_list.erp" + queryParams;
 		}else if("dept".equals(page)){
-			return "redirect:/dept_list.erp";
+			return "redirect:/dept_list.erp" +queryParams;
 		}else if("cmmCode".equals(page)){
-			return "redirect:/cmm_list.erp";
+			return "redirect:/cmm_list.erp" + queryParams;
 		}else if("authInfo".equals(page)) {
-			return "redirect:/empAuthInfo.erp";
+			return "redirect:/empAuthInfo.erp" +queryParams;
 		}else if("auth".equals(page)) {
-			return "redirect:/auth_list.erp";
+			return "redirect:/auth_list.erp"+ queryParams;
 		}else if("received".equals(page)) {
 			return "redirect:/ymh_MessageReceive.erp" + queryParams;
 		}else if("send".equals(page)) {

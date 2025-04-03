@@ -1,6 +1,8 @@
 package Login.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import admin.model.EmployeeAuthDao;
 import employee.model.EmployeeBean;
 import employee.model.EmployeeDao;
 import jwt.util.JwtUtil;
+import utility.AutoAuthority;
 
 @Controller
 public class SubmitLoginController {
@@ -24,7 +28,12 @@ public class SubmitLoginController {
 
 	@Autowired
 	EmployeeDao empdao;
+	
+	@Autowired
+	EmployeeAuthDao empAuthDao;
 
+	@Autowired
+	AutoAuthority autoAuthority;
 
 	@RequestMapping(value=command,method=RequestMethod.GET)
 	public String doAction(){
@@ -46,13 +55,19 @@ public class SubmitLoginController {
 		System.out.println("pw:"+empBean.getPw());
 
 		if(empBean.getEmp_no().equals(emp_no) && empBean.getPw().equals(pw)) {
-
+			
+			autoAuthority.defaultAuthor(empBean);
+			
 			session.setAttribute("emp_no", emp_no);
 			session.setAttribute("emp_nm",empBean.getEmp_nm());
 			session.setAttribute("dept_cd", empBean.getDept_cd());
 			session.setAttribute("dept_nm", empBean.getDept_nm());          
 			session.setAttribute("position_cd", empBean.getPosition_cd());
 			session.setAttribute("position_nm", empBean.getPosition_nm()); 
+			
+			 List<String> authNames = empAuthDao.getAuthNamesByEmpNo(emp_no);
+		     session.setAttribute("currentAuth", String.join(",", authNames));
+		     session.setAttribute("hasAdmin", authNames.contains("관리자권한"));
 
 			String accessToken = JwtUtil.createToken(emp_no, empBean.getPosition_nm(), empBean.getDept_nm());
 

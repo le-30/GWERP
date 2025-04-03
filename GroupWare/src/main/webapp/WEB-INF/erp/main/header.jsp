@@ -59,7 +59,7 @@
     <div class="header-left" id="headerTabs">
        
     </div>
-    <button id="headerBtn" onclick="openModal(currentModal)">
+    <button id="headerBtn" onclick="openModal(currentModal)" style="display: none;">
     등록
     </button>
 </header>
