@@ -183,7 +183,7 @@ tbody tr:hover {
         </div>
     </div>
 </div>
-  
+       
 <script>
     function confirmApproval(vacationNo) {
         document.getElementById("modalMessage").innerText = "해당 휴가를 승인하시겠습니까?";
