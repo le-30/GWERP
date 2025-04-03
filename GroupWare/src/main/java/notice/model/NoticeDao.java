@@ -69,6 +69,11 @@ public class NoticeDao {
 		List<NoticeBean> lists = sqlSessionTemplate.selectList(namespace + ".selectSaveNotice");
 		return lists;
 	}
+
+	public String selectOneNum() {
+		String notice_no_seq = sqlSessionTemplate.selectOne(namespace + ".selectOneNum");
+		return notice_no_seq;
+	}
 	
 	
 	

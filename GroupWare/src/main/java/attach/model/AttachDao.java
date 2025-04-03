@@ -23,6 +23,12 @@ public class AttachDao {
 		
 		return sqlSessionTemplate.selectOne(namespace + ".getServerFileNameByDocNo", msg_no);
 	}
+	
+	
+	public String getServerFileNameByNoticeNo(String notice_no) {
+		
+		return sqlSessionTemplate.selectOne(namespace + ".getServerFileNameByNoticeNo", notice_no);
+	}
 
 
 
