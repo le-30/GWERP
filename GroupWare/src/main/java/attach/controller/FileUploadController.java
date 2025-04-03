@@ -20,8 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class FileUploadController {
 
-	private static final String GITHUB_API_URL;
-	private static final String GITHUB_TOKEN ;  
+	 	private static final String GITHUB_API_URL;
+		private static final String GITHUB_TOKEN;    
 
 
 
