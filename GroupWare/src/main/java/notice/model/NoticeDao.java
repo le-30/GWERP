@@ -43,9 +43,10 @@ public class NoticeDao {
 	}//selectOneNotice
 
 	public int updateNotice(NoticeBean notice) {
-		int cnt = sqlSessionTemplate.update(namespace + ".updateNotice", notice);
+		int cnt = sqlSessionTemplate.update(namespace + ".downReadcount", notice);
+		int cnt2 = sqlSessionTemplate.update(namespace + ".updateNotice", notice);
 		System.out.println(cnt);
-		return cnt;
+		return cnt2;
 	}//updateNotice
 
 	public int deleteNotice(int notice_no) {
