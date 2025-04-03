@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="./../common/common.jsp"%>
-<!-- 
-<script>
-    function companion(apprNo) {
-        location.href = "rejectForm.erp?appr_no=" + apprNo;
-    }
-</script> -->
 
 <table border="1">
 	<thead>
@@ -21,8 +15,6 @@
 			<th>결제 일시</th>
 			<th>반려 사유</th>
 			<th>서류</th>
-			<th>승인</th>
-			<th>반려</th>
 
 		</tr>
 	</thead>
@@ -39,18 +31,12 @@
 				<td>${approval.appr_dtm}</td>
 				<td>${approval.appr_refuse_op}</td>
 				<td><a href="download.erp?doc_no=${approval.doc_no}">다운로드</a></td>
-
-				<td><a href="rejectForm.erp?appr_no=${approval.appr_no}">반려</a></td>
-				<td><a
-					href="signOff.erp?appr_no=${approval.appr_no}&appr_order=${approval.appr_order}">
-						승인 </a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
 
-<br>
-<p align="center">
-	${pageInfo.pagingHtml }
-</p>
-
+<br><br>
+<div id="paging">
+${pageInfo.pagingHtml}
+</div>

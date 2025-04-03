@@ -1,5 +1,6 @@
 package employee.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -94,5 +95,24 @@ public class EmployeeDao {
 		
 	}
 
+	public int updateAnnualLeave(String emp_no, int total_days) {
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("emp_no", emp_no);
+	    map.put("total_days", total_days);
+
+	    int result = sqlSessionTemplate.update(namespace + ".updateAnnualLeave", map);
+	    
+	    return result;
+	}
+	
+    // 로그인한 사원의 연차 정보 조회 (연차만 가져오기)
+    public EmployeeBean getEmployeeLeave(String emp_no) {
+        return sqlSessionTemplate.selectOne(namespace + ".getEmployeeLeave", emp_no);
+    }
+
+    // 전체 사원의 연차 정보 조회
+    public List<EmployeeBean> getAllEmployeeVacation() {
+        return sqlSessionTemplate.selectList(namespace + ".getAllEmployeeVacation");
+    }
 	
 }
