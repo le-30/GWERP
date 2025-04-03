@@ -27,7 +27,7 @@
 		<if test="whatColumn == 'emp_no'">
 		where e.emp_no like #{keyword}
 		</if>
-		order by hire_date
+		order by e.emp_no
 	</select>
 	
 	<select id="getAllEmployeeList" resultType="employee.model.EmployeeBean">
@@ -69,20 +69,32 @@
 	</select>
 	
 	<select id="getAllEmployeeAuth" resultType="employee.model.EmployeeBean">
-		select
-		       e.emp_no
-		      ,e.emp_nm
-		      ,e.pw
-		      ,e.dept_cd
-		      ,(select d.dept_nm from department d where d.dept_cd = e.dept_cd) as dept_nm
-		      ,e.position_cd
-		      ,(select c.cmm_nm from cmm_code c where c.cmm_class = 'POSITION_CD' and c.cmm_cd = e.position_cd) as position_nm
-		      ,NVL(a.auth_cd,'없음') as currentAuth
-		      from employee e
-		      left join
-		      employee_auth a on e.emp_no = a.emp_no
-		      order by e.emp_no
-	
+		SELECT 
+   		 	  e.emp_no
+   			 ,e.emp_nm
+   			 ,e.pw
+   			 ,e.dept_cd
+  			 ,(SELECT d.dept_nm FROM department d WHERE d.dept_cd = e.dept_cd) AS dept_nm
+   			 ,e.position_cd
+    		 ,(SELECT c.cmm_nm FROM cmm_code c 
+    				 WHERE c.cmm_class = 'POSITION_CD' AND c.cmm_cd = e.position_cd) AS position_nm
+     
+   			 ,NVL((
+       			    SELECT LISTAGG(i.auth_nm, ',') WITHIN GROUP (ORDER BY i.auth_cd)
+       				FROM employee_auth a
+        			JOIN auth_info i ON a.auth_cd = i.auth_cd
+       			    WHERE a.emp_no = e.emp_no
+   			 ), '없음') AS currentAuth
+
+			FROM employee e
+			<if test="whatColumn == 'emp_nm'">
+			where e.emp_nm like #{keyword}
+			</if>
+			<if test="whatColumn == 'dept_nm'">
+			where e.dept_nm like #{keyword}
+			</if>
+			ORDER BY e.emp_no
+
 	</select>
 	
 	<select id="getTotalCount" resultType="int">

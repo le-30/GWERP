@@ -7,6 +7,7 @@ window.pageConfig = window.pageConfig || {
 	emp: {
 		button: "사원 등록",
 		modal: "emp_insert",
+		auth :"관리자권한,사원등록권한",
 		container:"empListContainer",
 		tabs: [
 			{ label: "사원 목록", target: "emp" }
@@ -64,6 +65,7 @@ window.pageConfig = window.pageConfig || {
 	totalNotice: {
 		button: "공지사항 작성",
 		modal: "notice_insert",
+		auth :"관리자권한,공지사항등록권한",
 		container:"noticeListContainer",
 		tabs: [
 			{ label: "전체 공지", target: "totalNotice" }
@@ -95,36 +97,71 @@ window.pageConfig = window.pageConfig || {
 	window.currentModal = '';
 	window.currentPage ='';
 	
-
 	function loadContent(page, params = {}) {
-		
 		currentPage = page;
-		
+
 		let data = { page: page };
-		
 		Object.assign(data, params);
-		
+
 		$.ajax({
 			url: 'router.erp',
 			type: 'GET',
 			data: data,
-			success: function(html) {
+			success: function (html) {
 				$('.main-content').html(html);
-			
+
 				const config = pageConfig[page];
+
 				if (config) {
-					$('#headerBtn').text(config.button);
-					currentModal = config.modal;
+					// 버튼 텍스트와 모달 지정
+					$('#headerBtn').text(config.button || '');
+					currentModal = config.modal || '';
+
+					// 버튼 숨김/보임 처리
+					if (!config.button) {
+						// 버튼 자체가 정의되지 않은 경우
+						$('#headerBtn').hide();
+					} else if (config.auth) {
+						// 권한 확인 필요
+						const requiredAuths = config.auth.split(",");
+						const userAuths = window.userAuths || [];
+						let hasPermission = false;
+
+						for (let i = 0; i < requiredAuths.length; i++) {
+							for (let j = 0; j < userAuths.length; j++) {
+								if (requiredAuths[i].trim() === userAuths[j].trim()) {
+									hasPermission = true;
+									break;
+								}
+							}
+							if (hasPermission) break;
+						}
+
+						$('#headerBtn').toggle(hasPermission);
+					} else {
+						// 권한 체크 필요 없으면 무조건 보여줌
+						$('#headerBtn').show();
+					}
 				} else {
+					// config가 없는 경우
 					$('#headerBtn').text('');
 					currentModal = '';
+					$('#headerBtn').hide();
 				}
+
+				if (page === 'authInfo') {
+					bindAuthorityEvents();
+				}
+				bindDeleteEvent(); // 삭제 이벤트 바인딩
 			},
-			error: function() {
+			error: function () {
 				alert('본문을 불러오는 중 오류가 발생했습니다.');
 			}
 		});
-	}//본문 함수
+	}
+
+
+	
 	
 	
 	function bindTabEvents(){
@@ -211,6 +248,14 @@ window.pageConfig = window.pageConfig || {
             url = 'ymh_MessageReceive.erp';
         } else if (formId === '#sendSearchForm'){
             url = 'ymh_MessageSend.erp';  // 기본 URL
+        } else if (formId === '#deptSearchForm'){
+            url = 'dept_list.erp';
+        }else if (formId === '#cmmCodeSearchForm'){
+            url = 'cmm_list.erp';
+        }else if (formId === '#authInfoSearchForm'){
+            url = 'empAuthInfo.erp';
+        }else if (formId === '#authSearchForm'){
+            url = 'auth_list.erp';
         }
         
 			$.ajax({
@@ -252,6 +297,10 @@ window.pageConfig = window.pageConfig || {
 	    // msgSearchForm에 대해 이벤트 추가
 	    addSearchEventListener('#receiveSearchForm', '#receiveSearchBtn', '#receiveKeywordInput');
 	    addSearchEventListener('#sendSearchForm', '#sendSearchBtn', '#sendKeywordInput');
+	    addSearchEventListener('#authInfoSearchForm', '#authInfoSearchBtn', '#authInfoKeywordInput');
+	    addSearchEventListener('#cmmCodeSearchForm', '#cmmCodeSearchBtn', '#cmmCodeKeywordInput');
+	    addSearchEventListener('#deptSearchForm', '#deptSearchBtn', '#deptkeywordInput');
+	    addSearchEventListener('#authSearchForm', '#authSearchBtn', '#authkeywordInput');
 	});//검색 클릭이나 엔터 누를식 본문만 바뀌는 함수
 
 
@@ -373,5 +422,117 @@ window.pageConfig = window.pageConfig || {
 		});
 	} // MessageDelete
 
-		
+	//AuthInfo 권한 부여/해제 요청 함수
+	function submitAuthority(actionType) {
+		const form = document.querySelector("form[action='empAuthInfo.erp']");
+		const formData = new FormData(form);
+
+		const auth_cd = formData.get("auth_cd");
+		const empNos = [];
+		form.querySelectorAll("input[name='emp_no']:checked").forEach(input => {
+			empNos.push(input.value);
+		});
+
+		if (empNos.length === 0) {
+			alert("사원을 선택해주세요.");
+			return;
+		}
+
+		$.ajax({
+			url: 'empAuthInfo.erp', // 기존 컨트롤러 재활용
+			method: 'POST',
+			data: {
+				auth_cd: auth_cd,
+				actionType: actionType,
+				emp_no: empNos
+			},
+			traditional: true, // emp_no[]=1&emp_no[]=2 형태로 전송됨
+			success: function () {
+				alert("처리되었습니다.");
+				loadContent("authInfo"); // 본문 새로고침
+			},
+			error: function () {
+				alert("처리 실패");
+			}
+		});
+	}//권한부여,해제
+
+	// 본문이 로딩될 때 버튼 이벤트 연결
+	function bindAuthorityEvents() {
+		$(document).off("click", "#grantBtn").on("click", "#grantBtn", function () {
+			submitAuthority("grant");
+		});
+		$(document).off("click", "#revokeBtn").on("click", "#revokeBtn", function () {
+			submitAuthority("revoke");
+		});
+	}
+
+	//삭제 메서드
+	function bindDeleteEvent() {
+  $(document).off("click", ".deleteBtn").on("click", ".deleteBtn", function () {
+    const url = $(this).data("url");
+    const name = $(this).data("name") || "항목";
+    let params = {};
+
+    try {
+      params = JSON.parse($(this).attr("data-params"));//JSON.parse 문자열을 객체로바꿔서 쓰고 싶을때 사용
+    } catch (e) {
+      alert("삭제 파라미터 오류");
+      return;
+    }
+
+    if (!confirm(name + "을(를) 삭제하시겠습니까?")) return;
+
+    $.ajax({
+      url: url,
+      type: "GET",
+      data: params,
+      success: function () {
+        alert(name + " 삭제 완료");
+        loadContent(currentPage);
+      },
+      error: function () {
+        alert(name + " 삭제 실패");
+      }
+    });
+  });
+}
+
+	window.userAuths = "${sessionScope.currentAuth}".split(",");
+
+	
+	function hideUnauthorizedButtons() {
+		  const currentAuths = window.userAuths || []; // 현재 로그인 사용자의 권한 배열
+
+		  $(".auth-btn").each(function () {
+		    const required = $(this).data("auth"); // 버튼에 적힌 권한 문자열
+		    if (!required) return; // 권한 체크 안 해도 되는 버튼이면 그냥 통과
+
+		    const requiredAuths = required.split(","); // 예: "관리자권한,권한등록권한" → 배열
+
+		    let hasPermission = false;
+
+		    // 현재 로그인한 사용자의 권한 중 하나라도 일치하면 허용
+		    for (let i = 0; i < requiredAuths.length; i++) {
+		      for (let j = 0; j < currentAuths.length; j++) {
+		        if (requiredAuths[i].trim() === currentAuths[j].trim()) {
+		          hasPermission = true;
+		          break; // 내부 루프 종료
+		        }
+		      }
+		      if (hasPermission) break; // 외부 루프도 탈출
+		    }
+
+		    if (!hasPermission) {
+		      $(this).hide(); // 권한이 없으면 버튼 숨기기
+		    }
+		  });
+		}
+
+	$(document).ready(function () {
+		  hideUnauthorizedButtons();
+		});
+
+
+
 </script>

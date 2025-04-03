@@ -46,9 +46,9 @@ public class CmmCodeDao {
 			return cnt;
 		}
 
-		public int deleteCmmCode(String cmm_nm) {
+		public int deleteCmmCode(Map<String,String> map) {
 			
-			int cnt = sqlSessionTemplate.delete(namespace+".deleteCmmCode",cmm_nm);
+			int cnt = sqlSessionTemplate.delete(namespace+".deleteCmmCode",map);
 			
 			return cnt;
 		}

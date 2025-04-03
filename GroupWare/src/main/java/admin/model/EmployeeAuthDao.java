@@ -1,6 +1,7 @@
 package admin.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,10 +17,10 @@ public class EmployeeAuthDao {
 
 		public String getAuthByEmpNo(String emp_no,String auth_cd) {
 			
-			EmployeeAuthBean empAuthBean = new EmployeeAuthBean();
-			empAuthBean.setAuth_cd(auth_cd);
-			empAuthBean.setEmp_no(emp_no);
-			String getAuthByEmpNo = sqlSessionTemplate.selectOne(namespace+".getAuthByEmpNo",empAuthBean);
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("auth_cd", auth_cd);
+			map.put("emp_no", emp_no);
+			String getAuthByEmpNo = sqlSessionTemplate.selectOne(namespace+".getAuthByEmpNo",map);
 			
 			return getAuthByEmpNo;
 		}
@@ -42,5 +43,18 @@ public class EmployeeAuthDao {
 			int cnt = sqlSessionTemplate.update(namespace+".updateEmployeeAuth",map);
 			
 			return cnt;
+		}
+
+		public int deleteEmployeeAuth(String emp_no, String auth_cd) {
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("auth_cd", auth_cd);
+			map.put("emp_no", emp_no);
+			int cnt = sqlSessionTemplate.delete(namespace+".deleteEmployeeAuth",map);
+			return cnt;
+		}
+
+		public List<String> getAuthNamesByEmpNo(String emp_no) {
+			List<String> authlists = sqlSessionTemplate.selectList(namespace+".getAuthNamesByEmpNo",emp_no);
+			return authlists;
 		}
 }
