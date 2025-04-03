@@ -9,7 +9,7 @@
     <option value="dept_nm">부서이름</option>
   </select>
   <input type="text" name="keyword" id="deptkeywordInput">
-  <input type="button" value="검색" id="deptsearchBtn">  
+  <input type="button" value="검색" id="deptSearchBtn">  
 </form>
 
 

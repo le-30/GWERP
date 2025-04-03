@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@include file="./../common/common.jsp" %>
 <!-- /WEB-INF/views/sidebar.jsp -->
 <style>
           /* 사이드바 */
@@ -116,10 +116,13 @@
     <div class="sideTr" data-action="page" data-target="pay">
         <i class="fas fa-dollar-sign sideIcon"></i>급여
     </div>
+    <c:if test="${sessionScope.hasAdmin eq true}">
     <div class="sideTr" data-action="page" data-target="admin">
         <i class="fas fa-dollar-sign sideIcon"></i>관리자페이지
         
     </div>
+    </c:if>
+    
 </div>
 
 </div>

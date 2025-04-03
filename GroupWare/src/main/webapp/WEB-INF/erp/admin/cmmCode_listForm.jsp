@@ -36,7 +36,12 @@
 			  </button>
 			</th>
 			<th>
-			<a href="cmmCode_delete.erp?cmm_nm=${cmmCode.cmm_nm }">삭제</a>
+			<button class="deleteBtn" 
+        			data-url="cmmCode_delete.erp"
+        			data-name="공통코드"
+       			    data-params='{"cmm_cd":"${cmmCode.cmm_cd}","cmm_class":"${cmmCode.cmm_class}"}'>
+       				 삭제
+			</button>
 			</th>
 			
 		</tr>	

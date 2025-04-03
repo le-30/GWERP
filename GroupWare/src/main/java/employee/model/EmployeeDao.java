@@ -47,9 +47,10 @@ public class EmployeeDao {
 		return empBean;
 	}
 
-	public List<EmployeeBean> getAllEmployeeJoinAuth() {
+	public List<EmployeeBean> getAllEmployeeJoinAuth(Paging pageInfo,Map<String,String> map) {
 		
-		List<EmployeeBean> empList = sqlSessionTemplate.selectList(namespace+".getAllEmployeeAuth");
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(),pageInfo.getLimit());
+		List<EmployeeBean> empList = sqlSessionTemplate.selectList(namespace+".getAllEmployeeAuth",map,rowBounds);
 		
 		return empList;
 	}
