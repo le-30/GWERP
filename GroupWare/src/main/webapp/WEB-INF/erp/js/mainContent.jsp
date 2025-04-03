@@ -140,7 +140,26 @@ window.pageConfig = window.pageConfig || {
 		});
 	}//tab 클릭시 페이지교체(헤더제목 누를시)
 	
-	
+	function handleSidebarByTarget(target,page) { // validCheck
+		
+		//alert("handletarget : " + target);
+		//alert("handlepage : " + page);
+		
+		const sidebarBtn = $(".sideTr").filter(function() {
+			return $(this).data("target") === page;
+		});
+		
+		//alert("sidebarBtn : " + sidebarBtn.length);
+		//alert('action : ' +sidebarBtn[0].dataset.action);
+		//alert('target : ' +sidebarBtn[0].dataset.target);
+		
+		if (sidebarBtn.length > 0) {
+			handleSidebar(sidebarBtn[0], target); // DOM 요소로 변환 후 전달
+		} else {
+			alert("해당 target을 가진 sidebarBtn을 찾을 수 없습니다.");
+		}
+		handleSidebar(sidebarBtn);
+	} // insert 이후 헤더 자동 변환
 	
 	window.onload = function() {//"초기화 역할" + "URL 진입 대응" + "자동 탭/본문 로딩"
 		const params = new URLSearchParams(window.location.search); 

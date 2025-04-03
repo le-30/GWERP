@@ -52,44 +52,54 @@ window.tabSets = window.tabSets || {
 
 
 	
-	function handleSidebar(btn){
-		
-		
-		const action = btn.dataset.action;//sidebar.jsp의 data-action
-		const target = btn.dataset.target;//sidebar.jsp의 data-target
-		
-		const whatColumn = btn.querySelector("input[name='whatColumn']")?.value || "";
-	    const keyword = btn.querySelector("input[name='keyword']")?.value || "";
-	    const pageNumber = btn.querySelector("input[name='pageNumber']")?.value || "1";
-	    
-		if(action === "page"){
-			const tabs = tabSets[target];//해당 메뉴의 탭세트 가져오기
+		function handleSidebar(btn,target2){
 			
-			 
-			if(tabs){//만약 tabs이 존재하면
-				 const $headerTabs = $("#headerTabs");//$변수이름은 Jquery객체라고 표시해준것
-				 //상단탭들이 들어갈 div나 span묶음의 jQuery객
-				 $headerTabs.empty();//기존탭 비우기
+			const action = btn.dataset.action;//sidebar.jsp의 data-action
+			const target = btn.dataset.target;//sidebar.jsp의 data-target
+			
+			const whatColumn = btn.querySelector("input[name='whatColumn']")?.value || "";
+			const keyword = btn.querySelector("input[name='keyword']")?.value || "";
+		    const pageNumber = btn.querySelector("input[name='pageNumber']")?.value || "1";
+		    
+			if(action === "page"){
+				const tabs = tabSets[target];//해당 메뉴의 탭세트 가져오기
 				 
-				 $.each(tabs, function(index, tab){//탭 배열을 하나씩 돌면서(jQuery 반복문)
+				if(tabs){//만약 tabs이 존재하면
+					const $headerTabs = $("#headerTabs");//$변수이름은 Jquery객체라고 표시해준것
+					 //상단탭들이 들어갈 div나 span묶음의 jQuery객
+					$headerTabs.empty();//기존탭 비우기
 					 
-					 const isActive = index === 0 ? "active" :""; // 첫번째 탭에만 "active"클래스 부여해서 스타일링
-					 const html = '<span class="tab '+isActive+ '"data-target="'+tab.target+'">'+tab.label+'</span>';
+					$.each(tabs, function(index, tab) {//탭 배열을 하나씩 돌면서(jQuery 반복문)
+					 	
+						let isActive = "";
+					 	
+						if(target2 == null) {
+							isActive = index === 0 ? "active" :"";
+						}else {
+							isActive = (tab.target === target2) ? "active" : "";
+						}
+					 	
+						const html = '<span class="tab ' + isActive + '" data-target="' + tab.target + '">' + tab.label + '</span>';
+					    
+						$headerTabs.append(html); // 생성한 탭 HTML을 실제 DOM에 추가
+					});
+					bindTabEvents();
+					 //span을 클릭했을때 이벤트를만들어주는것(어떤 본문을 불러올지 연결하는 작업)
+					window.currentPage = target2 ? target2 : tabs[0].target;
 					 
-					 $headerTabs.append(html);//생성한 탭 HTML을 실제 DOM에 추가
-				 });
-				 
-				 bindTabEvents();
-				 //span을 클릭했을때 이벤트를만들어주는것(어떤 본문을 불러올지 연결하는 작업)
-				 loadContent(tabs[0].target, { whatColumn, keyword, pageNumber });
-			 }else{
-				 //탭세트 없으면 바로 로딩
-			loadContent(target, { whatColumn, keyword, pageNumber });
-				 
-			 }
-		}else if(action === "modal"){
-			openModal(target);
+					loadContent(currentPage, { whatColumn, keyword, pageNumber });
+					 
+					 //alert("handlesidebar tab 존재 : " + currentPage);
+				}else{
+					 //탭세트 없으면 바로 로딩
+					window.currentPage = target;
+					loadContent(target, { whatColumn, keyword, pageNumber });
+					 
+					//alert("handlesidebar 바로 로딩 : " + currentPage);
+				}
+			}else if(action === "modal"){
+				openModal(target);
+			}
 		}
-	}
 
 </script>

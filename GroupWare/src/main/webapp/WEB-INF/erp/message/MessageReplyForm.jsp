@@ -30,7 +30,7 @@
 	<input type="hidden" value="${sessionScope.emp_no }" name="send_emp_no">
 	<input type="hidden" value="${mb2.send_emp_no }" name="receive_emp_no">
 	<input type="hidden" value="${mb2.msg_no }" name="msg2_no">
-	<input type="hidden" name="redirectPage" value="messageDetail.erp?msg_no=${mb2.msg_no}">
+	<input type="hidden" name="redirectPage" value="messageDetail.erp?no=${mb2.msg_no}">
     <div>
         <div>
             <label>받는사람 : </label>
