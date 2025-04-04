@@ -23,10 +23,6 @@
 		JOIN appr_line al ON a.con_key3 = al.doc_no
 		WHERE al.doc_no = #{doc_no}
 	</select>
-<<<<<<< HEAD
-	
-=======
->>>>>>> origin/l.j.r-2
 	<select id="getServerFileNameByNoticeNo" resultType="string">
 		SELECT a.server_file_name
 		FROM attach a

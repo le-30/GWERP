@@ -29,7 +29,11 @@
 		    <div style="min-width: 120px;">시간</div>
 		</div>
 		<div style="border-bottom: 2px solid #000;">
-		
+			<c:if test="${totalCount == 0 }">
+				<div style=" align-items: center; padding: 10px; border-bottom: 1px solid #ddd; gap: 20px;">
+					<div align="center">받은 메일이 없습니다.</div>
+				</div>
+			</c:if>
 			<c:forEach var="mb" items="${receivelist}">
 		        <div style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #ddd; gap: 20px;">
 		            <div style="min-width: 75px; text-align: center;">

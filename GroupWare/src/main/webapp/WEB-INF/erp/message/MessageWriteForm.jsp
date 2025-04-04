@@ -28,22 +28,7 @@ messageinsertForm
 	font-weight: bold;  
 }
 </style>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script>
-	
-$(document).on('click', '#toggleCheckboxList', function () {
-    const checkboxList = $('#checkboxList');
-    if (checkboxList.css('display') === "none") {
-        checkboxList.show();
-        $(this).html("▲ 받는 사람 선택 숨기기");
-    } else {
-        checkboxList.hide();
-        $(this).html("▼ 받는 사람 선택");
-    }
-});
-
-</script>
+<script	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 
 <form action="ymh_messageinsert.erp" method="post" id="MessageWriteForm"
 	enctype="multipart/form-data">

@@ -100,10 +100,6 @@
 	insert into auth_info(auth_cd,auth_nm)
 	values(#{auth_cd},#{auth_nm})
 	</insert>
-<<<<<<< HEAD
-	
-=======
->>>>>>> origin/l.j.r-2
 		<select id="getTotalCount" resultType="int">
 	select count(*) from department
 	<if test="whatColumn == 'dept_cd'">
