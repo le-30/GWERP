@@ -38,6 +38,25 @@ public class AttachDao {
 		
 		return attach;
 	}
+	
+	
+	
+	public int deleteFail(String notice_no) {
+		
+		int cnt = sqlSessionTemplate.delete(namespace + ".deleteFail",notice_no);
+		System.out.println("delect cnt : " + cnt);
+		
+		return cnt;
+	}
 
 
+
+	public String selectFile(int notice_no) {
+		
+		String fileName = sqlSessionTemplate.selectOne(namespace + ".selectFile",notice_no);
+		
+		return fileName;
+	}
+	
+	
 }

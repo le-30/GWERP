@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>    
+    pageEncoding="UTF-8"%>
     <!-- header부분-->
 <script>
 
@@ -25,16 +25,16 @@ window.tabSets = window.tabSets || {
 		    { label: "월간 일정", target: "calendarMonth" },
 		    { label: "주간 일정", target: "calendarWeek" }
 		  ],
-		  commute: [
+		  comment: [
 		    { label: "출퇴근 기록", target: "commute" }
 		  ],
 		  vacation: [
 		    { label: "휴가 확인", target: "vacation" },
-		    { label: "휴가 신청", target: "vacationRequest" }
+		    { label: "휴가 잔여", target: "vacationleave" }
 		  ],
 		  appr: [
 			  { label: "내 결재 요청", target: "appr" },
-			    { label: "결재 완료", target: "apprSuc" },
+			    { label: "본인 결재 완료 이력", target: "apprSuc" },
 			    { label: "결재 해야하는 리스트", target: "apprList" }
 		  ],
 		  pay: [
@@ -52,7 +52,9 @@ window.tabSets = window.tabSets || {
 
 
 	
+
 		function handleSidebar(btn,target2){
+
 			
 			const action = btn.dataset.action;//sidebar.jsp의 data-action
 			const target = btn.dataset.target;//sidebar.jsp의 data-target
@@ -87,9 +89,10 @@ window.tabSets = window.tabSets || {
 					 //span을 클릭했을때 이벤트를만들어주는것(어떤 본문을 불러올지 연결하는 작업)
 					window.currentPage = target2 ? target2 : tabs[0].target;
 					 
+
 					loadContent(currentPage, { whatColumn, keyword, pageNumber });
 					 
-					 //alert("handlesidebar tab 존재 : " + currentPage);
+					// alert("handlesidebar tab 존재 : " + currentPage);
 				}else{
 					 //탭세트 없으면 바로 로딩
 					window.currentPage = target;

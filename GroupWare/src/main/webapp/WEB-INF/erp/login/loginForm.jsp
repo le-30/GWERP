@@ -115,13 +115,7 @@
 
     <!-- QR 로그인 -->
     <div class="tab-content" id="qr-login">
-        <form action="lsh_login.erp" method="post">
-            <input type="hidden" name="uuid" value="${uuid}">
-            <img class="qr-img" width="200" height="200"
-                 src="https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:8080/login/scan/qr/login?uuid=${uuid}&size=200x200" />
-            <div class="small-text">휴대폰으로 QR 코드를 스캔해 로그인하세요</div>
-            <div class="small-text" style="color:red;">${error}</div>
-        </form>
+        <%@ include file="view.jsp" %>
     </div>
 
     <!-- 비밀번호 찾기 링크 -->

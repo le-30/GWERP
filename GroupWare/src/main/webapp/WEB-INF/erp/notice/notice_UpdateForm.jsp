@@ -3,14 +3,29 @@
 <%@ include file=".././common/common.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/notice_write_style.css">
 
-<form:form commandName="notice" method="post" action="notice_update.erp" enctype="multipart/form-data">
+<form:form commandName="notice" method="post" action="notice_update.erp" enctype="multipart/form-data" id="notice_updateform">
+	<input type="hidden" name="notice_no" value="${notice.notice_no }">
 	<input type="hidden" name="emp_no" value="${sessionScope.emp_no }">
 	<input type="hidden" name="emp_nm" value="${sessionScope.emp_nm }">
-	<input type="hidden" name="notice_no" value="${notice.notice_no }">
+	<input type="hidden" name="pageNumber" value="${pageNumber }">
+	<input type="hidden" name="whatColumn" value="${whatColumn }">
+	<input type="hidden" name="keyword" value="${keyword }">
+	<input type="hidden" name="kind" value="${kind }">
+	
+	<c:if test="${fn:trim(kind) == 'total'}">
+		<c:set var="list" value="notice_alist.erp"/>
+	</c:if>
+	<c:if test="${fn:trim(kind) == 'dept'}">
+		<c:set var="list" value="notice_dlist.erp"/>
+	</c:if>
+	<c:if test="${fn:trim(kind) == 'my'}">
+		<c:set var="list" value="notice_mlist.erp"/>
+	</c:if>
+	
     <table class="notice-form-table">
         <tr>
             <td colspan="2" align="right">
-                <a href="notice_list.erp?pageNumber=${pageNumber}&whatColumn=${whatColumn }&keyword=${keyword }" class="notice-list-link">목록보기</a>
+                <a href="javascript:void(0)" onclick="updateList('${pageNumber },${whatColumn },${keyword } ', '${kind }')">목록보기</a>
             </td>
         </tr>
         <tr>
@@ -32,7 +47,11 @@
         </tr>
         <tr>
             <td align="center" class="notice-label-3">파일첨부</td>
-            <td><input type="file" name="file" value=""></td>
+            <td>
+            	<input type="file" name="file">
+            	<c:if test="${fileName != null}"><span style="color: blue;">등록된 파일 : ${fileName }</span></c:if>
+            	<c:if test="${fileName == null}"><span style="color: blue;">등록된 파일 없음</span></c:if>
+            </td>
         </tr>
         <tr>
             <td align="center" class="notice-label-4">내용</td>

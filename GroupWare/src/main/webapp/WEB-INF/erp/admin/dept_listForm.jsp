@@ -10,7 +10,7 @@
   </select>
   <input type="text" name="keyword" id="deptkeywordInput">
   <input type="button" value="검색" id="deptSearchBtn">  
-</form>
+</form>  
 
 
 

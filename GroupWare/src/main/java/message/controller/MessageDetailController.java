@@ -28,7 +28,8 @@ public class MessageDetailController {
 	public String doAction(@RequestParam("no") String msg_no,HttpServletRequest request, HttpSession session,
 							@RequestParam(value="whatColumn", required = false) String whatColumn,
 							@RequestParam(value="keyword", required = false) String keyword,
-							@RequestParam(value="pageNumber", required = false) String pageNumber) {
+							@RequestParam(value="pageNumber", required = false) String pageNumber,
+							@RequestParam(value="kind", required = false) String kind) {
 		
 		String emp_no = (String)session.getAttribute("emp_no");
 		MessageBean mb = mdao.detailMessage(msg_no,emp_no);

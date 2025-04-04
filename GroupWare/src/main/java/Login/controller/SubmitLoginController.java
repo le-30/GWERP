@@ -2,7 +2,6 @@ package Login.controller;
 
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -64,12 +63,13 @@ public class SubmitLoginController {
 			session.setAttribute("dept_nm", empBean.getDept_nm());          
 			session.setAttribute("position_cd", empBean.getPosition_cd());
 			session.setAttribute("position_nm", empBean.getPosition_nm()); 
+
+			String accessToken = JwtUtil.createToken(emp_no, empBean.getEmp_nm(),empBean.getPosition_nm(), empBean.getDept_nm());
 			
 			 List<String> authNames = empAuthDao.getAuthNamesByEmpNo(emp_no);
 		     session.setAttribute("currentAuth", String.join(",", authNames));
-		     session.setAttribute("hasAdmin", authNames.contains("ê´€ë¦¬ìê¶Œí•œ"));
+		     session.setAttribute("hasAdmin", authNames.contains("°ü¸®ÀÚ±ÇÇÑ"));
 
-			String accessToken = JwtUtil.createToken(emp_no, empBean.getPosition_nm(), empBean.getDept_nm());
 
 			response.setHeader("Set-Cookie", "access_token=" + accessToken + "; Path=/; HttpOnly; Max-Age=54000"); // 15ï¿½Ã°ï¿½
 

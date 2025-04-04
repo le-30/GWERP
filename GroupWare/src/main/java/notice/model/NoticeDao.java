@@ -22,6 +22,16 @@ public class NoticeDao {
 		int cnt = sqlSessionTemplate.selectOne(namespace +".getTotalCount", map);
 		return cnt;
 	}//getTotalCount
+	
+	public int getDeptCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace +".getDeptCount", map);
+		return cnt;
+	}//getTotalCount
+	
+	public int getMyCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace +".getMyCount", map);
+		return cnt;
+	}//getTotalCount
 
 	public List<NoticeBean> selectAllNotice(Paging pageInfo, Map<String, String> map) {
 		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
@@ -38,16 +48,22 @@ public class NoticeDao {
 
 	public NoticeBean selectOneNotice(int notice_no) {
 		int cnt = sqlSessionTemplate.update(namespace + ".updateReadcount", notice_no);
+		System.out.println("조회수 올림");
 		NoticeBean nb = sqlSessionTemplate.selectOne(namespace + ".selectOneNotice", notice_no);
 		return nb;
 	}//selectOneNotice
 
 	public int updateNotice(NoticeBean notice) {
-		int cnt = sqlSessionTemplate.update(namespace + ".downReadcount", notice);
-		int cnt2 = sqlSessionTemplate.update(namespace + ".updateNotice", notice);
+		int cnt = sqlSessionTemplate.update(namespace + ".updateNotice", notice);
 		System.out.println(cnt);
-		return cnt2;
+		return cnt;
 	}//updateNotice
+	
+	public int downReadcount(int notice_no) {
+		int cnt = sqlSessionTemplate.update(namespace + ".downReadcount", notice_no);
+		System.out.println("조회수 내림");
+		return cnt;
+	}//downReadcount
 
 	public int deleteNotice(int notice_no) {
 		int cnt = sqlSessionTemplate.delete(namespace + ".deleteNotice", notice_no);
@@ -65,6 +81,12 @@ public class NoticeDao {
 		List<NoticeBean> lists = sqlSessionTemplate.selectList(namespace + ".selectNotice");
 		return lists;
 	}//selectNotice
+	
+	public List<NoticeBean> selectDeptNotice(Paging pageInfo, Map<String, String> map) {
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		List<NoticeBean> lists = sqlSessionTemplate.selectList(namespace + ".selectDeptNotice", map, rowBounds);
+		return lists;
+	}//selectDeptNotice
 
 	public List<NoticeBean> selectSaveNotice() {
 		List<NoticeBean> lists = sqlSessionTemplate.selectList(namespace + ".selectSaveNotice");
@@ -74,6 +96,11 @@ public class NoticeDao {
 	public String selectOneNum() {
 		String notice_no_seq = sqlSessionTemplate.selectOne(namespace + ".selectOneNum");
 		return notice_no_seq;
+	}
+
+	public List<NoticeBean> selectDeptPointNotice(String dept_nm) {
+		List<NoticeBean> lists = sqlSessionTemplate.selectList(namespace + ".selectDeptPointNotice", dept_nm);
+		return lists;
 	}
 	
 	

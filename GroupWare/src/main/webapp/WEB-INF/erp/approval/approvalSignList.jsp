@@ -7,7 +7,6 @@
         location.href = "rejectForm.erp?appr_no=" + apprNo;
     }
 </script> -->
-
 <table border="1">
 	<thead>
 		<tr>
@@ -21,8 +20,8 @@
 			<th>결제 일시</th>
 			<th>반려 사유</th>
 			<th>서류</th>
-			<th>승인</th>
 			<th>반려</th>
+			<th>승인</th>
 
 		</tr>
 	</thead>
@@ -46,11 +45,10 @@
 						승인 </a></td>
 			</tr>
 		</c:forEach>
-	</tbody>
+	</tbody>  
 </table>
-
-<br>
-<p align="center">
-	${pageInfo.pagingHtml }
-</p>
+<br><br>
+<div id="paging">
+${pageInfo.pagingHtml}
+</div>
 

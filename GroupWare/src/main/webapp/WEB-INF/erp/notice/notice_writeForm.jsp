@@ -14,11 +14,6 @@
 	<input type="hidden" name="emp_nm" value="${sessionScope.emp_nm }">
     <table class="notice-form-table">
         <tr>
-            <td colspan="2" align="right">
-                <a href="notice_list.erp?pageNumber=${pageNumber}&whatColumn=${whatColumn }&keyword=${keyword }" class="notice-list-link">목록보기</a>
-            </td>
-        </tr>
-        <tr>
             <td align="center" class="notice-label-1">부서선택</td>
             <td>
                 <select name="dept_nm">
@@ -39,7 +34,7 @@
             <td align="center" class="notice-label-3">파일첨부</td>
             <td>
     			<input type="file" name="file">
-    			<span style="color: red;">* 첨부파일 임시저장 불가</span>
+    			<span style="color: red;">* 첨부파일 임시저장 불가</span>  
 			</td>
         </tr>
         <tr>
@@ -51,8 +46,9 @@
         <tr>
             <td colspan="2" align="center" class="notice-form-buttons">
                 <input type="button" value="임시저장" onClick="saveNotice()">
-                <input type="submit" value="작성">
+                <input type="button" value="추가하기" id="submitBtn" data-modal="notice_insert">
             </td>
         </tr>
     </table>
 </form:form>
+<%@include file = "./../js/validCheck.jsp"%>

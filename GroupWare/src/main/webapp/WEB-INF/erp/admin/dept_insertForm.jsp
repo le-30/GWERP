@@ -3,7 +3,7 @@
     <%@include file="./../common/common.jsp" %>
 
 <form:form commandName="deptBean" action="dept_insert.erp" method="post" id="deptinsertForm">
-
+  
 
 
 부서코드:<input type="text" name="dept_cd" value="${deptBean.dept_cd }">

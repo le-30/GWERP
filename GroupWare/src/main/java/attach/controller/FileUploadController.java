@@ -19,12 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FileUploadController {
-
-	private static final String GITHUB_API_URL = ""; // GitHub API 疫꿸퀡�궚 URL
-
-	private static final String GITHUB_TOKEN = "";  ;  
-
-
+	
+	
 	@ResponseBody
 	public String uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
 		System.out.println("file : " + file);
@@ -52,7 +48,7 @@ public class FileUploadController {
 		}
 	}
 
-
+	
 	private String uploadToGitHub(String fileName, String encodedContent) {
 		
 		System.out.println("fileName : " + fileName);
