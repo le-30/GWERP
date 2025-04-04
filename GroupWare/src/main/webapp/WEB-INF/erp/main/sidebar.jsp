@@ -87,6 +87,10 @@ div#prof {
     border-radius: 0 !important;
     overflow: visible !important;
 }
+<<<<<<< HEAD
+=======
+>>>>>>> bc17b30034934d07ff51b1240c13bff6d42e22d9
+>>>>>>> origin/l.j.r-2
 
 </style>
 
@@ -104,7 +108,6 @@ div#prof {
     </div>
 
     <div id="sideMiddle">
-
     <div class="sideTr" data-action="page" data-target="msg">
         <i class="fas fa-paper-plane sideIcon"></i>메신저
     </div>

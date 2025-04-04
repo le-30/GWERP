@@ -40,15 +40,15 @@ public class VacationDao {
 	}
 
 
-    // ÈÞ°¡ ½ÂÀÎ ¸Þ¼­µå (½ÂÀÎÀÚÀÇ emp_no Ãß°¡)
+    // ï¿½Þ°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ emp_no ï¿½ß°ï¿½)
     public void vacationApproval(String vacation_no, String approver_emp_no) {
-        java.util.Map<String, Object> param = new java.util.HashMap<>();
+        java.util.Map<String, Object> param = new java.util.HashMap<String, Object>();
         param.put("vacation_no", vacation_no);
         param.put("approver_emp_no", approver_emp_no);
         sqlSessionTemplate.update(namespace + ".vacationApproval", param);
     }
 
-    // ½ÅÃ»ÀÚÀÇ emp_no Á¶È¸ ¸Þ¼­µå Ãß°¡
+    // ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ emp_no ï¿½ï¿½È¸ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
     public String getApplicantEmpNo(String vacation_no) {
         return sqlSessionTemplate.selectOne(namespace + ".getApplicantEmpNo", vacation_no);
     }

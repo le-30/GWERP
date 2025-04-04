@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@include file="./../common/common.jsp" %>
+    <%@include file="./../common/common.jsp" %>  
 
 <form:form commandName="authBean" action="auth_insert.erp" method="post" id="authinsertForm">
 
@@ -23,4 +23,5 @@
 <input type="button" value="추가하기" id="submitBtn" data-modal="auth_insert">
 </form:form>
 
-<%@include file = "./../js/validCheck.jsp"%>  
+
+<%@include file = "./../js/validCheck.jsp"%>

@@ -31,7 +31,7 @@
             </td>
         </tr>
         <tr>
-            <td align="center" class="notice-label-3">파일첨부</td>
+            <td align="center" class="notice-label-3">파일첨부</td>  
             <td><input type="file" name="file" value=""></td>
         </tr>
         <tr>

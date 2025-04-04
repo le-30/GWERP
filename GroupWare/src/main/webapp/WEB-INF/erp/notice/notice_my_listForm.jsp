@@ -76,7 +76,7 @@
 	</table>
 <br><br>
 <center>
-<form action="notice_list.erp" method="get">
+<form action="notice_list.erp" method="get">  
 	<select name="whatColumn">
 		<option value="">전체 검색</option>
 		<option value="emp_nm">작성자</option>

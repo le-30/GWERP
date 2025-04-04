@@ -6,7 +6,7 @@
 <b>공지사항(등록된공지:${totalCount}/${pageInfo.pageNumber})</b>
 <br><br>
 <c:if test="${totalCount == 0 }">
-	<table width="700">
+	<table width="700">  
 		<tr>
 			<td align="center">
 				공지사항이 없습니다.

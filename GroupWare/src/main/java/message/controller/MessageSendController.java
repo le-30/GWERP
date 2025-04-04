@@ -68,7 +68,7 @@ public class MessageSendController {
 		
 //		System.out.println("emp_no : " + emp_no);
 		
-		// 1 = loginInfo ÀÇ receive_emp_no ·Î±×ÀÎ ÇÑ ´ë»óÀÌ ¹ŞÀº ¸Ş½ÃÁö¸¦ ¸ğ¾Æ¿Â´Ù.
+		// 1 = loginInfo å ì™ì˜™ receive_emp_no å ì‹¸ê¹ì˜™å ì™ì˜™ å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™ å ìŒ¨ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™í‹¸ì¨ˆå ï¿½.
 		
 		List<MessageBean> sendlist = mdao.getAllSend(emp_no, map, pageInfo);
 		

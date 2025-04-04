@@ -52,6 +52,8 @@ public class RouterController {
 			return "redirect:/approvalList.erp";
 		} else if("apprList".equals(page)) {
 			return "redirect:/approvalSignList.erp";
+		}else if("commute".equals(page)) {
+			return "redirect:/list/commute.erp";
 		} else if("apprSuc".equals(page)) {
 			return "redirect:/approvalComplete.erp";
 		}if("vacation".equals(page)) {

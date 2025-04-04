@@ -7,7 +7,6 @@
         location.href = "rejectForm.erp?appr_no=" + apprNo;
     }
 </script> -->
- 
 <table border="1">
 	<thead>
 		<tr>

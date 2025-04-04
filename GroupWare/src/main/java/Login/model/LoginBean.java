@@ -2,11 +2,11 @@ package Login.model;
 
 public class LoginBean {
 
+	private String emp_no;
 	private String uuid;
 	private String code;
 	private String token;
 	private String created_at;
-	private String emp_no;
 	
 	public String getEmp_no() {
 		return emp_no;

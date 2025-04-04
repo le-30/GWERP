@@ -91,7 +91,7 @@ public class MessagePassController {
 		if(mb.getReceive_emp_no() != null) {
 			
 			String input = mb.getReceive_emp_no();
-			emp_no_arr = input.split("\\s*,\\s*"); // °ø¹é°ú ÄŞ¸¶ Á¦°Å ÈÄ ¹è¿­·Î º¯È¯
+			emp_no_arr = input.split("\\s*,\\s*"); // å ì™ì˜™å ì™ì˜™å ï¿½ å ìŒ¨ëªŒì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™ å ì¼ì—´å ì™ì˜™ å ì™ì˜™í™˜
 			
 		}
 
