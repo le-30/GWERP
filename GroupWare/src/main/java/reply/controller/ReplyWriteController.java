@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import notice.model.NoticeDao;
 import reply.model.ReplyBean;
 import reply.model.ReplyDao;
 
@@ -23,20 +23,24 @@ public class ReplyWriteController {
 	@Autowired
 	ReplyDao rdao;
 	
-	@RequestMapping(value=command, method=RequestMethod.POST)
+	@Autowired
+	NoticeDao ndao;
+	
+	@RequestMapping(command)
 	public ModelAndView doAction(@ModelAttribute("reply") @Valid ReplyBean reply,
 								 BindingResult result,
 								 @RequestParam(value="pageNumber") int pageNumber,
 			 					 @RequestParam("whatColumn") String whatColumn,
-			 					 @RequestParam("keyword") String keyword) {
+			 					 @RequestParam("keyword") String keyword,
+			 					 @RequestParam(value="kind", required = false) String kind) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		System.out.println("content : "+reply.getReply_content());
-		System.out.println("notice_no : "+reply.getNotice_no());
-		System.out.println("Emp_no : "+reply.getEmp_no());
-		System.out.println("Emp_nm : "+reply.getEmp_nm());
-		System.out.println("Reply_dtm : "+reply.getReply_dtm());
+		System.out.println("re_content : "+reply.getReply_content());
+		System.out.println("re_notice_no : "+reply.getNotice_no());
+		System.out.println("re_Emp_no : "+reply.getEmp_no());
+		System.out.println("re_Emp_nm : "+reply.getEmp_nm());
+		System.out.println("re_Reply_dtm : "+reply.getReply_dtm());
 		
 		if(result.hasErrors()) {
 			mav.setViewName(getPage);
@@ -44,10 +48,12 @@ public class ReplyWriteController {
 		}
 		
 		int cnt = rdao.writeReply(reply);
-		mav.addObject("notice_no", reply.getNotice_no());
+		ndao.downReadcount(reply.getNotice_no());
+		mav.addObject("no", reply.getNotice_no());
 		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("whatColumn", whatColumn);
 		mav.addObject("keyword", keyword);
+		mav.addObject("kind", kind);
 		mav.setViewName(gotoPage);
 		return mav;
 	}

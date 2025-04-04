@@ -18,18 +18,20 @@ public class ReplyDeleteController {
 	
 	@RequestMapping(command)
 	public ModelAndView doAction(@RequestParam("reply_no") int reply_no,
-								 @RequestParam("notice_no") int notice_no,
+								 @RequestParam("no") int notice_no,
 			 					 @RequestParam(value="pageNumber") int pageNumber,
 			 					 @RequestParam(value="whatColumn",required = false) String whatColumn,
-			 					 @RequestParam(value="keyword",required = false) String keyword) {
+			 					 @RequestParam(value="keyword",required = false) String keyword,
+			 					 @RequestParam(value="kind", required = false) String kind) {
 		
 		int cnt = rdao.deleteReply(reply_no);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("notice_no", notice_no);
+		mav.addObject("no", notice_no);
 		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("whatColumn", whatColumn);
 		mav.addObject("keyword", keyword);
+		mav.addObject("kind", kind);
 		mav.setViewName(getPage);
 		
 		return mav;

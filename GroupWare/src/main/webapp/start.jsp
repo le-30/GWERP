@@ -3,5 +3,4 @@
 
 <%
 response.sendRedirect("lsh_login.erp");
-%>   
-
+%>

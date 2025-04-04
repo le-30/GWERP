@@ -119,7 +119,6 @@
     <c:if test="${sessionScope.hasAdmin eq true}">
     <div class="sideTr" data-action="page" data-target="admin">
         <i class="fas fa-dollar-sign sideIcon"></i>관리자페이지
-        
     </div>
     </c:if>
     

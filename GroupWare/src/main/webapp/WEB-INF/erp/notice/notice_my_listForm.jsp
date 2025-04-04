@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file=".././common/common.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/notice_list_style.csss">
-
-<b>공지사항(등록된공지:${totalCount}/${pageInfo.pageNumber})</b>
-<br><br>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/notice_list_style.css">
+<div id="mnoticeListContainer">
+<br>
+	등록된 공지 : ${totalCount}
+<br>
 <c:if test="${totalCount == 0 }">
 	<table width="700">
 		<tr>
@@ -25,14 +26,13 @@
 	</table>
 	<br><br>
 	<table border="1" width="700" align="center">
-		<tr><td>작성중인 공지사항</td></tr>
 		<c:forEach var="nl" items="${noticeLists2 }">
 			<tr>
 				<td align="center" width="100">
 					작성중
 				</td>
 				<td align="left" width="350">
-					<a href= "notice_content.erp?notice_no=${nl.notice_no }&pageNumber=${pageInfo.pageNumber}&whatColumn=${param.whatColumn}&keyword=${param.keyword}">${nl.notice_title }</a>
+					<a href="javascript:void(0)" onclick="Detail('${nl.notice_no},${pageInfo.pageNumber },${pageInfo.whatColumn },${pageInfo.keyword }, my', 'notice')">${nl.notice_title }</a>
 				</td>
 				<td align="left" width="100">
 					${nl.emp_nm }
@@ -50,16 +50,12 @@
 	<table border="1" width="700" align="center">
 		<c:forEach var="nl" items="${noticeLists0 }">
 			<tr>
-				<c:if test="nl.emp_no == sessionScope.emp_no">
+				<c:if test="${nl.emp_no == sessionScope.emp_no }">
 					<td align="center" width="100">
 						${nl.dept_nm }
 					</td>
 					<td align="left" width="350">
-						<a href= "notice_content.erp?notice_no=${nl.notice_no }&pageNumber=${pageInfo.pageNumber}&whatColumn=${param.whatColumn}&keyword=${param.keyword}">${nl.notice_title }</a>
-						<%-- <a href="#"
-	        	             class="detail-link"
-	        	             data-url="notice_content.erp"
-	        	             data-id="${nl.notice_no }">${nl.notice_title }</a> --%>
+						<a href="javascript:void(0)" onclick="Detail('${nl.notice_no},${pageInfo.pageNumber },${pageInfo.whatColumn },${pageInfo.keyword }, my', 'notice')">${nl.notice_title }</a>
 					</td>
 					<td align="left" width="100">
 						${nl.emp_nm }
@@ -87,6 +83,7 @@
 </form>
 </center>
 </c:if>
-<p align="center">
-	${pageInfo.pagingHtml }
-</p>
+<div id="paging" align="center">
+	${pageInfo.pagingHtml}
+</div>
+</div>

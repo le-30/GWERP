@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file=".././common/common.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/notice_list_style.css">
-<div id="noticeListContainer">
-<b>공지사항(등록된공지:${totalCount}/${pageInfo.pageNumber})</b>
-<br><br>
+<div id="anoticeListContainer">
+<br>
+	등록된 공지 : ${totalCount}
+<br>
 <c:if test="${totalCount == 0 }">
 	<table width="700">
 		<tr>
@@ -31,7 +32,7 @@
 					필독
 				</td>
 				<td align="left" width="350">
-					<a href= "notice_content.erp?notice_no=${nl.notice_no }&pageNumber=${pageInfo.pageNumber}&whatColumn=${param.whatColumn}&keyword=${param.keyword}">${nl.notice_title }</a>
+					<a href="javascript:void(0)" onclick="Detail('${nl.notice_no},${pageInfo.pageNumber },${pageInfo.whatColumn },${pageInfo.keyword }, total', 'notice')">${nl.notice_title }</a>
 				</td>
 				<td align="left" width="100">
 					${nl.emp_nm }
@@ -53,7 +54,7 @@
 					${nl.dept_nm }
 				</td>
 				<td align="left" width="350">
-					<a href= "notice_content.erp?notice_no=${nl.notice_no }&pageNumber=${pageInfo.pageNumber}&whatColumn=${param.whatColumn}&keyword=${param.keyword}">${nl.notice_title }</a>
+					<a href="javascript:void(0)" onclick="Detail('${nl.notice_no},${pageInfo.pageNumber },${pageInfo.whatColumn },${pageInfo.keyword }, total', 'notice')">${nl.notice_title }</a>
 					<%-- <a href="#"
         	             class="detail-link"
         	             data-url="notice_content.erp"

@@ -47,7 +47,11 @@ public class RouterController {
 		}else if("send".equals(page)) {
 			return "redirect:/ymh_MessageSend.erp" + queryParams;
 		}else if("totalNotice".equals(page)){
-			return "redirect:/notice_list.erp";
+			return "redirect:/notice_alist.erp" + queryParams;
+		}else if("deptNotice".equals(page)){
+			return "redirect:/notice_dlist.erp" + queryParams;
+		}else if("myNotice".equals(page)){
+			return "redirect:/notice_mlist.erp" + queryParams;
 		} else if("appr".equals(page)){
 			return "redirect:/approvalList.erp";
 		} else if("apprList".equals(page)) {

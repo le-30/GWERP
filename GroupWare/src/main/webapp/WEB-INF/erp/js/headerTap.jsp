@@ -89,7 +89,7 @@ window.tabSets = window.tabSets || {
 					 
 					loadContent(currentPage, { whatColumn, keyword, pageNumber });
 					 
-					 //alert("handlesidebar tab 존재 : " + currentPage);
+					// alert("handlesidebar tab 존재 : " + currentPage);
 				}else{
 					 //탭세트 없으면 바로 로딩
 					window.currentPage = target;

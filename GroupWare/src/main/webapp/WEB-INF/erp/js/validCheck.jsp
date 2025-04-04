@@ -64,7 +64,16 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	notice_insert: {
 		url: "notice_write.erp",
 		formId: "notice_writeForm",
-		target: "notice"
+		target: "totalnotice",
+		page : "notice",
+		userFormData: true
+	},
+	notice_update: {
+		url: "notice_update.erp",
+		formId: "notice_updateform",
+		target: "totalnotice",
+		page : "notice",
+		userFormData: true
 	}
 };
 
@@ -107,11 +116,14 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		        // 유효성 성공
 		        $('#customModal').hide();
 		        $('#modalContent').empty();
-
+				
 		        const redirectPage = $form.find('input[name="redirectPage"]').val();
 				   const targetPage = config.target || config.defaultRedirect;
 				   const page = config.page;
-
+				
+				   //alert("targetPage : " + targetPage);
+				   //alert("page : " + page);
+				   
 		        if (redirectPage) {
 		          $.ajax({
 		            url: redirectPage,

@@ -29,5 +29,15 @@
 		JOIN notice no ON a.con_key2 = no.notice_no
 		WHERE no.notice_no = #{notice_no}
 	</select>
+	
+	<delete id="deleteFail">
+		delete attach
+		where con_key2 = #{notice_no}
+	</delete>
 
+	<select id="selectFile" resultType="string">
+		SELECT org_file_name
+		FROM attach
+		WHERE con_key2 = #{notice_no}
+	</select>
 </mapper>

@@ -67,7 +67,7 @@ public class SubmitLoginController {
 			
 			 List<String> authNames = empAuthDao.getAuthNamesByEmpNo(emp_no);
 		     session.setAttribute("currentAuth", String.join(",", authNames));
-		     session.setAttribute("hasAdmin", authNames.contains("ê´€ë¦¬ìê¶Œí•œ"));
+		     session.setAttribute("hasAdmin", authNames.contains("°ü¸®ÀÚ±ÇÇÑ"));
 
 			String accessToken = JwtUtil.createToken(emp_no, empBean.getPosition_nm(), empBean.getDept_nm());
 

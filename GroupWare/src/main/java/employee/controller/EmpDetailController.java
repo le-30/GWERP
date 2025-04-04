@@ -25,7 +25,8 @@ public class EmpDetailController {
 	public ModelAndView doAction(@RequestParam("no") String emp_no,
 								@RequestParam(value="whatColumn", required = false) String whatColumn,
 								@RequestParam(value="keyword", required = false) String keyword,
-								@RequestParam(value="pageNumber", required = false) String pageNumber) {
+								@RequestParam(value="pageNumber", required = false) String pageNumber,
+								@RequestParam(value="kind", required = false) String kind) {
 
 		ModelAndView mav = new ModelAndView();
 		

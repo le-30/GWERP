@@ -1,12 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file=".././common/common.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/notice_content_style.css">
 
 <table border="1" width="500">
 	<tr height="30">
 		<td colspan="4" align="right">
-		<input type="button" value="글목록" onClick="location.href='notice_list.erp?pageNumber=${pageNumber}&whatColumn=${whatColumn }&keyword=${keyword }'">
+			<div class="sideTr" data-action="page"
+	             <c:choose>
+	                 <c:when test="${fn:trim(kind) == 'total'}">
+	                     data-target="totalNotice"
+	                 </c:when>
+	                 <c:when test="${fn:trim(kind) == 'dept'}">
+	                     data-target="deptNotice"
+	                 </c:when>
+	                 <c:otherwise>
+	                     data-target="myNotice"
+	                 </c:otherwise>
+	             </c:choose>
+	             onclick="handleSidebar(this)">
+	            <input type="hidden" value="${whatColumn}" name="whatColumn">
+	            <input type="hidden" value="${keyword}" name="keyword">
+	            <input type="hidden" value="${pageNumber}" name="pageNumber">
+	            <i class="fas fa-flag sideIcon"></i> 글목록
+	        </div>
 		</td>
 	</tr>
 	<tr height="30">
@@ -21,30 +37,33 @@
 		</td>
 		<td width="125">${notice.notice_views }</td>
 	</tr>
-	<tr>
-		<td>첨부파일</td>
-		<td><a href="download.erp?notice_no=${notice.notice_no}">다운로드</a></td>
-	</tr>
+	<c:if test="${fileName != null}">
+		<tr>
+			<td>첨부파일</td>
+			<td><a href="download.erp?notice_no=${notice.notice_no}">${fileName }</a></td>
+		</tr>
+	</c:if>
 	<tr height="180">
 		<td width="375" colspan="4">${notice.notice_content }</td>
 	</tr>
 	<c:if test="${notice.emp_no == sessionScope.emp_no}">
 		<tr height="30">
 			<td colspan="4" align="right">
-			<input type="button" value="글수정" onClick="location.href='notice_update.erp?notice_no=${notice.notice_no }&pageNumber=${pageNumber }&whatColumn=${whatColumn }&keyword=${keyword }'">
-			<input type="button" value="글삭제" onClick="location.href='notice_delete.erp?notice_no=${notice.notice_no }&pageNumber=${pageNumber }&whatColumn=${whatColumn }&keyword=${keyword }'">
+			<a href="javascript:void(0)" onclick="Update('${notice.notice_no},${pageNumber },${whatColumn },${keyword }, ${fn:trim(kind) }', 'notice')">글수정</a>
+			<a href="javascript:void(0)" onclick="Delete('${notice.notice_no},${pageNumber },${whatColumn },${keyword }, ${fn:trim(kind) }', 'notice')">글삭제</a>
 			</td>
 		</tr>
 	</c:if>
 </table>
 <br><br>
-<form:form commandName="reply" method="post" action="reply_write.erp">
+<form:form commandName="reply" method="post" action="reply_write.erp" id="norice_write_reply">
 	<input type="hidden" name="emp_no" value="${sessionScope.emp_no }">
 	<input type="hidden" name="emp_nm" value="${sessionScope.emp_nm }">
 	<input type="hidden" name="notice_no" value="${notice.notice_no }">
 	<input type="hidden" name="pageNumber" value="${pageNumber }">
 	<input type="hidden" name="whatColumn" value="${whatColumn }">
 	<input type="hidden" name="keyword" value="${keyword }">
+	<input type="hidden" name="kind" value="${kind }">
 	
 	<table border="1" width="500">
 		<tr height="100">
@@ -53,7 +72,7 @@
 				<form:errors cssClass="err" path="reply_content"/>
 			</td>
 			<td>
-				<input type="submit" value="작성">
+				<input type="button" value="작성" onClick="writeReply()">
 			</td>
 		</tr>
 	</table>
@@ -75,8 +94,7 @@
 					<td>
 						<fmt:formatDate value="${rl.reply_dtm }" type="date" pattern="yyyy-MM-dd HH:mm"/>
 						<c:if test="${rl.emp_no == sessionScope.emp_no}">
-							<!-- <a href="">수정</a> -->
-							<a href="reply_delete.erp?notice_no=${notice.notice_no }&reply_no=${rl.reply_no }&pageNumber=${pageNumber }&whatColumn=${whatColumn }&keyword=${keyword }">삭제</a>
+							<a href="javascript:void(0)" onclick="Delete('${notice.notice_no},${pageNumber },${whatColumn },${keyword }, ${fn:trim(kind) }, ${rl.reply_no }', 'reply')">삭제</a>
 						</c:if>
 					</td>
 				</tr>
