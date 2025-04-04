@@ -20,10 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class FileUploadController {
 
-	 	private static final String GITHUB_API_URL;
-		private static final String GITHUB_TOKEN;    
-
-
+    private static final String GITHUB_TOKEN = "";    // GitHub 占쎈꽅占쎄쿃
+    private static final String GITHUB_API_URL = ""; // GitHub API 疫꿸퀡�궚 URL
+  
 
 	@ResponseBody
 	public String uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
@@ -32,7 +31,7 @@ public class FileUploadController {
 		response.setContentType("application/json; charset=UTF-8");
 
 		if (file.isEmpty()) {
-			return "{\"message\": \"�떎�뙣�뻽�뒿�땲�떎.\"}";
+			return "{\"message\": \"占쎈뼄占쎈솭占쎈뻥占쎈뮸占쎈빍占쎈뼄.\"}";
 		}
 
 		try {
@@ -42,7 +41,7 @@ public class FileUploadController {
 			String newFileName = timeStamp + "_" + file.getOriginalFilename();
 
 			byte[] fileContent = file.getBytes();
-			String encodedContent = Base64.getEncoder().encodeToString(fileContent); // json �씤肄붾뵫
+			String encodedContent = Base64.getEncoder().encodeToString(fileContent); // json 占쎌뵥�굜遺얜뎃
 
 			String githubFileName = uploadToGitHub(newFileName, encodedContent);
 
@@ -54,6 +53,9 @@ public class FileUploadController {
 
 
 	private String uploadToGitHub(String fileName, String encodedContent) {
+		
+		System.out.println("fileName : " + fileName);
+		
 		String filePath = "mail/" + fileName; 
 
 		HttpHeaders headers = new HttpHeaders();

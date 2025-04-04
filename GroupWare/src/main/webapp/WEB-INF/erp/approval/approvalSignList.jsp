@@ -21,8 +21,8 @@
 			<th>결제 일시</th>
 			<th>반려 사유</th>
 			<th>서류</th>
-			<th>승인</th>
 			<th>반려</th>
+			<th>승인</th>
 
 		</tr>
 	</thead>

@@ -24,33 +24,33 @@ public class FileDownloadController {
     private final String command = "download.erp";
     private final String getPage = "approval.approvalList";
     
-
-    private static final String GITHUB_API_URL;
-   	private static final String GITHUB_TOKEN;  
-
+    private static final String GITHUB_TOKEN = "";  // GitHub 占쎈꽅占쎄쿃
+    private static final String GITHUB_API_URL = ""; // GitHub API 疫꿸퀡�궚 URL
+  
   
     @Autowired
     private AttachDao attachDao;
 
     @RequestMapping(command)
     @ResponseBody
-    public ResponseEntity<byte[]> downloadFileFromGitHub(@RequestParam(value="doc_no", required = false) String doc_no,
-    													@RequestParam(value="msg_no", required = false) String msg_no)
-    																							throws Exception {
+    public ResponseEntity<byte[]> downloadFileFromGitHub(@RequestParam(value = "doc_no" , required = false) String doc_no,
+    														@RequestParam(value = "msg_no" , required = false) String msg_no,
+    														@RequestParam(value = "notice_no", required = false) String notice_no) throws Exception {
+    		  
     	String serverFileName = null;
-    	
-    	if(doc_no != null) {
-    		serverFileName = attachDao.getServerFileNameByDocNo(doc_no);
-    	}else if(msg_no != null) {
-    		serverFileName = attachDao.getServerFileNameByDocNo(msg_no);
-    	}
-    	
-    	System.out.println("msg_no : " + msg_no);
-    	System.out.println("serverFileName : " + serverFileName);
-    	
-        if (serverFileName == null) {
-        	
+        
+        if(doc_no != null) {
+           serverFileName = attachDao.getServerFileNameByDocNo(doc_no);
+        }else if(msg_no != null) {
+           serverFileName = attachDao.getServerFileNameByDocNo(msg_no);
+        }else if(notice_no != null) {
+           serverFileName = attachDao.getServerFileNameByNoticeNo(notice_no);
+
         }
+        
+         if (serverFileName == null) {
+            
+         }
 
         String filePath = "mail/" + serverFileName;  
         String apiUrl = GITHUB_API_URL + filePath; 

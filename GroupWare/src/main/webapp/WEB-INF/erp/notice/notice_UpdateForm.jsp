@@ -3,7 +3,7 @@
 <%@ include file=".././common/common.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/notice_write_style.css">
 
-<form:form commandName="notice" method="post" action="notice_update.erp">
+<form:form commandName="notice" method="post" action="notice_update.erp" enctype="multipart/form-data">
 	<input type="hidden" name="emp_no" value="${sessionScope.emp_no }">
 	<input type="hidden" name="emp_nm" value="${sessionScope.emp_nm }">
 	<input type="hidden" name="notice_no" value="${notice.notice_no }">
@@ -32,7 +32,7 @@
         </tr>
         <tr>
             <td align="center" class="notice-label-3">파일첨부</td>
-            <td><input type="file" name="file"></td>
+            <td><input type="file" name="file" value=""></td>
         </tr>
         <tr>
             <td align="center" class="notice-label-4">내용</td>

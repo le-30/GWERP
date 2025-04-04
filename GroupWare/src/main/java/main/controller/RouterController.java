@@ -1,5 +1,8 @@
 package main.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,8 +14,23 @@ public class RouterController {
 	private final String gotoPage ="main/main";
 	
 	@RequestMapping(command)
-	public String doAction(@RequestParam("page") String page) {
-		System.out.println("page:"+page);
+	public String doAction(@RequestParam("page") String page,
+							@RequestParam(value="whatColumn", required = false) String whatColumn,
+							@RequestParam(value="keyword", required = false) String keyword,
+							@RequestParam(value="pageNumber", required = false) String pageNumber) throws UnsupportedEncodingException {
+		
+		System.out.println("router whatColumn : " + whatColumn);
+		System.out.println("router keyword : " + keyword);
+		System.out.println("router pageNumber : " + pageNumber);
+		
+		String encodedKeyword = (keyword != null) ? URLEncoder.encode(keyword, "UTF-8") : "";
+		String encodedWhatColumn = (whatColumn != null) ? URLEncoder.encode(whatColumn, "UTF-8") : "";
+		    
+		String queryParams = String.format("?whatColumn=%s&keyword=%s&pageNumber=%s",
+	            encodedWhatColumn,
+	            encodedKeyword,
+	            pageNumber != null ? pageNumber : "1");
+		
 		if ("emp".equals(page)) {
 		    return "redirect:/lsh_list.erp";
 		}else if("dept".equals(page)){

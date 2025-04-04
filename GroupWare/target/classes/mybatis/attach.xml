@@ -16,11 +16,19 @@
         #{org_file_name}, #{server_file_name}, #{file_size}, sysdate
     )
 </insert>
+
 	<select id="getServerFileNameByDocNo" resultType="string">
 		SELECT a.server_file_name
 		FROM attach a
 		JOIN appr_line al ON a.con_key3 = al.doc_no
 		WHERE al.doc_no = #{doc_no}
+	</select>
+	
+	<select id="getServerFileNameByNoticeNo" resultType="string">
+		SELECT a.server_file_name
+		FROM attach a
+		JOIN notice no ON a.con_key2 = no.notice_no
+		WHERE no.notice_no = #{notice_no}
 	</select>
 
 </mapper>

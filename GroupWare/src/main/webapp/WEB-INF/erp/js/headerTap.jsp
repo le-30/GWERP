@@ -89,21 +89,7 @@ window.tabSets = window.tabSets || {
 					 //span을 클릭했을때 이벤트를만들어주는것(어떤 본문을 불러올지 연결하는 작업)
 					window.currentPage = target2 ? target2 : tabs[0].target;
 					 
-<<<<<<< HEAD
-					 $headerTabs.append(html);//생성한 탭 HTML을 실제 DOM에 추가
-				 });
-				 
-				 bindTabEvents();
-				 //span을 클릭했을때 이벤트를만들어주는것(어떤 본문을 불러올지 연결하는 작업)
-				 loadContent(tabs[0].target);
-			 }else{
-				 //탭세트 없으면 바로 로딩
-			loadContent(target);
-				 
-			 }
-		}else if(action === "modal"){
-			openModal(target);
-=======
+
 					loadContent(currentPage, { whatColumn, keyword, pageNumber });
 					 
 					 //alert("handlesidebar tab 존재 : " + currentPage);
@@ -117,7 +103,6 @@ window.tabSets = window.tabSets || {
 			}else if(action === "modal"){
 				openModal(target);
 			}
->>>>>>> main
 		}
 
 </script>

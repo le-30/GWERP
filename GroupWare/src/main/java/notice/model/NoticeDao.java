@@ -43,9 +43,10 @@ public class NoticeDao {
 	}//selectOneNotice
 
 	public int updateNotice(NoticeBean notice) {
-		int cnt = sqlSessionTemplate.update(namespace + ".updateNotice", notice);
-		System.out.println(cnt);
-		return cnt;
+		//int cnt = sqlSessionTemplate.update(namespace + ".downReadcount", notice);
+		int cnt2 = sqlSessionTemplate.update(namespace + ".updateNotice", notice);
+		System.out.println(cnt2);
+		return cnt2;
 	}//updateNotice
 
 	public int deleteNotice(int notice_no) {
@@ -68,6 +69,11 @@ public class NoticeDao {
 	public List<NoticeBean> selectSaveNotice() {
 		List<NoticeBean> lists = sqlSessionTemplate.selectList(namespace + ".selectSaveNotice");
 		return lists;
+	}
+
+	public String selectOneNum() {
+		String notice_no_seq = sqlSessionTemplate.selectOne(namespace + ".selectOneNum");
+		return notice_no_seq;
 	}
 	
 	
