@@ -34,7 +34,7 @@
             <td align="center" class="notice-label-3">파일첨부</td>
             <td>
     			<input type="file" name="file">
-    			<span style="color: red;">* 첨부파일 임시저장 불가</span>
+    			<span style="color: red;">* 첨부파일 임시저장 불가</span>  
 			</td>
         </tr>
         <tr>

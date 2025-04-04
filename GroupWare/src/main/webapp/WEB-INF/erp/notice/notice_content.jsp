@@ -75,7 +75,7 @@
 				<input type="button" value="작성" onClick="writeReply()">
 			</td>
 		</tr>
-	</table>
+	</table>  
 </form:form>
 <table border="1" width="500">
 	<c:forEach var="rl" items="${replyLists }">

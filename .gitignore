@@ -1,0 +1,9 @@
+<<<<<<< HEAD
+.project
+=======
+*.class
+/bin/
+/target/
+.idea/
+*.class
+>>>>>>> origin/l.j.r-2

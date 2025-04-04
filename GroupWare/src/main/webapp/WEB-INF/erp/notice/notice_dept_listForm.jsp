@@ -66,7 +66,7 @@
 						<fmt:formatDate value="${nl.notice_dtm}" pattern="${nl.isWithin24Hours() ? 'HH:mm' : 'yyyy-MM-dd'}" />
 					</td>
 					<td align="center" width="50">
-						${nl.notice_views }
+						${nl.notice_views }  
 					</td>
 				</c:if>
 			</tr>

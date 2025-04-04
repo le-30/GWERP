@@ -6,7 +6,7 @@ import java.net.URLEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+ 
 @Controller
 public class RouterController {
 	
@@ -31,21 +31,21 @@ public class RouterController {
 	            encodedKeyword,
 	            pageNumber != null ? pageNumber : "1");
 		
-		System.out.println("page:"+page);
 		if ("emp".equals(page)) {
-		    return "redirect:/lsh_list.erp" + queryParams;
+		    return "redirect:/lsh_list.erp";
 		}else if("dept".equals(page)){
 			return "redirect:/dept_list.erp" +queryParams;
 		}else if("cmmCode".equals(page)){
 			return "redirect:/cmm_list.erp" + queryParams;
 		}else if("authInfo".equals(page)) {
+			
 			return "redirect:/empAuthInfo.erp" +queryParams;
 		}else if("auth".equals(page)) {
 			return "redirect:/auth_list.erp"+ queryParams;
 		}else if("received".equals(page)) {
-			return "redirect:/ymh_MessageReceive.erp" + queryParams;
+			return "redirect:/ymh_MessageReceive.erp";
 		}else if("send".equals(page)) {
-			return "redirect:/ymh_MessageSend.erp" + queryParams;
+			return "redirect:/ymh_MessageSend.erp";
 		}else if("totalNotice".equals(page)){
 			return "redirect:/notice_alist.erp" + queryParams;
 		}else if("deptNotice".equals(page)){
@@ -57,7 +57,15 @@ public class RouterController {
 		} else if("apprList".equals(page)) {
 			return "redirect:/approvalSignList.erp";
 		}else if("commute".equals(page)) {
-			return "redirect:/check_in/commute.erp";
+			return "redirect:/list/commute.erp";
+		} else if("apprSuc".equals(page)) {
+			return "redirect:/approvalComplete.erp";
+		}if("vacation".equals(page)) {
+			return "redirect:/vacationList.erp";
+		} else if("vacationApproval".equals(page)) {
+			return "redirect:/vacationList.erp";
+		} else if("vacationleave".equals(page)){
+			return "redirect:/employeeVacation.erp";
 		}
 		else {
 		    return gotoPage;

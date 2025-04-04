@@ -32,6 +32,7 @@ public class EmployeeBean {
     private String emp_status_nm;
     private String currentAuth;
     
+    private String annual_leave;
     
     public String getGender_nm() {
 		return gender_nm;
@@ -136,6 +137,12 @@ public class EmployeeBean {
 	}
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+	public String getAnnual_leave() {
+		return annual_leave;
+	}
+	public void setAnnual_leave(String annual_leave) {
+		this.annual_leave = annual_leave;
 	}
 	
 	
