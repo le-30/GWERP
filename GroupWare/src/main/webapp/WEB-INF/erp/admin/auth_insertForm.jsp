@@ -23,4 +23,4 @@
 <input type="button" value="추가하기" id="submitBtn" data-modal="auth_insert">
 </form:form>
 
-<%@include file = "./../js/validCheck.jsp"%>
+<%@include file = "./../js/validCheck.jsp"%>  
