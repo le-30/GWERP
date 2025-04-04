@@ -44,7 +44,7 @@
 <form:form action="ymh_messageinsert.erp" commandName="mb" method="post" id="MessagePassForm">
 	<input type="hidden" value="${sessionScope.emp_no }" name="send_emp_no">
 	<input type="hidden" value="${mb.msg_no }" name="msg_no">
-	<input type="hidden" name="redirectPage" value="messageDetail.erp?msg_no=${mb.msg_no }">
+	<input type="hidden" name="redirectPage" value="messageDetail.erp?no=${mb.msg_no }">
     <div>
         <div>
             <!-- 화살표 버튼을 누르면 체크박스 목록이 나타남 -->

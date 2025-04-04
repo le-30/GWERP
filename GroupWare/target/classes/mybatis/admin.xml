@@ -28,16 +28,26 @@
 		<if test="whatColumn == 'cmm_nm'">
 		where cmm_nm like #{keyword}
 		</if>
+		order by cmm_class,cmm_cd
 	</select>
 	
 	<select id="getAllAuthInfo" resultType="admin.model.AuthInfoBean">
 		select * from auth_info
+		<if test="whatColumn == 'auth_cd'">
+		where auth_cd like #{keyword}
+		</if>
+		<if test="whatColumn == 'auth_nm'">
+		where auth_nm like #{keyword}
+		</if>
+		order by auth_cd
 	</select>
 	
-	<select id="getAuthByEmpNo" resultType="admin.model.EmployeeAuthBean">
-		select * from employee_auth 
-		where emp_no = #{emp_no} and auth_cd = #{auth_cd}
+	<select id="getAuthByEmpNo" parameterType="map" resultType="String">
+    SELECT auth_cd 
+    	FROM employee_auth 
+    WHERE emp_no = #{emp_no} AND auth_cd = #{auth_cd}
 	</select>
+
 	
 	<insert id="insertEmployeeAuth">
 		insert into employee_auth(auth_cd,emp_no)
@@ -82,7 +92,8 @@
 	
 	</update>
 	<delete id="deleteCmmCode">
-	delete from cmm_code where cmm_nm = #{cmm_nm}
+	delete from cmm_code
+	where cmm_cd = #{cmm_cd} and cmm_class = #{cmm_class}
 	</delete>
 	
 	<insert id="insertAuth">
@@ -109,4 +120,36 @@
 		where cmm_nm like #{keyword}
 		</if>
 	</select>
+	
+	<delete id="deleteEmployeeAuth">
+    DELETE FROM employee_auth
+    WHERE emp_no = #{emp_no}
+      AND auth_cd = #{auth_cd}
+	</delete>
+	<delete id="deleteAuthInfo">
+    DELETE FROM auth_info
+    WHERE auth_cd = #{auth_cd}
+	</delete>
+	
+	<select id="getTotalCountAuth" resultType="int">
+		select count(*) from auth_info
+	<if test="whatColumn == 'auth_cd'">
+		where auth_cd like #{keyword}
+		</if>
+		<if test="whatColumn == 'auth_nm'">
+		where auth_nm like #{keyword}
+		</if>
+	</select>
+	
+	<select id="getAllAuth" resultType="admin.model.AuthInfoBean">
+		select * from auth_info
+		order by auth_cd
+	</select>
+	
+	<select id="getAuthNamesByEmpNo" resultType="String" parameterType="String">
+	SELECT A.auth_nm
+	FROM auth_info A
+	JOIN employee_auth B ON A.auth_cd = B.auth_cd
+	WHERE B.emp_no = #{emp_no}
+</select>
 </mapper>

@@ -9,8 +9,8 @@ authInfoForm.jsp<br>
     <option value="emp_nm">사원이름</option>
     <option value="dept_nm">부서이름</option>
   </select>
-  <input type="text" name="keyword" id="authInfokeywordInput">
-  <input type="button" value="검색" id="authInfosearchBtn">  
+  <input type="text" name="keyword" id="authInfoKeywordInput">
+  <input type="button" value="검색" id="authInfSearchBtn">  
 </form>
 <br><br>
 
@@ -44,10 +44,13 @@ authInfoForm.jsp<br>
         </c:forEach>
     </table>
 <br><br>
+<!-- 버튼들 -->
+	<input type="button" id="grantBtn" value="권한 부여" />
+	<input type="button" id="revokeBtn" value="권한 해제" />
+
+<br><br>
 <div id="paging">
 ${pageInfo.pagingHtml}
 </div>
 </div>
-    <input type="submit" value="권한 부여" />
-
 </form>
