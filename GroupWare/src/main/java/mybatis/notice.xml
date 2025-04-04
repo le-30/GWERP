@@ -71,4 +71,14 @@
 		insert into notice
 		values(notice_seq.nextval,#{notice_title},#{notice_content},#{dept_nm},systimestamp,#{emp_no},#{emp_nm},1,#{notice_level},0)
 	</insert>
+	
+	<select id="selectOneNum" resultType="String">
+		SELECT notice_no
+		FROM (
+		SELECT
+		notice_no, RANK() OVER (ORDER BY notice_no DESC) AS rnk
+		FROM notice
+		) WHERE
+		rnk = 1
+	</select>
 </mapper>

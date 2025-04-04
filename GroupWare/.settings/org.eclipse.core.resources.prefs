@@ -7,3 +7,5 @@ encoding//src/main/java/attach/model/AttachDao.java=UTF-8
 encoding//src/main/java/commute/controller/CommuteListController.java=UTF-8
 encoding//src/main/java/employee/model/EmployeeBean.java=UTF-8
 encoding//src/main/java/message/controller/MessageWriteController.java=UTF-8
+encoding//src/main/java/notice/controller/NoticeUpdateController.java=UTF-8
+encoding//src/main/java/notice/controller/NoticeWriteController.java=UTF-8

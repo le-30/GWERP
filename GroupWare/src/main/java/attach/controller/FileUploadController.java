@@ -20,9 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class FileUploadController {
 
-	 	private static final String GITHUB_API_URL;
-		private static final String GITHUB_TOKEN;    
-
 
 
 	@ResponseBody
@@ -54,6 +51,9 @@ public class FileUploadController {
 
 
 	private String uploadToGitHub(String fileName, String encodedContent) {
+		
+		System.out.println("fileName : " + fileName);
+		
 		String filePath = "mail/" + fileName; 
 
 		HttpHeaders headers = new HttpHeaders();

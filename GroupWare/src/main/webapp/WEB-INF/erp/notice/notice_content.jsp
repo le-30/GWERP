@@ -21,6 +21,10 @@
 		</td>
 		<td width="125">${notice.notice_views }</td>
 	</tr>
+	<tr>
+		<td>첨부파일</td>
+		<td><a href="download.erp?notice_no=${notice.notice_no}">다운로드</a></td>
+	</tr>
 	<tr height="180">
 		<td width="375" colspan="4">${notice.notice_content }</td>
 	</tr>
