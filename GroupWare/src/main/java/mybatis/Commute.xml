@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commute.CommuteDao">
+
+	<select id="selectOne" resultType="commute.model.CommuteBean"
+		parameterType="map">
+		SELECT *
+		FROM commute
+		WHERE emp_no = #{emp_no}
+		AND TRUNC(work_date) = TRUNC(TO_DATE(#{work_date}, 'YYYY-MM-DD'))
+	</select>
+
+	<insert id="check_in" parameterType="map">
+		INSERT INTO commute (work_date, emp_no, clock_in,deptNm,cmmNm,empNm)
+		VALUES (TO_DATE(#{work_date}, 'YYYY-MM-DD'), #{emp_no},
+		SYSDATE,#{deptNm},#{cmmNm},#{empNm})
+	</insert>
+
+	<update id="check_out" parameterType="map" >
+    UPDATE commute
+    SET clock_out = SYSDATE
+    WHERE emp_no = #{emp_no}
+    AND TRUNC(work_date) = TRUNC(TO_DATE(#{work_date}, 'YYYY-MM-DD'))
+</update>
+
+	<!-- 사장 -->
+	<select id="findAll" resultType="commute.model.CommuteBean">
+		select * from commute
+		<if test="type == 'empNm'">
+			where empNm like #{keyword}
+		</if>
+		<if test="type== 'deptNm'">
+			where deptNm like #{keyword}
+		</if>
+		<if test="type== 'cmmNm'">
+			where cmmNm like #{keyword}
+		</if>
+		ORDER BY work_date DESC
+	</select>
+
+	<!-- 인사팀 -->
+	<select id="findAllExcludingPresident"
+		resultType="commute.model.CommuteBean">
+		select * from commute
+		<where>
+			<if test="type == 'empNm'">
+				empNm like #{keyword}
+			</if>
+			<if test="type== 'deptNm'">
+				deptNm like #{keyword}
+			</if>
+			<if test="type== 'cmmNm'">
+				cmmNm like #{keyword}
+			</if>
+			and cmmNm != '사장'
+		</where>
+		ORDER BY work_date DESC
+	</select>
+
+	<!-- 부장 -->
+	<select id="findByDepartmentExcludingPresident"
+		resultType="commute.model.CommuteBean">
+		select *from commute
+		<where>
+			<if test="type == 'empNm'">
+				empNm like #{keyword}
+			</if>
+			<if test="type== 'deptNm'">
+				deptNm like #{keyword}
+			</if>
+			<if test="type== 'cmmNm'">
+				cmmNm like #{keyword}
+			</if>
+			and deptNm=#{deptNm} and cmmNm != '사장'
+		</where>
+		ORDER BY work_date DESC
+	</select>
+
+	<!-- 사원 -->
+	<select id="findByEmpId" resultType="commute.model.CommuteBean">
+		select * from commute where
+		emp_no=#{emp_no} ORDER BY work_date DESC
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from commute
+		<if test="type == 'empNm'">
+			where empNm like #{keyword}
+		</if>
+		<if test="type== 'deptNm'">
+			where deptNm like #{keyword}
+		</if>
+		<if test="type== 'cmmNm'">
+			where cmmNm like #{keyword}
+		</if>
+		ORDER BY work_date DESC
+	</select>
+
+	<update id="wortktime">
+		UPDATE commute
+		SET clock_out = SYSDATE,
+		total_hours = #{total_hours},
+		overtime_hours = #{overtime_hours}
+		WHERE work_date = TO_DATE(#{work_date}, 'YYYY-MM-DD')
+		AND emp_no = #{emp_no}
+	</update>
+</mapper>
