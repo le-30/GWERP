@@ -24,4 +24,4 @@
 </form:form>
 
 
-<%@include file = "./../js/validCheck.jsp"%>
+<%@include file = "./../js/validCheck.jsp"%>  
