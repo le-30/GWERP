@@ -49,9 +49,13 @@ public class SubmitLoginController {
 		ModelAndView mav = new ModelAndView();
 
 		EmployeeBean empBean = empdao.getEmployeeInfo(emp_no, pw);
+		
+		if (empBean == null) {
+			mav.addObject("error", "»ç¹øÀÌ Á¸ÀçÇÏÁö ¾Ê°Å³ª ºñ¹Ð¹øÈ£°¡ Æ²·È½À´Ï´Ù.");
+			mav.setViewName(getPage);
+			return mav;
+		}
 
-		System.out.println("emp_no:"+empBean.getEmp_no());
-		System.out.println("pw:"+empBean.getPw());
 
 		if(empBean.getEmp_no().equals(emp_no) && empBean.getPw().equals(pw)) {
 			
@@ -80,7 +84,6 @@ public class SubmitLoginController {
 			mav.setViewName(gotoPage);
 			return mav;
 		}else {
-			System.out.println("ï¿½ï¿½ï¿½ï¿½");
 			mav.setViewName(getPage);
 			return mav;
 		}

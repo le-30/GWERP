@@ -88,6 +88,17 @@ div#prof {
     overflow: visible !important;
 }
 
+
+.badge {
+  background-color: #ff4d4d;
+  color: white;
+  border-radius: 50px;
+  font-size: 11px;
+  padding: 2px 6px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
 </style>
 
 <div id="sideBar">
@@ -106,9 +117,10 @@ div#prof {
     <div id="sideMiddle">
     <div class="sideTr" data-action="page" data-target="msg">
         <i class="fas fa-paper-plane sideIcon"></i>메신저
+         <span id="msg-badge" style="margin-left: auto; background: red; color: white; padding: 2px 8px; border-radius: 10px; font-size: 12px; display: none;"></span>
     </div>
-    <div class="sideTr" data-action="page" data-target="alarm">
-        <i class="fas fa-bell sideIcon"></i>새로운 소식
+    <div class="sideTr" data-action="page" data-target="todo">
+        <i class="fas fa-bell sideIcon"></i>To-Do
     </div>
     <div class="sideTr" data-action="page" data-target="notice">
         <i class="fas fa-flag sideIcon"></i>공지사항
@@ -138,4 +150,4 @@ div#prof {
     </c:if>
     
 </div>
-</div>
+</div>  

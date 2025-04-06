@@ -695,6 +695,29 @@ window.pageConfig = window.pageConfig || {
 
 	$(document).ready(function () {
 		  hideUnauthorizedButtons();
+
+		  function checkMsgAlert() {
+		    $.ajax({
+		      url: '/notification/msgCount.erp',
+		      method: 'GET',
+		      dataType: 'json',
+		      success: function (data) {
+		        if (data.count > 0) {
+		          $('#msg-badge').text(data.count).show();
+		        } else {
+		          $('#msg-badge').hide();
+		        }
+		      },
+		      error: function () {
+		        console.log("❌ 메신저 알림 조회 실패");
+		      }
+		    });
+		  }
+
+		  // 처음 한번 로드
+		  checkMsgAlert();
+
+		  setInterval(checkMsgAlert, 10000); // ← 필요시 30초(30000)로 변경 가능
 		});
 
 
