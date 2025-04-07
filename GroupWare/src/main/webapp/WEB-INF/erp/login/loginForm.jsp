@@ -125,7 +125,7 @@ input[type="submit"]:hover {
 
 		<!-- ID 로그인 -->
 		<div class="tab-content" id="id-login">
-			<form action="lsh_login.erp" method="post">
+			<form action="check_in/commute.erp" method="post">
 				<input type="text" name="emp_no" placeholder="사원번호" required>
 				<input type="password" name="pw" placeholder="비밀번호" required>
 				<input type="submit" value="로그인">

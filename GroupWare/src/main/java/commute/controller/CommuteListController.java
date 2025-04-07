@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import admin.model.EmployeeAuthDao;
 import commute.model.CommuteBean;
 import commute.model.CommuteDao;
 import jwt.util.JwtUtil;
@@ -24,19 +26,31 @@ public class CommuteListController {
 
 	@Autowired
 	CommuteDao cdao;
+	
+	@Autowired
+	EmployeeAuthDao empAuthDao;
 
-
+	
 	@RequestMapping("/check_in/commute.erp")
-	public String checkIn(@CookieValue(value = "access_token", required = false) String token,
+	public String checkIn(@CookieValue(value = "access_token", required = false) String token,HttpSession session,
 			Model model) {
+		System.out.println("✅ access_token: " + token); 
 
 		String emp_no = JwtUtil.getEmp_no(token);
 		String empNm=JwtUtil.getEmpNm(token);
 		String deptNm = JwtUtil.getDeptNm(token);
 		String cmmNm = JwtUtil.getCmmNm(token);
 
+		session.setAttribute("emp_no", emp_no);
+	    session.setAttribute("emp_nm", empNm);
+	    session.setAttribute("dept_nm", deptNm);
+	    session.setAttribute("position_nm", cmmNm); // position_cd도 필요하면 추가
+	    session.setAttribute("position_cd", cmmNm); // Optional
 
-
+	    List<String> authNames = empAuthDao.getAuthNamesByEmpNo(emp_no);
+	     session.setAttribute("currentAuth", String.join(",", authNames));
+	     session.setAttribute("hasAdmin", authNames.contains("관리자권한"));
+	     
 		Timestamp currentTimestamp = new java.sql.Timestamp(System.currentTimeMillis());
 		String workDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(currentTimestamp);
 

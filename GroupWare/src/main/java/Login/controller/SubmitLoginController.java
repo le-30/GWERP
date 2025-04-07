@@ -51,7 +51,7 @@ public class SubmitLoginController {
 		EmployeeBean empBean = empdao.getEmployeeInfo(emp_no, pw);
 		
 		if (empBean == null) {
-			mav.addObject("error", "»ç¹øÀÌ Á¸ÀçÇÏÁö ¾Ê°Å³ª ºñ¹Ğ¹øÈ£°¡ Æ²·È½À´Ï´Ù.");
+			mav.addObject("error", "ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°Å³ï¿½ ï¿½ï¿½Ğ¹ï¿½È£ï¿½ï¿½ Æ²ï¿½È½ï¿½ï¿½Ï´ï¿½.");
 			mav.setViewName(getPage);
 			return mav;
 		}
@@ -68,11 +68,15 @@ public class SubmitLoginController {
 			session.setAttribute("position_cd", empBean.getPosition_cd());
 			session.setAttribute("position_nm", empBean.getPosition_nm()); 
 
+			System.out.println("ì„¸ì…˜ ì €ì¥ í›„: " + session.getAttribute("emp_nm"));
+			System.out.println("ì„¸ì…˜ ì €ì¥ í›„: " + session.getAttribute("emp_no"));
+			System.out.println("ì„¸ì…˜ ì €ì¥ í›„: " + session.getAttribute("dept_cd"));
+			
 			String accessToken = JwtUtil.createToken(emp_no, empBean.getEmp_nm(),empBean.getPosition_nm(), empBean.getDept_nm());
 			
 			 List<String> authNames = empAuthDao.getAuthNamesByEmpNo(emp_no);
 		     session.setAttribute("currentAuth", String.join(",", authNames));
-		     session.setAttribute("hasAdmin", authNames.contains("°ü¸®ÀÚ±ÇÇÑ"));
+		     session.setAttribute("hasAdmin", authNames.contains("ê´€ë¦¬ìê¶Œí•œ"));
 
 
 			response.setHeader("Set-Cookie", "access_token=" + accessToken + "; Path=/; HttpOnly; Max-Age=54000"); // 15ï¿½Ã°ï¿½
@@ -81,7 +85,6 @@ public class SubmitLoginController {
 			mav.setViewName("redirect:/check_in/commute.erp?access_token="+accessToken);
 			
 			
-			mav.setViewName(gotoPage);
 			return mav;
 		}else {
 			mav.setViewName(getPage);

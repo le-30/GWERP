@@ -64,14 +64,14 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	notice_insert: {
 		url: "notice_write.erp",
 		formId: "notice_writeForm",
-		target: "totalnotice",
+		target: "totalNotice",
 		page : "notice",
 		userFormData: true
 	},
 	notice_update: {
 		url: "notice_update.erp",
 		formId: "notice_updateform",
-		target: "totalnotice",
+		target: "totalNotice",
 		page : "notice",
 		userFormData: true
 	}
