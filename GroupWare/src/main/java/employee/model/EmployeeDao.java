@@ -39,8 +39,6 @@ public class EmployeeDao {
 		EmployeeBean empBean = new EmployeeBean();
 		empBean.setEmp_no(emp_no);
 		empBean.setPw(pw);
-		System.out.println("empBean.emp_no"+empBean.getEmp_no());
-		System.out.println("empBean.pw"+empBean.getPw());
 		
 		empBean = sqlSessionTemplate.selectOne(namespace+".getEmployeeInfo",empBean);
 		
