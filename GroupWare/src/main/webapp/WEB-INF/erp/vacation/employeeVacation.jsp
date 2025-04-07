@@ -6,30 +6,77 @@
     <meta charset="UTF-8">
     <title>연차 정보</title>
     <style>
-        table {
-            width: 70%;
-            border-collapse: collapse;
-            margin: 20px auto;
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Segoe UI', sans-serif;
         }
-        th, td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: center;
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
-        th {
-            background-color: #f2f2f2;
-        }
-        p {
-            text-align: center;
-            font-size: 18px;
+
+        h2 {
+            font-size: 24px;
             font-weight: bold;
+            border-left: 6px solid #007bff;
+            padding-left: 12px;
+            margin: 30px 0 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        td {
+            font-size: 15px;
+        }
+
+        td:last-child {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .no-data {
+            text-align: center;
+            color: red;
+            font-weight: bold;
+            padding: 30px 0;
+        }
+
+        #paging {
+            text-align: center;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
 
-    <h2 style="text-align: center;">내 연차 정보</h2>
+<div class="container">
 
+    <h2>👤 내 연차 정보</h2>
     <c:choose>
         <c:when test="${not empty employee and not empty leaveInfo}">
             <table>
@@ -41,17 +88,16 @@
                 <tr>
                     <td>${employee.emp_no}</td>
                     <td>${employee.emp_nm}</td>
-                    <td style="color: blue;">${leaveInfo.annual_leave} 일</td>
+                    <td>${leaveInfo.annual_leave} 일</td>
                 </tr>
             </table>
         </c:when>
         <c:otherwise>
-            <p style="color: red;">연차 정보가 없습니다.</p>
+            <div class="no-data">연차 정보가 없습니다.</div>
         </c:otherwise>
     </c:choose>
 
-    <h2 style="text-align: center; margin-top: 30px;">전체 사원 연차 정보</h2>
-
+    <h2>🏢 전체 사원 연차 정보</h2>
     <c:choose>
         <c:when test="${not empty employeeList}">
             <table>
@@ -64,19 +110,20 @@
                     <tr>
                         <td>${emp.emp_no}</td>
                         <td>${emp.emp_nm}</td>
-                        <td style="color: blue;">${emp.annual_leave} 일</td>
+                        <td>${emp.annual_leave} 일</td>
                     </tr>
                 </c:forEach>
             </table>
         </c:when>
         <c:otherwise>
-            <p style="color: red;">전체 사원 연차 정보가 없습니다.</p>
+            <div class="no-data">전체 사원 연차 정보가 없습니다.</div>
         </c:otherwise>
     </c:choose>
 
+    <div id="paging">
+        ${pageInfo.pagingHtml}
+    </div>
+</div>
+
 </body>
 </html>
-<br><br>
-<div id="paging">
-${pageInfo.pagingHtml}
-</div>

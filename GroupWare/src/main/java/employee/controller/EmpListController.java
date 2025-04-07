@@ -51,6 +51,9 @@ public class EmpListController {
 		        mav.addObject("lists", lists);
 		        mav.addObject("pageInfo", pageInfo);
 		        mav.addObject("totalCount", totalCount);
+		        mav.addObject("keyword", keyword);
+		        mav.addObject("whatColumn", whatColumn);
+		        mav.addObject("pageNumber", pageNumber);
 		        mav.setViewName(gotoPage);
 
 		    

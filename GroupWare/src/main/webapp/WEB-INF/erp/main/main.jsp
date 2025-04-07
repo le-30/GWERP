@@ -4,6 +4,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@include file="./../common/common.jsp" %>
 
+<style>
+
+html {
+	overflow-y: scroll;
+}
+
+</style>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>

@@ -28,6 +28,10 @@ public class EmpDetailController {
 								@RequestParam(value="pageNumber", required = false) String pageNumber,
 								@RequestParam(value="kind", required = false) String kind) {
 
+		System.out.println("dta keyword : " + keyword);
+		System.out.println("dta whatColumn : " + whatColumn);
+		System.out.println("dta pageNumber : " + pageNumber);
+		
 		ModelAndView mav = new ModelAndView();
 		
 		EmployeeBean empBean = empDao.getOneEmp(emp_no);

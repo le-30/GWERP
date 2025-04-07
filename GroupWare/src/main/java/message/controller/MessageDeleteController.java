@@ -22,10 +22,12 @@ public class MessageDeleteController {
 	MessageDao mdao;
 	
 	@RequestMapping(command)
-	public ModelAndView doAction(HttpServletRequest request,@RequestParam("msg_no") String msg_no,
+	public ModelAndView doAction(HttpServletRequest request,@RequestParam("no") String msg_no,
 						@RequestParam(value="whatColumn", required = false) String whatColumn,
 						@RequestParam(value="keyword", required = false) String keyword,
 						@RequestParam(value="pageNumber", required = false) String pageNumber,
+						@RequestParam(value="kind", required = false) String kind,
+						@RequestParam(value="reply_no", required = false) String reply_no,
 						 HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
