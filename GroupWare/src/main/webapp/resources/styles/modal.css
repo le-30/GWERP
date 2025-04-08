@@ -1,0 +1,162 @@
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.modal-box.notice-size {
+  width: 800px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+
+.modal-box.mail-size {
+  width: 500px;
+  background: #fff; /* ❗ 흰 배경 */
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* ❗ 그림자 */
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-box.emp-size {
+  width: 300px;
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.modal-box.approval-size {
+  width: 600px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-box.auth-size {
+  width: 400px;
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-box.cmmCode-size {
+  width: 450px;
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-box.dept-size {
+  width: 450px;
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-box {
+  margin: auto;
+}
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px; /* 간격 조절 여기서 함 */
+}
+
+.form-group label {
+  width: 100px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+textarea.form-control {
+  height: 180px;       /* 원하는 고정 높이 */
+  resize: none;        /* 마우스 크기조절 비활성화 */
+  font-size: 14px;
+  padding: 10px;
+  line-height: 1.5;
+  width: 100%;
+  box-sizing: border-box;
+}
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: none; /* ✅ 크기 조절 방지 */
+}
+

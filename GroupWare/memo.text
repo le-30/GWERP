@@ -1,0 +1,62 @@
+function loadContent(page, params = {}) {
+		
+		currentPage = page;
+		
+		let data = { page: page };
+		
+		Object.assign(data, params);
+		
+		$.ajax({
+			url: 'router.erp',
+			type: 'GET',
+			data: data,
+			success: function(html) {
+				$('.main-content').html(html);
+			
+				const config = pageConfig[page];
+				if (config) {
+					$('#headerBtn').text(config.button);
+					currentModal = config.modal;
+					
+				if (!config.button) {
+					  $('#headerBtn').hide();
+					 }//button이 없으면 button 숨김
+					
+					  if (config.auth) {//권한정보가 있으면 체크해서 숨김/보이기 
+						    const requiredAuths = config.auth.split(",");
+						    const userAuths = window.userAuths || [];
+						    let hasPermission = false;
+						    
+						    for (let i = 0; i < requiredAuths.length; i++) {
+						      for (let j = 0; j < userAuths.length; j++) {
+						        if (requiredAuths[i].trim() === userAuths[j].trim()) {
+						          hasPermission = true;
+						          break;
+						        }
+						      }
+						      if (hasPermission) break;
+						    }
+
+						    if (!hasPermission) {
+						      $('#headerBtn').hide(); // 권한 없으면 버튼 숨김
+						    } else {
+						      $('#headerBtn').show(); // 권한 있으면 보여줌
+						    }
+						  } else {
+						    $('#headerBtn').show(); // 권한이 정의 안 됐으면 누구나 가능
+						  }
+
+				} else {
+					$('#headerBtn').text('');
+					currentModal = '';
+				}
+				if (page === 'authInfo') {
+					bindAuthorityEvents();
+				}
+				bindDeleteEvent();// 삭제 메서드
+			},
+			error: function() {
+				alert('본문을 불러오는 중 오류가 발생했습니다.');
+			}
+		});
+	}//본문 함수
