@@ -32,26 +32,31 @@ public class RouterController {
 	            pageNumber != null ? pageNumber : "1");
 		
 		if ("emp".equals(page)) {
-		    return "redirect:/lsh_list.erp";
+		    return "redirect:/lsh_list.erp" + queryParams;
 		}else if("dept".equals(page)){
-			return "redirect:/dept_list.erp" +queryParams;
+			return "redirect:/dept_list.erp" + queryParams;
 		}else if("cmmCode".equals(page)){
 			return "redirect:/cmm_list.erp" + queryParams;
 		}else if("authInfo".equals(page)) {
-			
 			return "redirect:/empAuthInfo.erp" +queryParams;
 		}else if("auth".equals(page)) {
 			return "redirect:/auth_list.erp"+ queryParams;
 		}else if("received".equals(page)) {
-			return "redirect:/ymh_MessageReceive.erp";
+			return "redirect:/ymh_MessageReceive.erp" + queryParams;
 		}else if("send".equals(page)) {
-			return "redirect:/ymh_MessageSend.erp";
+			return "redirect:/ymh_MessageSend.erp" + queryParams;
 		}else if("totalNotice".equals(page)){
-			return "redirect:/notice_list.erp";
+			return "redirect:/notice_alist.erp" + queryParams;
+		}else if("deptNotice".equals(page)){
+			return "redirect:/notice_dlist.erp" + queryParams;
+		}else if("myNotice".equals(page)){
+			return "redirect:/notice_mlist.erp" + queryParams;
 		} else if("appr".equals(page)){
 			return "redirect:/approvalList.erp";
 		} else if("apprList".equals(page)) {
 			return "redirect:/approvalSignList.erp";
+		}else if("commute".equals(page)) {
+			return "redirect:/list/commute.erp";
 		} else if("apprSuc".equals(page)) {
 			return "redirect:/approvalComplete.erp";
 		}if("vacation".equals(page)) {
@@ -60,6 +65,8 @@ public class RouterController {
 			return "redirect:/vacationList.erp";
 		} else if("vacationleave".equals(page)){
 			return "redirect:/employeeVacation.erp";
+		} else if("notice_insert".equals(page)) {
+			return "redirect:/notice_insert.erp";
 		}
 		else {
 		    return gotoPage;

@@ -23,12 +23,12 @@ public class FileDownloadController {
     
     private final String command = "download.erp";
     private final String getPage = "approval.approvalList";
-    
+
     private static final String GITHUB_API_URL = ""; // GitHub API 疫꿸퀡�궚 URL
 
-	private static final String GITHUB_TOKEN = "";   
+	private static final String GITHUB_TOKEN = "";  ;  
 
-  
+
     @Autowired
     private AttachDao attachDao;
 
@@ -43,7 +43,7 @@ public class FileDownloadController {
         if(doc_no != null) {
            serverFileName = attachDao.getServerFileNameByDocNo(doc_no);
         }else if(msg_no != null) {
-           serverFileName = attachDao.getServerFileNameByDocNo(msg_no);
+           serverFileName = attachDao.getServerFileNameByMessageNo(msg_no);
         }else if(notice_no != null) {
            serverFileName = attachDao.getServerFileNameByNoticeNo(notice_no);
 

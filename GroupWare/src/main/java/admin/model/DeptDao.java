@@ -19,8 +19,8 @@ public class DeptDao {
 
 		public List<DeptBean> getAllDept(Paging pageInfo, Map<String, String> map) {
 			
-			RowBounds rowBounds = new RowBounds(pageInfo.getOffset(),pageInfo.getLimit());
-			List<DeptBean> lists = sqlSessionTemplate.selectList(namespace+".getAllDept",map,rowBounds);
+			RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+			List<DeptBean> lists = sqlSessionTemplate.selectList(namespace + ".getAllDept", map, rowBounds);
 			
 			return lists;
 		}

@@ -81,4 +81,17 @@ public class ApprovalDao {
 		List<ApprovalBean> getApprovalCompleteList = sqlSessionTemplate.selectList(namespace + ".getApprovalCompleteList", map, rowBounds);
 		return getApprovalCompleteList;
 	}
+
+
+	public int getSignTotalCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".getSignTotalCount", map);
+		
+		return cnt;
+	}
+
+
+	public int getCompleteTotalCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".getCompleteTotalCount", map);
+		return cnt;
+	}
 }

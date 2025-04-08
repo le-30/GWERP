@@ -33,7 +33,6 @@ public class MessageReplyController {
 
 	@Autowired
 	EmployeeDao edao;
-	
 	@Autowired
 	AttachDao attachDao;
 
@@ -42,7 +41,7 @@ public class MessageReplyController {
 
 		MessageBean mb = mdao.detailMessage(msg_no);
 
-		System.out.println("reply send_name : " + mb.getSend_emp_name()); // ³ª°úÀå
+		System.out.println("reply send_name : " + mb.getSend_emp_name()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		request.setAttribute("mb2", mb);
 
@@ -61,8 +60,8 @@ public class MessageReplyController {
 		String savedFileName = fileUploadController.uploadFile(file, response);
 		
 		if (!file.isEmpty()) {
-		    System.out.println("ÆÄÀÏ ÀÌ¸§: " + file.getOriginalFilename());
-		    System.out.println("ÆÄÀÏ Å©±â: " + file.getSize());
+		    System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½: " + file.getOriginalFilename());
+		    System.out.println("ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½: " + file.getSize());
 		}
 		
 		ModelAndView mav = new ModelAndView();

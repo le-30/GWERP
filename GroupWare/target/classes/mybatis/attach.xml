@@ -30,5 +30,31 @@
 		JOIN notice no ON a.con_key2 = no.notice_no
 		WHERE no.notice_no = #{notice_no}
 	</select>
+	
+	<select id="getServerFileNameByMessageNo" resultType="string">
+		SELECT a.server_file_name
+		FROM attach a
+		JOIN notice no ON a.con_key1 = no.notice_no
+		WHERE no.notice_no = #{notice_no}
+	</select>
+	
+	<select id="getOneSelect" resultType="attach.model.AttachBean">
+		SELECT a.server_file_name,
+		a.org_file_name,
+		a.file_size
+		FROM attach a
+		JOIN message m ON a.con_key1 = m.msg_no
+		WHERE m.msg_no = #{msg_no}
+	</select>
+	
+	<delete id="deleteFail">
+		delete attach
+		where con_key2 = #{notice_no}
+	</delete>
 
+	<select id="selectFile" resultType="string">
+		SELECT org_file_name
+		FROM attach
+		WHERE con_key2 = #{notice_no}
+	</select>
 </mapper>

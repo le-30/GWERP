@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="./../common/common.jsp"%>
+<%@ include file="./../common/common.jsp"%>     
 <!-- 
 <script>
     function companion(apprNo) {
         location.href = "rejectForm.erp?appr_no=" + apprNo;
     }
 </script> -->
-
+<div id = "approvalCompleteContainer">
 <table border="1">
 	<thead>
 		<tr>
@@ -44,6 +44,7 @@
 </table>
 
 <br><br>
-<div id="paging">
-${pageInfo.pagingHtml}
-</div>
+    <div id="paging" style="margin-top: 20px; text-align: center;">
+        ${pageInfo.pagingHtml}
+    </div>
+</div>   

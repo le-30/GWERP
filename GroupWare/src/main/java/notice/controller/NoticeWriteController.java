@@ -25,6 +25,8 @@ public class NoticeWriteController {
 	private final String command = "notice_write.erp";
 	private final String getPage = "notice/notice_writeForm";
 	private final String gotoPage = "redirect:/main.erp?page=totalNotice";
+	private final String gotoPage2 = "redirect:/main.erp?page=totalNotice";
+	private final String gotoPage3 = "redirect:/main.erp?page=totalNotice";
 	
 	@Autowired
 	NoticeDao ndao;

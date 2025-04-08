@@ -15,6 +15,30 @@
 		</if>
 	</select>
 	
+	<select id="getDeptCount" resultType="int">
+		select count(*) from notice
+		where temporary_save = 0
+		and dept_nm = #{dept_nm}
+		<if test="whatColumn == 'emp_nm'">
+			and emp_nm like #{keyword}
+		</if>
+		<if test="whatColumn == 'notice_title'">
+			and notice_title like #{keyword}
+		</if>
+	</select>
+	
+	<select id="getMyCount" resultType="int">
+		select count(*) from notice
+		where temporary_save = 0
+		and emp_no = #{emp_no}
+		<if test="whatColumn == 'emp_nm'">
+			and emp_nm like #{keyword}
+		</if>
+		<if test="whatColumn == 'notice_title'">
+			and notice_title like #{keyword}
+		</if>
+	</select>
+	
 	<select id="selectAllNotice" resultType="MyNotice">
 			select * from notice
 			where temporary_save = 0
@@ -34,6 +58,27 @@
 			order by notice_no desc
 	</select>
 	
+	<select id="selectDeptNotice" resultType="MyNotice">
+			select * from notice
+			where temporary_save = 0
+			and dept_nm = #{dept_nm}
+		<if test="whatColumn == 'emp_nm'">
+			and emp_nm like #{keyword}
+		</if>
+		<if test="whatColumn == 'notice_title'">
+			and notice_title like #{keyword}
+		</if>
+			order by notice_no desc
+	</select>
+	
+	<select id="selectDeptPointNotice" resultType="MyNotice">
+			select * from notice
+			where temporary_save = 0
+			and notice_level = 1
+			and dept_nm = #{dept_nm}
+			order by notice_no desc
+	</select>
+	
 	<select id="selectSaveNotice" resultType="MyNotice">
 			select * from notice
 			where temporary_save = 1
@@ -48,6 +93,12 @@
 	<update id="updateReadcount">
 		update notice set
 		notice_views = notice_views + 1
+		where notice_no = #{notice_no}
+	</update>
+	
+	<update id="downReadcount">
+		update notice set
+		notice_views = notice_views - 1
 		where notice_no = #{notice_no}
 	</update>
 	

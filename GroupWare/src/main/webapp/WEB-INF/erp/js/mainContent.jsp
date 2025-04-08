@@ -66,16 +66,47 @@ window.pageConfig = window.pageConfig || {
 		button: "공지사항 작성",
 		modal: "notice_insert",
 		auth :"관리자권한,공지사항등록권한",
-		container:"noticeListContainer",
+		container:"anoticeListContainer",
 		tabs: [
 			{ label: "전체 공지", target: "totalNotice" }
+			]
+	},
+	deptNotice: {
+		button: "공지사항 작성",
+		modal: "notice_insert",
+		auth :"관리자권한,공지사항등록권한",
+		container:"dnoticeListContainer",
+		tabs: [
+			{ label: "부서 공지", target: "deptNotice" }
+			]
+	},
+	myNotice: {
+		button: "공지사항 작성",
+		modal: "notice_insert",
+		auth :"관리자권한,공지사항등록권한",
+		container:"mnoticeListContainer",
+		tabs: [
+			{ label: "내가 쓴 공지", target: "myNotice" }
 			]
 	},
 	appr: {
 		button: "결제 신청",
 		modal: "appr_insert",
+		container:"approvalRequestContainer",
 		tabs: [
 			{ label: "결제 관리", target: "appr" }
+			]
+	},
+	apprSuc: {
+		container:"approvalCompleteContainer",
+		tabs: [
+			{ label: "본인 결재 완료 이력", target: "apprSuc" }
+			]
+	},
+	apprList: {
+		container:"approvalmustDoContainer",
+		tabs: [
+			{ label: "결제 해야 하는 리스트", target: "apprList" }
 			]
 	},
     vacation: {
@@ -84,7 +115,14 @@ window.pageConfig = window.pageConfig || {
 	      tabs: [
 	        { label: "휴가 관리", target: "vacation" }
 	      ]
-	    }
+	    },
+	    commute: {
+		      button: "",
+		      modal: "",
+		      tabs: [
+		        { label: "출퇴근 기록", target: "commute" }
+		      ]
+		    }
 };//본문을 헤더에 연결할 tabs 변수, button이름 & modal 연결할 url변수 설정을 위한 변
 
 	
@@ -107,10 +145,9 @@ window.pageConfig = window.pageConfig || {
 	
 	function loadContent(page, params = {}) {
 		currentPage = page;
-
 		let data = { page: page };
 		Object.assign(data, params);
-
+		
 		$.ajax({
 			url: 'router.erp',
 			type: 'GET',
@@ -167,8 +204,6 @@ window.pageConfig = window.pageConfig || {
 			}
 		});
 	}
-
-
 	
 	
 	
@@ -184,6 +219,8 @@ window.pageConfig = window.pageConfig || {
 			}
 		});
 	}//tab 클릭시 페이지교체(헤더제목 누를시)
+	
+	
 	
 	function handleSidebarByTarget(target,page) { // validCheck
 		
@@ -205,6 +242,8 @@ window.pageConfig = window.pageConfig || {
 		}
 		handleSidebar(sidebarBtn);
 	} // insert 이후 헤더 자동 변환
+	
+	
 	
 	window.onload = function() {//"초기화 역할" + "URL 진입 대응" + "자동 탭/본문 로딩"
 		const params = new URLSearchParams(window.location.search); 
@@ -324,9 +363,16 @@ window.pageConfig = window.pageConfig || {
 			url: url,
 			method: 'GET',
 			success: function(html) {
-				// 받은 html에서 리스트 영역만 추출해서 교체
-    			const newList = $('<div>').html(html).find('#'+targetId).html();
-    			$target.html(newList);
+				console.log("✅ AJAX 응답 성공!");
+				const $html = $('<div>').html(html);
+				const newList = $html.find('#'+targetId).html();
+
+				if (!newList) {
+					console.warn("⚠️ newList를 못 찾음. HTML 구조 이상할 수 있음");
+					console.log("👉 받은 html: ", html);
+					console.log("👉 찾으려는 ID:", targetId);
+				}
+				$target.html(newList);
     		},
     		error: function(xhr) {
     			console.log("❌ 페이징 실패", xhr.status);
@@ -345,6 +391,7 @@ window.pageConfig = window.pageConfig || {
 		const pageNumber = params[1]; // pageNumber는 두 번째 값
 		const whatColumn = params[2]; // whatColumn은 세 번째 값
 		const keyword = params[3]; // keyword는 네 번째 값
+		const kind = params[4];
 		
 		let url = '';
 	    
@@ -352,8 +399,8 @@ window.pageConfig = window.pageConfig || {
 	        url = 'messageDetail.erp';
 	    } else if (source === 'emp') {
 	        url = 'emp_detail.erp';
-	    } else if (source === '') {
-	        url = '';
+	    } else if (source === 'notice') {
+	        url = 'notice_content.erp';
 	    } else {
 	        console.log("기본 메시지 상세 조회");
 	    }
@@ -364,7 +411,8 @@ window.pageConfig = window.pageConfig || {
 				no: no, 
 				pageNumber: pageNumber, 
 				whatColumn: whatColumn, 
-				keyword: keyword 
+				keyword: keyword, 
+				kind: kind
 			},  // 메세지 ID를 서버로 전달
 			success: function(html) {
 				$('.main-content').html(html);  // 가져온 HTML을 main-content에 삽입
@@ -374,7 +422,103 @@ window.pageConfig = window.pageConfig || {
 				}
 		});
 	} // loadMessageDetail
-			
+	
+	
+	
+	function updateList(detail, kind) { // detail
+		
+  		const params = detail.split(',');
+		const pageNumber = params[0]; // pageNumber는 두 번째 값
+		const whatColumn = params[1]; // whatColumn은 세 번째 값
+		const keyword = params[2]; // keyword는 네 번째 값
+		
+		let url = '';
+	    
+	    if (kind.trim() === 'total') {  
+	        url = 'notice_alist.erp';
+	    } else if (kind.trim() === 'dept') {
+	        url = 'notice_dlist.erp';
+	    } else if (kind.trim() === 'my') {
+	        url = 'notice_mlist.erp';
+	    } else {
+	        console.log("기본 메시지 상세 조회");
+	    }
+		$.ajax({
+			url: url,  // 서버에서 메세지 상세 정보를 처리할 URL
+			type: 'GET',
+			data: { 
+				pageNumber: pageNumber, 
+				whatColumn: whatColumn, 
+				keyword: keyword, 
+				kind: kind.trim()
+			},  // 메세지 ID를 서버로 전달
+			success: function(html) {
+				$('.main-content').html(html);  // 가져온 HTML을 main-content에 삽입
+			},
+				error: function() {
+					alert('메세지 로딩 중 오류가 발생했습니다.');
+				}
+		});
+	} // loadMessageDetail
+	
+	
+	
+	function writeReply() {
+		var form = document.getElementById("norice_write_reply"); // 폼 가져오기
+		var formData = new FormData(form); // 폼 데이터를 FormData로 변환
+		
+		$.ajax({
+	        url: 'reply_write.erp',  // 서버에서 처리할 URL
+	        type: 'POST',         // 요청 방식 (POST 또는 GET)
+	        data: formData,       // 폼 데이터
+	        processData: false,   // FormData 객체는 자동으로 처리되지 않도록 설정
+	        contentType: false,   // 서버에서 처리할 수 있는 콘텐츠 타입으로 자동 설정
+	        success: function(html) {
+	            $('.main-content').html(html);  // 가져온 HTML을 main-content에 삽입
+	        },
+	        error: function(xhr, status, error) {
+	            console.log("오류 발생:", status, error);
+	            alert("폼 제출 중 오류가 발생했습니다.");
+	        }
+	    });
+	}//writeReply
+	
+	
+	function Update(detail, source) { // detail
+	    		
+  		const params = detail.split(',');
+  		const no = params[0]; // msg_no는 첫 번째 값
+		const pageNumber = params[1]; // pageNumber는 두 번째 값
+		const whatColumn = params[2]; // whatColumn은 세 번째 값
+		const keyword = params[3]; // keyword는 네 번째 값
+		const kind = params[4];
+		
+		let url = '';
+	    
+	    if (source === 'notice') {  
+	        url = 'notice_update.erp';
+	    } else {
+	        console.log("기본 메시지 상세 조회");
+	    }
+		$.ajax({
+			url: url,  // 서버에서 메세지 상세 정보를 처리할 URL
+			type: 'GET',
+			data: { 
+				no: no, 
+				pageNumber: pageNumber, 
+				whatColumn: whatColumn, 
+				keyword: keyword, 
+				kind: kind
+			},  // 메세지 ID를 서버로 전달
+			success: function(html) {
+				$('.main-content').html(html);  // 가져온 HTML을 main-content에 삽입
+			},
+				error: function() {
+					alert('메세지 로딩 중 오류가 발생했습니다.');
+				}
+		});
+	} // Update
+	
 	
 	
 	
@@ -416,13 +560,42 @@ window.pageConfig = window.pageConfig || {
 		
 	
 	
-	function MessageDelete(msg_no) {
+	function Delete(detail, source) {
+		
+		const params = detail.split(',');
+  		const no = params[0]; // msg_no는 첫 번째 값
+		const pageNumber = params[1]; // pageNumber는 두 번째 값
+		const whatColumn = params[2]; // whatColumn은 세 번째 값
+		const keyword = params[3]; // keyword는 네 번째 값
+		const kind = params[4].trim();
+		const reply_no = params[5];
+		
+		let url = '';
+	    
+	    if (source === 'message') {  
+	        url = 'ymh_messageDelete.erp';
+	    } else if (source === 'reply') {
+	        url = 'reply_delete.erp';
+	    } else if (source === 'notice') {
+	        url = 'notice_delete.erp';
+	    } else {
+	        console.log("기본 메시지 상세 조회");
+	    }
+	    
 		$.ajax({
-			url: 'ymh_messageDelete.erp',  // 서버에서 메세지 상세 정보를 처리할 URL
+			url: url,  // 서버에서 메세지 상세 정보를 처리할 URL
 			type: 'GET',
-			data: { msg_no: msg_no },  // 메세지 ID를 서버로 전달
+			data: { 
+				no: no, 
+				pageNumber: pageNumber, 
+				whatColumn: whatColumn, 
+				keyword: keyword, 
+				kind: kind,
+				reply_no: reply_no
+			},
 			success: function(html) {
 				$('.main-content').html(html);
+				alert("삭제 성공했습니다.");
 			},
 			error: function() {
 				alert("삭제 중 오류가 발생했습니다.");
@@ -430,6 +603,9 @@ window.pageConfig = window.pageConfig || {
 		});
 	} // MessageDelete
 
+	
+	
+	
 	//AuthInfo 권한 부여/해제 요청 함수
 	function submitAuthority(actionType) {
 		const form = document.querySelector("form[action='empAuthInfo.erp']");
@@ -490,7 +666,7 @@ window.pageConfig = window.pageConfig || {
     }
 
     if (!confirm(name + "을(를) 삭제하시겠습니까?")) return;
-
+    
     $.ajax({
       url: url,
       type: "GET",
@@ -537,9 +713,7 @@ window.pageConfig = window.pageConfig || {
 		  });
 		}
 
-	$(document).ready(function () {
-		  hideUnauthorizedButtons();
-		});
+
 
 
 

@@ -30,7 +30,4 @@ $(document).on('click','.detail-link',function(e){
 });//detail link로 들어가기 위한 ajax
 
 
-
-
-
 </script>

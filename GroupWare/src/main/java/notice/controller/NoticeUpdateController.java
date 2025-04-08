@@ -23,7 +23,7 @@ import notice.model.NoticeDao;
 public class NoticeUpdateController {
 	private final String command = "notice_update.erp";
 	private final String getPage = "notice/notice_UpdateForm";
-	private final String gotoPage = "redirect:/main.erp?page=totalNotice";
+	private final String gotoPage = "redirect:/notice_content.erp";
 	
 	@Autowired
 	NoticeDao ndao;
@@ -34,18 +34,23 @@ public class NoticeUpdateController {
 	FileUploadController fileUploadController = new FileUploadController();
 	
 	@RequestMapping(value=command, method=RequestMethod.GET)
-	public ModelAndView doAction(@RequestParam("notice_no") int notice_no,
-			 					 @RequestParam(value="pageNumber") int pageNumber,
+	public ModelAndView doAction(@RequestParam("no") int notice_no,
+			 					 @RequestParam(value="pageNumber") String pageNumber,
 			 					 @RequestParam(value="whatColumn",required = false) String whatColumn,
-			 					 @RequestParam(value="keyword",required = false) String keyword) {
+			 					 @RequestParam(value="keyword",required = false) String keyword,
+			 					 @RequestParam(value="kind",required = false) String kind) {
+		
+		String fileName = adao.selectFile(notice_no);
 		
 		NoticeBean nb = ndao.selectOneNotice(notice_no);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("notice", nb);
+		mav.addObject("fileName", fileName);
 		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("whatColumn", whatColumn);
 		mav.addObject("keyword", keyword);
+		mav.addObject("kind", kind);
 		mav.setViewName(getPage);
 		
 		return mav;
@@ -78,6 +83,9 @@ public class NoticeUpdateController {
 		System.out.println("notice_no_seq : " + notice_no_seq);
 		
 		if (file != null && !file.isEmpty()) {
+			
+			int cnt2 = adao.deleteFail(notice_no_seq);
+			
             AttachBean attach = new AttachBean();
             attach.setCon_key2(notice_no_seq); // 臾몄꽌 踰덊샇 �뿰寃�
             attach.setOrg_file_name(file.getOriginalFilename());// �썝蹂� �뙆�씪紐�
@@ -95,6 +103,17 @@ public class NoticeUpdateController {
             }
 		}
 		
+		System.out.println("notice_no() : " + notice.getNotice_no());
+		System.out.println("notice_no_seq : " + notice_no_seq);
+		System.out.println("file.getOriginalFilename() : " + file.getOriginalFilename());
+		System.out.println("pageNumber : " + pageNumber);
+		System.out.println("whatColumn : " + whatColumn);
+		System.out.println("keyword : " + keyword);
+		
+		ndao.downReadcount(notice.getNotice_no());
+		ndao.downReadcount(notice.getNotice_no());
+		
+		mav.addObject("notice_no", notice.getNotice_no());
 		mav.addObject("notice_no", notice.getNotice_no());
         mav.addObject("pageNumber", pageNumber);
         mav.addObject("whatColumn", whatColumn);

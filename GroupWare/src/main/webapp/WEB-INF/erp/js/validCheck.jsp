@@ -46,7 +46,7 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	mail_insert : {
 		url : "ymh_messageinsert.erp",
 		formId : "MessageWriteForm",
-		target : "received",
+		target : "send",
 		page : "msg", // insert 이후 헤더 움직이게 하기 위함
 		userFormData: true
 	},
@@ -64,7 +64,16 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	notice_insert: {
 		url: "notice_write.erp",
 		formId: "notice_writeForm",
-		target: "notice"
+		target: "totalNotice",
+		page : "notice",
+		userFormData: true
+	},
+	notice_update: {
+		url: "notice_update.erp",
+		formId: "notice_updateform",
+		target: "totalNotice",
+		page : "notice",
+		userFormData: true
 	}
 };
 
@@ -107,11 +116,14 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		        // 유효성 성공
 		        $('#customModal').hide();
 		        $('#modalContent').empty();
-
+				
 		        const redirectPage = $form.find('input[name="redirectPage"]').val();
 				   const targetPage = config.target || config.defaultRedirect;
 				   const page = config.page;
-
+				
+				   //alert("targetPage : " + targetPage);
+				   //alert("page : " + page);
+				   
 		        if (redirectPage) {
 		          $.ajax({
 		            url: redirectPage,
@@ -131,25 +143,23 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		        }
 		      $('#submitBtn').prop('disabled', false);
               
-		      const toggleBtn = document.getElementById('toggleCheckboxList');
-		      if (toggleBtn) {
-		        toggleBtn.addEventListener('click', function () {
-		          const checkboxList = document.getElementById('checkboxList');
-		          if (checkboxList.style.display === "none") {
-		            checkboxList.style.display = "block";
-		            this.innerHTML = "▲ 받는 사람 선택 숨기기";
-		          } else {
-		            checkboxList.style.display = "none";
-		            this.innerHTML = "▼ 받는 사람 선택";
-		          }
-		        });
-		      }
+		     
 		    },
 		    error: function () {
 		      alert("요청 중 오류 발생");
 		    }
 		  });
 		});
-
+	
+	$(document).off('click', '#modalContent').on('click', '#modalContent #toggleCheckboxList', function () {
+	    const checkboxList = $('#checkboxList');
+	    if (checkboxList.css('display') === "none") {
+	        checkboxList.show();
+	        $(this).html("▲ 받는 사람 선택 숨기기");
+	    } else {
+	        checkboxList.hide();
+	        $(this).html("▼ 받는 사람 선택");
+	    }
+	});
 
 </script>

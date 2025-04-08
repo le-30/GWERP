@@ -17,11 +17,10 @@ public class AttachDao {
         return sqlSessionTemplate.insert(namespace + ".insertAttach", attach);
     }
 
-
-
-	public String getServerFileNameByDocNo(String msg_no) {
+    
+	public String getServerFileNameByDocNo(String doc_no) {
 		
-		return sqlSessionTemplate.selectOne(namespace + ".getServerFileNameByDocNo", msg_no);
+		return sqlSessionTemplate.selectOne(namespace + ".getServerFileNameByDocNo", doc_no);
 	}
 	
 	
@@ -31,6 +30,10 @@ public class AttachDao {
 	}
 
 
+	public String getServerFileNameByMessageNo(String msg_no) {
+		
+		return sqlSessionTemplate.selectOne(namespace + ".getServerFileNameByMessageNo", msg_no);
+	}
 
 	public AttachBean getOneSelect(String msg_no) {
 		
@@ -38,6 +41,23 @@ public class AttachDao {
 		
 		return attach;
 	}
+	
+	
+	public int deleteFail(String notice_no) {
+		
+		int cnt = sqlSessionTemplate.delete(namespace + ".deleteFail",notice_no);
+		System.out.println("delect cnt : " + cnt);
+		
+		return cnt;
+	}
 
 
+	public String selectFile(int notice_no) {
+		
+		String fileName = sqlSessionTemplate.selectOne(namespace + ".selectFile",notice_no);
+		
+		return fileName;
+	}
+	
+	
 }

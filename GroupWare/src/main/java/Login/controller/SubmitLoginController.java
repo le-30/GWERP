@@ -2,7 +2,6 @@ package Login.controller;
 
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -50,9 +49,13 @@ public class SubmitLoginController {
 		ModelAndView mav = new ModelAndView();
 
 		EmployeeBean empBean = empdao.getEmployeeInfo(emp_no, pw);
+		
+		if (empBean == null) {
+			mav.addObject("error", "�궗踰덉씠 議댁옱�븯吏� �븡嫄곕굹 鍮꾨�踰덊샇媛� ���졇�뒿�땲�떎.");
+			mav.setViewName(getPage);
+			return mav;
+		}
 
-		System.out.println("emp_no:"+empBean.getEmp_no());
-		System.out.println("pw:"+empBean.getPw());
 
 		if(empBean.getEmp_no().equals(emp_no) && empBean.getPw().equals(pw)) {
 			
@@ -64,14 +67,16 @@ public class SubmitLoginController {
 			session.setAttribute("dept_nm", empBean.getDept_nm());          
 			session.setAttribute("position_cd", empBean.getPosition_cd());
 			session.setAttribute("position_nm", empBean.getPosition_nm()); 
+
+			String accessToken = JwtUtil.createToken(emp_no, empBean.getEmp_nm(),empBean.getPosition_nm(), empBean.getDept_nm());
+			System.out.println("accessToken:"+accessToken);
 			
 			 List<String> authNames = empAuthDao.getAuthNamesByEmpNo(emp_no);
 		     session.setAttribute("currentAuth", String.join(",", authNames));
-		     session.setAttribute("hasAdmin", authNames.contains("�����ڱ���"));
+		     session.setAttribute("hasAdmin", authNames.contains("관리자권한"));
 
-			String accessToken = JwtUtil.createToken(emp_no, empBean.getPosition_nm(), empBean.getDept_nm());
 
-			response.setHeader("Set-Cookie", "access_token=" + accessToken + "; Path=/; HttpOnly; Max-Age=54000"); // 15�ð�
+			response.setHeader("Set-Cookie", "access_token=" + accessToken + "; Path=/; HttpOnly; Max-Age=54000"); // 15�뜝�떆怨ㅼ삕
 
 			mav.addObject("emp_no",emp_no);
 			mav.setViewName("redirect:/check_in/commute.erp?access_token="+accessToken);
@@ -80,7 +85,6 @@ public class SubmitLoginController {
 			mav.setViewName(gotoPage);
 			return mav;
 		}else {
-			System.out.println("����");
 			mav.setViewName(getPage);
 			return mav;
 		}

@@ -37,12 +37,31 @@ public class DeptListController {
 	        map.put("whatColumn", whatColumn);
 	        map.put("keyword", "%" + keyword + "%");
 	        
+			System.out.println("whatColumn : " + whatColumn);
+			System.out.println("keyword : " + keyword);
 	        
 	        int totalCount = deptDao.getTotalCount(map);
-	        String url = request.getContextPath() + command;
-	        Paging pageInfo = new Paging(pageNumber,"3",totalCount,url,whatColumn,keyword);
 	        
+	        String url = request.getContextPath() + command;
+	        
+	        Paging pageInfo = new Paging(pageNumber,"3", totalCount, url, whatColumn, keyword);
+	        System.out.println("url : " + url);
+	        System.out.println("totalCount: " + totalCount);
+	        System.out.println("pageNumber: " + pageNumber);
+	        System.out.println("whatColumn: " + whatColumn);
+	        System.out.println("keyword: " + keyword);
+	         
+	    	// ★ 여기 추가! ★
+	    	System.out.println("pageInfo.getStart(): " + pageInfo.getBeginRow());
+	    	System.out.println("pageInfo.getEnd(): " + pageInfo.getEndRow());
+
+	    	// 4. 리스트 조회 (start, end 넣어서)
+	    	map.put("start", String.valueOf(pageInfo.getBeginRow()));
+	    	map.put("end", String.valueOf(pageInfo.getEndRow()));
+	    	
 			List<DeptBean> lists = deptDao.getAllDept(pageInfo,map);
+			System.out.println("lists : " + lists.size());
+			
 			mav.addObject("lists",lists);
 			mav.addObject("pageInfo", pageInfo);
 	        mav.addObject("totalCount", totalCount);

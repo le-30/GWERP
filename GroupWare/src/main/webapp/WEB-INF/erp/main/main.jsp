@@ -1,9 +1,16 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- /WEB-INF/views/main.jsp -->
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@include file="./../common/common.jsp" %>
+
+<style>
+
+html {
+	overflow-y: scroll;
+}
+
+</style>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -35,11 +42,15 @@
     </div>
     
     <!-- 모달 영역 -->
-	<div id="customModal" 
-		style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:#fff; border:1px solid #ccc; padding:20px; z-index:9999;">
- 		<div id="modalContent"></div>
-  		<button onclick="closeModal()">닫기</button>
-	</div>
+	<!-- 공통 모달 레이아웃 -->
+<div id="customModal" class="modal-wrapper" style="display: none;">
+  <div class="modal-box">
+    <div id="modalContent"></div>
+    <div class="modal-footer">
+    </div>
+  </div>
+</div>
+
     
     
     <%@include file ="./../js/headerTap.jsp" %>

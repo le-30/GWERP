@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+	pageEncoding="UTF-8"%>  
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/modal.css">
 <% String ctxPath = request.getContextPath(); %>
 <% 
     String emp_no = (String) session.getAttribute("emp_no"); 
@@ -156,22 +156,28 @@ textarea.form-control {
 </head> -->
 
 <!-- 결제 서류 제출 폼 -->
+<div class="custom-modal-overlay" style="display: flex;">
+  <div class="modal-box approval-size">
+    <div class="modal-header">
+      <span class="modal-title">📄 결재 문서 제출</span>
+      <button type="button" class="close-btn" onclick="closeModal()">✕</button>
+    </div>
 <form id="paymentForm" enctype="multipart/form-data" action="approval_insert.erp" method="post" >
 
     <!-- 문서 제목 -->
-    <div class="mb-3">
+    <div class="form-group">
         <label for="doc_title" class="form-label">문서 제목</label>
         <input type="text" id="doc_title" name="doc_title" class="form-control" placeholder="문서 제목을 입력하세요" required />
     </div>
 
     <!-- 결제 내용 -->
-    <div class="mb-3">
+    <div class="form-group">
         <label for="doc_content" class="form-label">결제 내용</label>
         <textarea id="doc_content" name="doc_content" class="form-control" placeholder="결제 내용을 작성하세요" required></textarea>
     </div>
 
     <!-- 첨부파일 업로드 -->
-    <div class="mb-3">
+    <div class="form-group">
         <label for="attachment_file" class="form-label">첨부파일 업로드</label>
         <input type="file" id="file" name="file" class="form-control" required />
         <small class="file-info">첨부 가능한 파일 형식: PDF, DOCX, JPG, PNG</small>
@@ -184,9 +190,12 @@ textarea.form-control {
     <input type="hidden" name="dept_cd" value='${sessionScope.dept_cd }'>
 
     <!-- 제출 버튼 -->
-    <input type="submit" value="추가하기" class="btn-submit">
+    <div class="modal-footer">
+    <input type="submit" value="추가하기" class="btn btn-submit">
+    </div>
 </form>
-
+</div>
+</div>>
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 </html>
