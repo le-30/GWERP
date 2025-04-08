@@ -32,9 +32,9 @@ public class RouterController {
 	            pageNumber != null ? pageNumber : "1");
 		
 		if ("emp".equals(page)) {
-		    return "redirect:/lsh_list.erp";
+		    return "redirect:/lsh_list.erp" + queryParams;
 		}else if("dept".equals(page)){
-			return "redirect:/dept_list.erp" +queryParams;
+			return "redirect:/dept_list.erp" + queryParams;
 		}else if("cmmCode".equals(page)){
 			return "redirect:/cmm_list.erp" + queryParams;
 		}else if("authInfo".equals(page)) {

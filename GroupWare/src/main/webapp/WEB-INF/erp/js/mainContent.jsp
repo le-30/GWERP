@@ -134,7 +134,7 @@ window.pageConfig = window.pageConfig || {
 		currentPage = page;
 		let data = { page: page };
 		Object.assign(data, params);
-
+		
 		$.ajax({
 			url: 'router.erp',
 			type: 'GET',
@@ -693,7 +693,7 @@ window.pageConfig = window.pageConfig || {
 		  });
 		}
 
-	
+
 
 
 
