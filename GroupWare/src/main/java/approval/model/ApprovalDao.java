@@ -21,9 +21,9 @@ public class ApprovalDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 
-	// 결제 순서 삽입 메서드
+	// 寃곗젣 �닚�꽌 �궫�엯 硫붿꽌�뱶
 	public int insertApprovalLine(ApprovalBean approval) {
-		// 결제 순서 정보를 데이터베이스에 삽입
+		// 寃곗젣 �닚�꽌 �젙蹂대�� �뜲�씠�꽣踰좎씠�뒪�뿉 �궫�엯
 		return sqlSessionTemplate.insert(namespace + ".insertApprovalLine", approval);
 	}
 
@@ -74,5 +74,11 @@ public class ApprovalDao {
 		List<ApprovalBean> getApprovalSignList = sqlSessionTemplate.selectList(namespace + ".getApprovalSignList", map, rowBounds);
 		return getApprovalSignList;
 	}
-
+	
+	public List<ApprovalBean> getApprovalCompleteList(Paging pageInfo, Map<String, String> map) {
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		
+		List<ApprovalBean> getApprovalCompleteList = sqlSessionTemplate.selectList(namespace + ".getApprovalCompleteList", map, rowBounds);
+		return getApprovalCompleteList;
+	}
 }
