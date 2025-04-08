@@ -11,16 +11,18 @@
       <span class="modal-title">🔐 권한 수정</span>
       <button type="button" class="close-btn" onclick="closeModal()">✕</button>
     </div>
-<form:form commandName="authBean" action="auth_update.erp" method="post" id="authupdateForm">
+<form:form commandName="authInfoBean" action="auth_update.erp" method="post" id="authupdateForm">
+ <input type="hidden" name="redirectPage" value="auth_list.erp?auth_cd=${authInfoBean.auth_cd}">
+ 
  <div class="form-group">
         <label>권한코드</label>
-        <input type="text" name="auth_cd" value="${authBean.auth_cd}">
+        <input type="text" name="auth_cd" value="${authInfoBean.auth_cd}">
       </div>
       <form:errors path="auth_cd" cssClass="err" />
 
       <div class="form-group">
         <label>권한 이름</label>
-        <input type="text" name="auth_nm" value="${authBean.auth_nm}">
+        <input type="text" name="auth_nm" value="${authInfoBean.auth_nm}">
       </div>
       <form:errors path="auth_nm" cssClass="err" />
 <div class="modal-footer">
@@ -29,7 +31,7 @@
 		type="button"
 		class="back-form"
 		data-url="auth_update.erp"
-		data-id="${authBean.auth_cd}"
+		data-id="${authInfoBean.auth_cd}"
 		data-modal="auth_update">
 		수정하기</button>
 		</div>

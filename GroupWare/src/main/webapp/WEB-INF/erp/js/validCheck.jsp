@@ -11,12 +11,13 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	emp_update: {
 		url: "emp_update.erp",
 		formId: "empUpdateForm",
-		defaultRedirect: "empUpdate"
+		defaultRedirect: "emp"
 	},
 	dept_insert: {
 		url: "dept_insert.erp",
 		formId: "deptinsertForm",
 		defaultRedirect: "dept"
+	
 	},
 	dept_update: {
 		url: "dept_update.erp",
@@ -121,8 +122,8 @@ window.formSubmitConfig = window.formSubmitConfig || {
 				   const targetPage = config.target || config.defaultRedirect;
 				   const page = config.page;
 				
-				   //alert("targetPage : " + targetPage);
-				   //alert("page : " + page);
+				  
+				   console.log("page : " + page);
 				   
 		        if (redirectPage) {
 		          $.ajax({

@@ -211,8 +211,9 @@ window.pageConfig = window.pageConfig || {
 	
 	function handleSidebarByTarget(target,page) { // validCheck
 		
-		//alert("handletarget : " + target);
-		//alert("handlepage : " + page);
+		console.log("handleSidebarByTarget 호출됨!");
+		console.log("받은 target:", target);
+		console.log("받은 page:", page);
 		
 		const sidebarBtn = $(".sideTr").filter(function() {
 			return $(this).data("target") === page;

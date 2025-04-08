@@ -55,7 +55,7 @@ public class EmpUpdateController {
 			int cnt = empDao.updateEmployee(empBean);
 			
 			authority.defaultAuthor(empBean);
-			mav.setViewName(gotoPage+"?id="+empBean.getEmp_no());
+			mav.setViewName(gotoPage+"?no="+empBean.getEmp_no());
 			
 			return mav;
 		}

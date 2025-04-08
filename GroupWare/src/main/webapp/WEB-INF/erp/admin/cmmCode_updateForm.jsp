@@ -12,7 +12,7 @@
     </div>
 <form:form commandName="cmmCodeBean" action="cmmCode_update.erp" method="post" id="cmmCodeupdateForm">
 
-
+<input type="hidden" name="redirectPage" value="cmmCode_update.erp?cmm_nm=${cmmCodeBean.cmm_nm}">
       <div class="form-group">
         <label>코드 Class</label>
         <input type="text" name="cmm_class" value="${cmmCodeBean.cmm_class}">

@@ -50,4 +50,17 @@ public class AuthInfoDao {
 			List<AuthInfoBean> authlists = sqlSessionTemplate.selectList(namespace+".getAllAuth");
 			return authlists;
 		}
+
+		public AuthInfoBean getOneAuthCode(String auth_cd) {
+			AuthInfoBean authInfoBean = sqlSessionTemplate.selectOne(namespace+".getOneAuthCode",auth_cd);
+			
+			return authInfoBean;
+		}
+
+		public int updateAuthInfo(AuthInfoBean authInfoBean) {
+			
+			int cnt = sqlSessionTemplate.update(namespace+".updateAuthInfo", authInfoBean);
+			
+			return cnt;
+		}
 }

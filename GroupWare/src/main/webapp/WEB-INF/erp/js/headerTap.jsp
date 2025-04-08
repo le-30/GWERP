@@ -59,6 +59,10 @@ window.tabSets = window.tabSets || {
 			const action = btn.dataset.action;//sidebar.jsp의 data-action
 			const target = btn.dataset.target;//sidebar.jsp의 data-target
 			
+			console.log("handleSidebar 호출됨!");
+			console.log("action 값:", action);  // action 변수가 제대로 할당되었는지 확인
+			console.log("handleSidebar arguments:", arguments); // 전달된 인자 확인
+			
 			const whatColumn = btn.querySelector("input[name='whatColumn']")?.value || "";
 			const keyword = btn.querySelector("input[name='keyword']")?.value || "";
 		    const pageNumber = btn.querySelector("input[name='pageNumber']")?.value || "1";

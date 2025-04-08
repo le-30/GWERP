@@ -11,7 +11,7 @@
     </div>
 <form:form commandName="deptBean" action="dept_update.erp" method="post" id="deptupdateForm">
 
-<input type="hidden" name="redirectPage" value="dept_list.erp">
+<input type="hidden" name="redirectPage" value="dept_list.erp?dept_cd=${deptBean.dept_cd}">
 
   <div class="form-group">
         <label>부서코드</label>
