@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file=".././common/common.jsp" %>
 
+
 <!-- 🔍 공지 검색 영역 -->
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
 	<h4 style="margin-bottom: 0; font-size: 18px; font-weight: bold; color: #2c3e50;">
@@ -19,6 +20,7 @@
 <div id="mnoticeListContainer" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
 	<h4 style="margin-bottom: 20px;"></h4>
 
+
 	<c:if test="${totalCount == 0}">
 		<div style="text-align: center; padding: 20px; border: 1px solid #eee;">공지사항이 없습니다.</div>
 	</c:if>
@@ -33,7 +35,9 @@
 		</c:forEach>
 
 		<c:if test="${hasDraft}">
+
 			<h5 style="margin: 10px 0 10px; font-weight: bold; color: #e67e22;">📌 작성 중인 공지</h5>
+
 			<!-- 헤더 -->
 			<div style="display: grid; grid-template-columns: 1fr 3fr 1.5fr 1.5fr 1fr; font-weight: bold; background: #f9f9f9; padding: 10px; border-bottom: 2px solid #ddd;">
 				<div style="text-align: left;">구분</div>
@@ -103,6 +107,8 @@
 				</c:if>
 			</c:forEach>
 		</c:if>
+
+
 	</c:if>
 
 	<!-- 페이징 -->

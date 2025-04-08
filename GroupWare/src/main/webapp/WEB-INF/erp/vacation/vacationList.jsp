@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+
 <%@ include file=".././common/common.jsp"%>
 
 <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
@@ -7,12 +8,14 @@
     <div style="margin-bottom: 20px; display: flex; gap: 10px;">
         <input type="text" id="searchInput" placeholder="신청자 검색..." style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 5px;">
         <select id="statusFilter" style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 5px;">
+
             <option value="">상태 선택</option>
             <option value="✔ 승인">승인</option>
             <option value="❌ 반려">반려</option>
             <option value="⌛ 대기">대기</option>
         </select>
     </div>
+
 
     <c:if test="${empty vacationList}">
         <div style="text-align: center; padding: 20px; border: 1px solid #eee;">현재 신청된 휴가가 없습니다.</div>
@@ -62,11 +65,13 @@
     </c:if>
 
     <div style="margin-top: 20px; text-align: center;">
+
         ${pageInfo.pagingHtml}
     </div>
 </div>
 
 <!-- 모달 -->
+
 <div id="confirmModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4);">
     <div style="background: white; width: 400px; margin: 15% auto; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
         <div style="font-weight: bold; margin-bottom: 10px;">확인</div>
@@ -74,6 +79,7 @@
         <div style="text-align: right;">
             <button onclick="closeModal()" style="margin-right: 10px; padding: 5px 10px;">취소</button>
             <a id="confirmAction" style="padding: 5px 10px; background: green; color: white; text-decoration: none; border-radius: 5px;">확인</a>
+
         </div>
     </div>
 </div>
@@ -104,17 +110,20 @@
 
     document.getElementById("searchInput").addEventListener("input", function () {
         let searchText = this.value.toLowerCase();
+
         document.querySelectorAll("div[style*='grid-template-columns']").forEach(row => {
             if (!row.innerText.toLowerCase().includes(searchText)) {
                 row.style.display = "none";
             } else {
                 row.style.display = "grid";
             }
+
         });
     });
 
     document.getElementById("statusFilter").addEventListener("change", function () {
         let filter = this.value;
+
         document.querySelectorAll("div[style*='grid-template-columns']").forEach(row => {
             let statusCell = row.children[5]?.innerText.trim();
             if (filter === "" || statusCell === filter) {
@@ -122,6 +131,7 @@
             } else {
                 row.style.display = "none";
             }
+
         });
     });
 </script>

@@ -1,3 +1,4 @@
+
 package approval.model;
 
 import java.util.HashMap;
@@ -21,9 +22,9 @@ public class ApprovalDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 
-	// 寃곗젣 �닚�꽌 �궫�엯 硫붿꽌�뱶
+	// 野껉퀣�젫 占쎈떄占쎄퐣 占쎄땜占쎌뿯 筌롫뗄苑뚳옙諭�
 	public int insertApprovalLine(ApprovalBean approval) {
-		// 寃곗젣 �닚�꽌 �젙蹂대�� �뜲�씠�꽣踰좎씠�뒪�뿉 �궫�엯
+		// 野껉퀣�젫 占쎈떄占쎄퐣 占쎌젟癰귣�占쏙옙 占쎈쑓占쎌뵠占쎄숲甕곗쥙�뵠占쎈뮞占쎈퓠 占쎄땜占쎌뿯
 		return sqlSessionTemplate.insert(namespace + ".insertApprovalLine", approval);
 	}
 
@@ -82,3 +83,4 @@ public class ApprovalDao {
 		return getApprovalCompleteList;
 	}
 }
+

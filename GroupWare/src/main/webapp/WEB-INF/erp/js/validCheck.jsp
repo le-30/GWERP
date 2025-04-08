@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 <script>
+
 let submitBound = false;
+
 window.formSubmitConfig = window.formSubmitConfig || {
 	emp_insert: {
 		url: "lsh_insert.erp",
@@ -13,8 +15,8 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	emp_update: {
 		url: "emp_update.erp",
 		formId: "empUpdateForm",
-		page : "emp",
-		defaultRedirect: "empUpdate"
+		defaultRedirect: "emp",
+		page : "emp"
 	},
 	dept_insert: {
 		url: "dept_insert.erp",
@@ -92,6 +94,12 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		target: "appr",
 		page : "appr",
 		userFormData: true
+	},
+	vacation_insert: {
+		url: "vacation_insert.erp",
+		formId: "vacationRequest",
+		target: "vacation",
+		page : "vacation",
 	}
 };
 	
@@ -116,6 +124,7 @@ if (!submitBound) {
 	    } else {
 	        formData = $form.serialize();
     }
+
 		  
 
 		  $.ajax({
@@ -139,8 +148,6 @@ if (!submitBound) {
 				   const targetPage = config.target || config.defaultRedirect;
 				   const page = config.page;
 				
-				   //alert("targetPage : " + targetPage);
-				   //alert("page : " + page);
 				   
 		        if (redirectPage) {
 		          $.ajax({
@@ -168,8 +175,10 @@ if (!submitBound) {
 		    }
 		  });
 		});
+
 	submitBound = true;
 }
+
 	
 	$(document).off('click', '#modalContent').on('click', '#modalContent #toggleCheckboxList', function () {
 	    const checkboxList = $('#checkboxList');

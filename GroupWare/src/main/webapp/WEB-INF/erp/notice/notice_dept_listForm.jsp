@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file=".././common/common.jsp" %>
 
+
 <!-- 🔍 공지 검색 영역 -->
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
 	<h4 style="margin-bottom: 0; font-size: 18px; font-weight: bold; color: #2c3e50;">
@@ -18,6 +19,7 @@
 </div>
 
 <div id="dnoticeListContainer" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+
 
 	<c:if test="${totalCount == 0}">
 		<div style="text-align: center; padding: 20px; border: 1px solid #eee;">공지사항이 없습니다.</div>
@@ -58,7 +60,9 @@
 
 		<!-- 검색 영역 -->
 		<div style="margin-top: 30px; text-align: center;">
+
 			<form action="notice_dlist.erp" method="get" style="display: flex; justify-content: center; gap: 10px; align-items: center;">
+
 				<select name="whatColumn" style="padding: 6px;">
 					<option value="">전체 검색</option>
 					<option value="emp_nm">작성자</option>
@@ -67,6 +71,7 @@
 				<input type="text" name="keyword" style="padding: 6px;">
 				<input type="submit" value="검색" style="padding: 6px 12px;">
 			</form>
+
 			<form id="sendSearchForm" style="display: flex; gap: 10px; align-items: center;">
 				<select name="whatColumn" style="padding: 5px;">
 					<option value="">전체 선택</option>
@@ -76,6 +81,7 @@
 				<input type="text" name="keyword" id="sendKeywordInput" placeholder="검색어 입력" style="padding: 5px;">
 				<input type="button" value="검색" id="sendSearchBtn" style="padding: 6px 12px;">
 			</form>
+
 		</div>
 	</c:if>
 

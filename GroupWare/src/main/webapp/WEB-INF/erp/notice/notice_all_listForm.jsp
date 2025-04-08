@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file=".././common/common.jsp" %>
 
+
 <!-- 🔍 공지 검색 영역 -->
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
 	<h4 style="margin-bottom: 0; font-size: 18px; font-weight: bold; color: #2c3e50;">
@@ -19,6 +20,7 @@
 
 <!-- 📋 공지 리스트 전체 영역 -->
 <div id="anoticeListContainer" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+
 
 	<c:if test="${totalCount == 0 }">
 		<div style="text-align: center; padding: 20px; border: 1px solid #eee;">공지사항이 없습니다.</div>

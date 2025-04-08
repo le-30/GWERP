@@ -1,48 +1,59 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="./../common/common.jsp"%>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/modal.css">
 <% 
     String emp_no = (String) session.getAttribute("emp_no"); 
     System.out.println("emp_no : " +  emp_no);
 %>
 <script>
-function validateCheckbox() {
-    let vacationType = document.querySelector('input[name="vacation_type"]:checked');
-    
-    if (!vacationType) {
-        alert("ÈŞ°¡ À¯ÇüÀ» ¼±ÅÃÇÏ¼¼¿ä.");
-        return false;
-    }
-    return true;
+
+function closeModal() {
+    document.querySelector(".custom-modal-overlay").style.display = "none";
 }
 </script>
 
-<!-- ÈŞ°¡ ½ÅÃ» Æû -->
+<div class="custom-modal-overlay" style="display: flex;">
+	<div class="modal-box vacation-size">
+		<div class="modal-header">
+			<span class="modal-title">ğŸ“¢ íœ´ê°€ ì‘ì„±</span>
+			<button type="button" class="close-btn" onclick="closeModal()">âœ•</button>
+		</div>
+		<form:form commandName="vacation" action="vacation_insert.erp" method="post" id="vacationRequest">
+			<input type="hidden" name="emp_no" value="${sessionScope.emp_no}">
 
-<form action="vacation_insert.erp" method="post" onsubmit="return validateCheckbox()">
-    <!-- hidden ÇÊµå·Î »ç¿ø ¹øÈ£ Àü´Ş -->
-    <input type="hidden" name="emp_no" value="${sessionScope.emp_no}">
-    <h2>ÈŞ°¡ ½ÅÃ»</h2>
+			<!-- radio æ´¹ëªƒï¼™ -->
+			<div class="form-group radio-group">
+  				<label><input type="radio" name="vacation_type" value="ì—°ì°¨">ì—°ì°¨</label>
+  				<label><input type="radio" name="vacation_type" value="ë°˜ì°¨">ë°˜ì°¨</label>
+  				<label><input type="radio" name="vacation_type" value="ë³‘ê°€">ë³‘ê°€</label>
+  				<label><input type="radio" name="vacation_type" value="ê¸°íƒ€">ê¸°íƒ€ </label>
+			</div>
 
-    <label>ÈŞ°¡ À¯Çü</label><br>
-    <input type="radio" name="vacation_type" value="¿¬Â÷"> ¿¬Â÷
-    <input type="radio" name="vacation_type" value="¹İÂ÷"> ¹İÂ÷
-    <input type="radio" name="vacation_type" value="º´°¡"> º´°¡
-    <input type="radio" name="vacation_type" value="±âÅ¸"> ±âÅ¸ <br><br>
-    
-    <label>»ç¿ø ¹øÈ£ : </label>
-    <input type="text" name="req_emp_no" value="${sessionScope.emp_no}" readonly><br><br>
+			<div class="form-group">
+				<label>ì‚¬ì› ë²ˆí˜¸ : </label>
+				<input type="text" name="req_emp_no" value="${sessionScope.emp_no}" readonly>
+			</div>
 
-    <label>ÈŞ°¡ »çÀ¯:</label><br>
-    <textarea name="vacation_reason" rows="4" cols="50"></textarea><br><br>
+			<div class="form-group">
+				<label>íœ´ê°€ ì‚¬ìœ  : </label>
+				<textarea name="vacation_reason" class="form-control"></textarea>
+			</div>
 
-    <label>½ÃÀÛÀÏ:</label>
-    <input type="date" name="start_dt"><br><br>
+			<div class="form-group">
+				<label>ì‹œì‘ì¼ : </label>
+				<input type="date" name="start_dt">
+			</div>
 
-    <label>Á¾·áÀÏ:</label>
-    <input type="date" name="end_dt"><br><br>
+			<div class="form-group">
+				<label>ì¢…ë£Œì¼ : </label>
+				<input type="date" name="end_dt">
+			</div>
 
-    <!-- Á¦Ãâ ¹öÆ° -->
-    <input type="submit" value="½ÅÃ»">
-</form>
+			<div class="modal-footer">
+		        <input type="button" value="ì‹ ì²­" id="submitBtn" data-modal="vacation_insert" class="btn btn-primary">
+			</div>
+		</form:form>
+	</div>
+</div>
 
-
+<%@include file="./../js/validCheck.jsp"%>

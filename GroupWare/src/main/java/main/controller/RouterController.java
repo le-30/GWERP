@@ -33,38 +33,39 @@ public class RouterController {
 		
 		if ("emp".equals(page)) {
 		    return "redirect:/lsh_list.erp" + queryParams;
-		}else if("dept".equals(page)){
+		} else if("dept".equals(page)){
 			return "redirect:/dept_list.erp" + queryParams;
-		}else if("cmmCode".equals(page)){
+		} else if("cmmCode".equals(page)){
 			return "redirect:/cmm_list.erp" + queryParams;
-		}else if("authInfo".equals(page)) {
+		} else if("authInfo".equals(page)) {
 			return "redirect:/empAuthInfo.erp" +queryParams;
-		}else if("auth".equals(page)) {
+		} else if("auth".equals(page)) {
 			return "redirect:/auth_list.erp"+ queryParams;
-		}else if("received".equals(page)) {
+		} else if("received".equals(page)) {
 			return "redirect:/ymh_MessageReceive.erp" + queryParams;
-		}else if("send".equals(page)) {
+		} else if("send".equals(page)) {
 			return "redirect:/ymh_MessageSend.erp" + queryParams;
-		}else if("totalNotice".equals(page)){
+		} else if("totalNotice".equals(page)){
 			return "redirect:/notice_alist.erp" + queryParams;
-		}else if("deptNotice".equals(page)){
+		} else if("deptNotice".equals(page)){
 			return "redirect:/notice_dlist.erp" + queryParams;
-		}else if("myNotice".equals(page)){
+		} else if("myNotice".equals(page)){
 			return "redirect:/notice_mlist.erp" + queryParams;
 		} else if("appr".equals(page)){
 			return "redirect:/approvalList.erp" + queryParams;
 		} else if("apprList".equals(page)) {
 			return "redirect:/approvalSignList.erp" + queryParams;
-		}else if("commute".equals(page)) {
+		} else if("commute".equals(page)) {
 			return "redirect:/list/commute.erp" + queryParams;
 		} else if("apprSuc".equals(page)) {
 			return "redirect:/approvalComplete.erp" + queryParams;
-		}if("vacation".equals(page)) {
+		} else if("vacation".equals(page)) {
 			return "redirect:/vacationList.erp" + queryParams;
 		} else if("vacationApproval".equals(page)) {
 			return "redirect:/vacationList.erp" + queryParams;
 		} else if("vacationleave".equals(page)){
 			return "redirect:/employeeVacation.erp" + queryParams;
+
 		}
 		else {
 		    return gotoPage;

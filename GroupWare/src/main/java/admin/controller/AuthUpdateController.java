@@ -1,6 +1,5 @@
 package admin.controller;
 
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -13,54 +12,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import admin.model.DeptBean;
-import admin.model.DeptDao;
+import admin.model.AuthInfoBean;
+import admin.model.AuthInfoDao;
+import admin.model.CmmCodeBean;
+import admin.model.CmmCodeDao;
 
 @Controller
-public class DeptUpdateController {
+public class AuthUpdateController {
 	
-	private final String command ="dept_update.erp";
-	private final String getPage ="admin/dept_updateForm";
-	private final String gotoPage ="redirect:/main.erp?page=dept";
+	private final String command ="auth_update.erp";
+	private final String getPage ="admin/auth_updateForm";
+	private final String gotoPage ="redirect:/main.erp?page=auth";
 	
 	@Autowired
-	DeptDao deptDao;
+	AuthInfoDao authInfoDao;
 	
 	
 	@RequestMapping(value=command, method=RequestMethod.GET)
-	public ModelAndView doAction(@RequestParam("id") String dept_cd) {
+	public ModelAndView doAction(@RequestParam("id") String auth_cd) {
 		
-
-		System.out.println("id:"+dept_cd);
-
 		ModelAndView mav = new ModelAndView();
-		DeptBean deptBean = deptDao.getOneDept(dept_cd);
+		AuthInfoBean authInfoBean = authInfoDao.getOneAuthCode(auth_cd);
 		
-		
-		List<DeptBean> lists = deptDao.getDeptCd();
-		mav.addObject("lists",lists);
-		mav.addObject("deptBean",deptBean);
+		mav.addObject("authInfoBean",authInfoBean);
 		mav.setViewName(getPage);
-		
 		return mav;
 	}
 	
 	@RequestMapping(value=command,method=RequestMethod.POST)
-	public ModelAndView doActioin(@ModelAttribute("deptBean") @Valid DeptBean deptBean,BindingResult result) {
+	public ModelAndView doActioin(@ModelAttribute("authInfoBean") @Valid AuthInfoBean authInfoBean,BindingResult result) {
 		
 		ModelAndView mav = new ModelAndView();
 		if(result.hasErrors()) {
 			
-			List<DeptBean> lists = deptDao.getDeptCd();
-			mav.addObject("lists",lists);
-			mav.addObject("deptBean", deptBean);
+			mav.addObject("authInfoBean", authInfoBean);
 			mav.setViewName(getPage);
 			return mav;
 		}
-		int cnt = deptDao.updateDept(deptBean);
-
-		   System.out.println("업데이트 성공 여부: " + cnt);
-
+		
+		int cnt = authInfoDao.updateAuthInfo(authInfoBean);
 		mav.setViewName(gotoPage);
 		
 		return mav;
