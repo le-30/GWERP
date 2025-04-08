@@ -26,6 +26,7 @@
 		<mapper resource="mybatis/Commute.xml" />
 		<mapper resource="mybatis/reply.xml" />
 		<mapper resource="mybatis/vacation.xml" />
+		<mapper resource="mybatis/salary.xml" />
 	</mappers>
 </configuration>
 

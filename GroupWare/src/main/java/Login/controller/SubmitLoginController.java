@@ -51,7 +51,7 @@ public class SubmitLoginController {
 		EmployeeBean empBean = empdao.getEmployeeInfo(emp_no, pw);
 		
 		if (empBean == null) {
-			mav.addObject("error", "사번이 존재하지 않거나 비밀번호가 틀렸습니다.");
+			mav.addObject("error", "�궗踰덉씠 議댁옱�븯吏� �븡嫄곕굹 鍮꾨�踰덊샇媛� ���졇�뒿�땲�떎.");
 			mav.setViewName(getPage);
 			return mav;
 		}
@@ -73,16 +73,15 @@ public class SubmitLoginController {
 			
 			 List<String> authNames = empAuthDao.getAuthNamesByEmpNo(emp_no);
 		     session.setAttribute("currentAuth", String.join(",", authNames));
-		     session.setAttribute("hasAdmin", authNames.contains("관리자권한"));
+		     session.setAttribute("hasAdmin", authNames.contains("愿�由ъ옄沅뚰븳"));
 
 
-			response.setHeader("Set-Cookie", "access_token=" + accessToken + "; Path=/; HttpOnly; Max-Age=54000"); // 15占시곤옙
+			response.setHeader("Set-Cookie", "access_token=" + accessToken + "; Path=/; HttpOnly; Max-Age=54000"); // 15�뜝�떆怨ㅼ삕
 
 			mav.addObject("emp_no",emp_no);
 			mav.setViewName("redirect:/check_in/commute.erp?access_token="+accessToken);
 			
 			
-			mav.setViewName(gotoPage);
 			return mav;
 		}else {
 			mav.setViewName(getPage);
