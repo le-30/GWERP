@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./../common/common.jsp"%>
 
+<div id="approvalRequestContainer">
 <div style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
     <h4 style="margin-bottom: 20px; text-align: center;">📄 결재 목록</h4>
 
@@ -40,4 +41,5 @@
     <div id="paging" style="margin-top: 20px; text-align: center;">
         ${pageInfo.pagingHtml}
     </div>
+</div>
 </div>

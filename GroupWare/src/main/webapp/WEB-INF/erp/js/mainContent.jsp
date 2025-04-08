@@ -92,8 +92,21 @@ window.pageConfig = window.pageConfig || {
 	appr: {
 		button: "결제 신청",
 		modal: "appr_insert",
+		container:"approvalRequestContainer",
 		tabs: [
 			{ label: "결제 관리", target: "appr" }
+			]
+	},
+	apprSuc: {
+		container:"approvalCompleteContainer",
+		tabs: [
+			{ label: "본인 결재 완료 이력", target: "apprSuc" }
+			]
+	},
+	apprList: {
+		container:"approvalmustDoContainer",
+		tabs: [
+			{ label: "결제 해야 하는 리스트", target: "apprList" }
 			]
 	},
     vacation: {
@@ -108,6 +121,13 @@ window.pageConfig = window.pageConfig || {
 		      modal: "",
 		      tabs: [
 		        { label: "출퇴근 기록", target: "commute" }
+		      ]
+		    },
+	salary: {
+		      button: "",
+		      modal: "",
+		      tabs: [
+		    	  { label: "급여 내역", target: "salary" }
 		      ]
 		    }
 };//본문을 헤더에 연결할 tabs 변수, button이름 & modal 연결할 url변수 설정을 위한 변
@@ -211,8 +231,7 @@ window.pageConfig = window.pageConfig || {
 	
 	function handleSidebarByTarget(target,page) { // validCheck
 		
-		//alert("handletarget : " + target);
-		//alert("handlepage : " + page);
+
 		
 		const sidebarBtn = $(".sideTr").filter(function() {
 			return $(this).data("target") === page;
@@ -225,6 +244,7 @@ window.pageConfig = window.pageConfig || {
 		if (sidebarBtn.length > 0) {
 			handleSidebar(sidebarBtn[0], target); // DOM 요소로 변환 후 전달
 		} else {
+			loadContent(target || page);
 			alert("해당 target을 가진 sidebarBtn을 찾을 수 없습니다.");
 		}
 		handleSidebar(sidebarBtn);
@@ -341,9 +361,11 @@ window.pageConfig = window.pageConfig || {
 	    addSearchEventListener('#cmmCodeSearchForm', '#cmmCodeSearchBtn', '#cmmCodeKeywordInput');
 	    addSearchEventListener('#deptSearchForm', '#deptSearchBtn', '#deptkeywordInput');
 	    addSearchEventListener('#authSearchForm', '#authSearchBtn', '#authkeywordInput');
+
 	    addSearchEventListener('#notice_aSearchForm', '#notice_aSearchBtn', '#notice_akeywordInput');
 	    addSearchEventListener('#notice_dSearchForm', '#notice_dSearchBtn', '#notice_dkeywordInput');
 	    addSearchEventListener('#notice_mSearchForm', '#notice_mSearchBtn', '#notice_mkeywordInput');
+
 	});//검색 클릭이나 엔터 누를식 본문만 바뀌는 함수
 
 
@@ -359,9 +381,16 @@ window.pageConfig = window.pageConfig || {
 			url: url,
 			method: 'GET',
 			success: function(html) {
-				// 받은 html에서 리스트 영역만 추출해서 교체
-    			const newList = $('<div>').html(html).find('#'+targetId).html();
-    			$target.html(newList);
+				console.log("✅ AJAX 응답 성공!");
+				const $html = $('<div>').html(html);
+				const newList = $html.find('#'+targetId).html();
+
+				if (!newList) {
+					console.warn("⚠️ newList를 못 찾음. HTML 구조 이상할 수 있음");
+					console.log("👉 받은 html: ", html);
+					console.log("👉 찾으려는 ID:", targetId);
+				}
+				$target.html(newList);
     		},
     		error: function(xhr) {
     			console.log("❌ 페이징 실패", xhr.status);
@@ -390,7 +419,8 @@ window.pageConfig = window.pageConfig || {
 	        url = 'emp_detail.erp';
 	    } else if (source === 'notice') {
 	        url = 'notice_content.erp';
-	    } else {
+	    } 
+	    else {
 	        console.log("기본 메시지 상세 조회");
 	    }
 		$.ajax({

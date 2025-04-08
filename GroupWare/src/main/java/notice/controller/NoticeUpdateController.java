@@ -1,5 +1,7 @@
 package notice.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -18,6 +20,8 @@ import attach.model.AttachBean;
 import attach.model.AttachDao;
 import notice.model.NoticeBean;
 import notice.model.NoticeDao;
+import reply.model.ReplyBean;
+import reply.model.ReplyDao;
 
 @Controller
 public class NoticeUpdateController {
@@ -30,6 +34,9 @@ public class NoticeUpdateController {
 	
 	@Autowired
 	AttachDao adao;
+	
+	@Autowired
+	ReplyDao rdao;
 	
 	FileUploadController fileUploadController = new FileUploadController();
 	
@@ -113,8 +120,10 @@ public class NoticeUpdateController {
 		ndao.downReadcount(notice.getNotice_no());
 		ndao.downReadcount(notice.getNotice_no());
 		
-		mav.addObject("notice_no", notice.getNotice_no());
-		mav.addObject("notice_no", notice.getNotice_no());
+		
+		
+		
+		mav.addObject("no", notice.getNotice_no());
         mav.addObject("pageNumber", pageNumber);
         mav.addObject("whatColumn", whatColumn);
         mav.addObject("keyword", keyword);

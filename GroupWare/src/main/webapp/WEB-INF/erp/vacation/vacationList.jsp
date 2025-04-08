@@ -20,7 +20,15 @@
 
     <c:if test="${not empty vacationList}">
         <!-- 헤더 -->
-        <div style="display: grid; grid-template-columns: 1fr 1.2fr 1.2fr 2.5fr 1fr 1fr 1fr 0.8fr 0.8fr; font-weight: bold; background: #f0f0f0; padding: 10px; border-bottom: 2px solid #ccc;">
+        <div style="display: grid; grid-template-columns: 
+            <c:choose>
+                <c:when test="${sessionScope.position_cd <= 2}">
+                    1fr 1.2fr 1.2fr 2.5fr 1fr 1fr 1fr 0.8fr 0.8fr
+                </c:when>
+                <c:otherwise>
+                    1fr 1.2fr 1.2fr 2.5fr 1fr 1fr 1fr
+                </c:otherwise>
+            </c:choose>; font-weight: bold; background: #f0f0f0; padding: 10px; border-bottom: 2px solid #ccc;">
             <div>번호</div>
             <div>유형</div>
             <div>신청자</div>
@@ -28,13 +36,23 @@
             <div>일수</div>
             <div>상태</div>
             <div>승인자</div>
-            <div>승인</div>
-            <div>반려</div>
+            <c:if test="${sessionScope.position_cd <= 2}">
+                <div>승인</div>
+                <div>반려</div>
+            </c:if>
         </div>
 
         <!-- 목록 -->
         <c:forEach var="vacation" items="${vacationList}">
-            <div style="display: grid; grid-template-columns: 1fr 1.2fr 1.2fr 2.5fr 1fr 1fr 1fr 0.8fr 0.8fr; padding: 10px; border-bottom: 1px solid #eee; align-items: center;">
+            <div style="display: grid; grid-template-columns: 
+                <c:choose>
+                    <c:when test="${sessionScope.position_cd <= 2}">
+                        1fr 1.2fr 1.2fr 2.5fr 1fr 1fr 1fr 0.8fr 0.8fr
+                    </c:when>
+                    <c:otherwise>
+                        1fr 1.2fr 1.2fr 2.5fr 1fr 1fr 1fr
+                    </c:otherwise>
+                </c:choose>; padding: 10px; border-bottom: 1px solid #eee; align-items: center;">
                 <div>${vacation.vacation_no}</div>
                 <div>${vacation.vacation_type}</div>
                 <div>${vacation.req_emp_no}</div>
@@ -55,8 +73,11 @@
                     </c:choose>
                 </div>
                 <div>${vacation.appr_emp_no}</div>
-                <div><a href="javascript:void(0)" onclick="confirmApproval(${vacation.vacation_no})" style="color: green; font-weight: bold;">✔</a></div>
-                <div><a href="javascript:void(0)" onclick="confirmRejection(${vacation.vacation_no})" style="color: red; font-weight: bold;">❌</a></div>
+
+                <c:if test="${sessionScope.position_cd <= 2}">
+                    <div><a href="javascript:void(0)" onclick="confirmApproval(${vacation.vacation_no})" style="color: green; font-weight: bold;">✔</a></div>
+                    <div><a href="javascript:void(0)" onclick="confirmRejection(${vacation.vacation_no})" style="color: red; font-weight: bold;">❌</a></div>
+                </c:if>
             </div>
         </c:forEach>
     </c:if>

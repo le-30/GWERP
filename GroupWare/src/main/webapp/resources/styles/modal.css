@@ -26,10 +26,10 @@
 
 .modal-box.mail-size {
   width: 500px;
-  background: #fff; /* ❗ 흰 배경 */
+  background: #fff; /* �쓼 �씛 諛곌꼍 */
   padding: 25px 30px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* ❗ 그림자 */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* �쓼 洹몃┝�옄 */
   position: relative;
   max-height: 80vh;
   overflow-y: auto;
@@ -90,6 +90,16 @@
   overflow-y: auto;
 }
 
+.modal-box.vacation-size {
+  width: 500px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
 
 .modal-header {
   display: flex;
@@ -126,7 +136,7 @@
 .form-group {
   display: flex;
   align-items: center;
-  margin-bottom: 15px; /* 간격 조절 여기서 함 */
+  margin-bottom: 15px; /* 媛꾧꺽 議곗젅 �뿬湲곗꽌 �븿 */
 }
 
 .form-group label {
@@ -141,8 +151,8 @@
   font-size: 14px;
 }
 textarea.form-control {
-  height: 180px;       /* 원하는 고정 높이 */
-  resize: none;        /* 마우스 크기조절 비활성화 */
+  height: 180px;       /* �썝�븯�뒗 怨좎젙 �넂�씠 */
+  resize: none;        /* 留덉슦�뒪 �겕湲곗“�젅 鍮꾪솢�꽦�솕 */
   font-size: 14px;
   padding: 10px;
   line-height: 1.5;
@@ -157,6 +167,29 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  resize: none; /* ✅ 크기 조절 방지 */
+  resize: none; /* �쐟 �겕湲� 議곗젅 諛⑹� */
 }
 
+/* �윍� �쑕媛� �쑀�삎 radio �쟾�슜 override */
+.form-group.radio-group {
+  display: flex;
+  flex-direction: row;   /* 媛�濡� �젙�젹 */
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-group.radio-group label {
+  width: auto !important;  /* 湲곗〈 100px 媛뺤젣 �빐�젣 */
+  font-size: 14px;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+}
+
+.form-group.radio-group input[type="radio"] {
+  margin: 0;
+}

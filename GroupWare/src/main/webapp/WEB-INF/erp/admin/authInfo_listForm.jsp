@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file=".././common/common.jsp" %>
-
+<div id="authInfoListContainer">
 <div id="authInfoFormContainer" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
 	<h4 style="margin-bottom: 20px;">👤 사원 권한 관리 (${totalCount})</h4>
 
@@ -75,4 +75,5 @@
 			${pageInfo.pagingHtml}
 		</div>
 	</form>
+</div>
 </div>

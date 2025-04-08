@@ -13,7 +13,7 @@
 		<property name="prefix" value="/WEB-INF/erp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
-	<context:component-scan base-package="employee, main, admin, utility, message,notice,attach,document,approval,Login,commute,qrGenerator,jwt,reply,vacation" />
+
+	<context:component-scan base-package="employee, main, admin, utility, message,notice,attach,document,approval,Login,commute,qrGenerator,jwt,reply,vacation,salary" />
 </beans>
 <!-- *.erp => erp-servlet.xml -->  

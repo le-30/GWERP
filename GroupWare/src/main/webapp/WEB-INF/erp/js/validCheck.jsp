@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 <script>
-let submitBound = false;
+
+window.submitBound = false;
+
 window.formSubmitConfig = window.formSubmitConfig || {
 	emp_insert: {
 		url: "lsh_insert.erp",
@@ -13,8 +15,9 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	emp_update: {
 		url: "emp_update.erp",
 		formId: "empUpdateForm",
-		page : "emp",
-		defaultRedirect: "empUpdate"
+		defaultRedirect: "emp",
+		page : "emp"
+
 	},
 	dept_insert: {
 		url: "dept_insert.erp",
@@ -25,7 +28,6 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	dept_update: {
 		url: "dept_update.erp",
 		formId: "deptupdateForm",
-		page : "dept",
 		defaultRedirect: "dept"
 	},
 	cmmCode_insert: {
@@ -92,10 +94,17 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		target: "appr",
 		page : "appr",
 		userFormData: true
+	},
+	vacation_insert: {
+		url: "vacation_insert.erp",
+		formId: "vacationRequest",
+		target: "vacation",
+		page : "vacation",
 	}
 };
 	
-if (!submitBound) {
+if (!window.submitBound) {
+	window.submitBound =true;
 	$(document).off('click', '#submitBtn').on('click', '#submitBtn', function (event) {
 	    const config = formSubmitConfig[$(this).data('modal')];
 	    const $form = $('#' + config.formId);
@@ -124,6 +133,7 @@ if (!submitBound) {
 		    processData: !config.userFormData,
             contentType: config.userFormData ? false : 'application/x-www-form-urlencoded',
 		    success: function (html) {
+		    	console.log('서버응답:',html);
 		      const $newForm = $('<div>').html(html).find('form');
 
 		      if ($newForm.length > 0) {
@@ -138,14 +148,13 @@ if (!submitBound) {
 				   const targetPage = config.target || config.defaultRedirect;
 				   const page = config.page;
 				
-				   //alert("targetPage : " + targetPage);
-				   //alert("page : " + page);
 				   
 		        if (redirectPage) {
 		          $.ajax({
 		            url: redirectPage,
 		            method: 'GET',
 		            success: function (html) {
+		            	 console.log('리디렉션 응답:', html);
 		              $('.main-content').html(html);
 		              handleSidebarByTarget(targetPage,page);
 		            },
@@ -167,8 +176,11 @@ if (!submitBound) {
 		    }
 		  });
 		});
+
 	submitBound = true;
 }
+
+
 	
 	$(document).off('click', '#modalContent').on('click', '#modalContent #toggleCheckboxList', function () {
 	    const checkboxList = $('#checkboxList');

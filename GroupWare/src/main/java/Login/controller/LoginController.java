@@ -167,6 +167,22 @@ public class LoginController {
 //
 //
 //
+	
+	@RequestMapping("/logout.erp")
+	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+
+		session.invalidate();
+
+	    Cookie cookie = new Cookie("access_token", null);
+	    cookie.setMaxAge(0);
+	    cookie.setPath("/");
+	    response.addCookie(cookie);
+
+	    return "redirect:/lsh_login.erp";
+	}
+	
+	
+	
 	// [공통] 유효시간 검사 메서드
 	private boolean isExpired(Date createdAt, int minutes) {//createdAT:db에서 조회한 qr코드 생선된 시간
 	long diff = System.currentTimeMillis() - createdAt.getTime();

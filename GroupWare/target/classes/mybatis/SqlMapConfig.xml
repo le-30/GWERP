@@ -2,11 +2,8 @@
 <!DOCTYPE configuration
     PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-config.dtd">
-
 <configuration>
 	<typeAliases>
-		<typeAlias alias="MyEmployee"
-			type="employee.model.EmployeeBean" />
 		<typeAlias alias="MyMessage"
 			type="message.model.MessageBean" />
 		<typeAlias alias="MyNotice"
@@ -26,6 +23,7 @@
 		<mapper resource="mybatis/Commute.xml" />
 		<mapper resource="mybatis/reply.xml" />
 		<mapper resource="mybatis/vacation.xml" />
+		<mapper resource="mybatis/salary.xml" />
 	</mappers>
 </configuration>
 

@@ -30,7 +30,7 @@ public class EmpUpdateController {
 		
 		@RequestMapping(value=command,method=RequestMethod.GET)
 		public ModelAndView doAction(@RequestParam("id") String emp_no) {
-			
+			System.out.println("id:"+emp_no);
 			ModelAndView mav = new ModelAndView();
 			
 			EmployeeBean empBean = empDao.getOneEmp(emp_no);
@@ -42,7 +42,8 @@ public class EmpUpdateController {
 		}
 		
 		@RequestMapping(value=command,method=RequestMethod.POST)
-		public ModelAndView doActioin(@ModelAttribute("empBean") @Valid EmployeeBean empBean,BindingResult result) {
+		public ModelAndView doActioin(@ModelAttribute("empBean") @Valid EmployeeBean empBean,BindingResult result,
+									  @RequestParam(value = "redirectPage", required = false) String redirectPage) {
 			
 			ModelAndView mav = new ModelAndView();
 			if(result.hasErrors()) {
@@ -55,7 +56,12 @@ public class EmpUpdateController {
 			int cnt = empDao.updateEmployee(empBean);
 			
 			authority.defaultAuthor(empBean);
-			mav.setViewName(gotoPage+"?id="+empBean.getEmp_no());
+
+			if (redirectPage != null && !redirectPage.trim().isEmpty()) {
+				mav.setViewName("redirect:/" + redirectPage);
+			} else {
+				mav.setViewName(gotoPage + "?no=" + empBean.getEmp_no());
+			}
 			
 			return mav;
 		}
