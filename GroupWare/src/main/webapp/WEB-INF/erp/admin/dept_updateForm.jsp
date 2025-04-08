@@ -12,11 +12,11 @@
     </div>
 <form:form commandName="deptBean" action="dept_update.erp" method="post" id="deptupdateForm">
 
-<%-- <input type="hidden" name="redirectPage" value="dept_list.erp?dept_cd=${deptBean.dept_cd}"> --%>
+<input type="hidden" name="redirectPage" value="router.erp?page=dept">
 
   <div class="form-group">
         <label>부서코드</label>
-        <input type="text" name="dept_cd" value="${deptBean.dept_cd}">
+        <input type="text" name="dept_cd" value="${deptBean.dept_cd}" readonly>
       </div>
       <form:errors path="dept_cd" cssClass="err" />
 

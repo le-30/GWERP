@@ -57,9 +57,10 @@ public class DeptUpdateController {
 			mav.setViewName(getPage);
 			return mav;
 		}
+		System.out.println("deptBean:"+deptBean);
 		int cnt = deptDao.updateDept(deptBean);
 
-		   System.out.println("업데이트 성공 여부: " + cnt);
+		System.out.println("업데이트 성공 여부: " + cnt);
 
 		mav.setViewName(gotoPage);
 		

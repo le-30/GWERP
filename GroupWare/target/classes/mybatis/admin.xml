@@ -69,7 +69,7 @@
 	</select>
 	
 	<update id="updateDept">
-		update department set dept_nm = #{dept_nm},p_dept_cd = #{p_dept_cd}
+		update department set dept_cd = #{dept_cd},dept_nm = #{dept_nm},p_dept_cd = #{p_dept_cd}
 		where dept_cd = #{dept_cd}
 	</update>
 	

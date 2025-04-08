@@ -123,8 +123,7 @@ public class NoticeUpdateController {
 		
 		
 		
-		mav.addObject("notice_no", notice.getNotice_no());
-		mav.addObject("notice_no", notice.getNotice_no());
+		mav.addObject("no", notice.getNotice_no());
         mav.addObject("pageNumber", pageNumber);
         mav.addObject("whatColumn", whatColumn);
         mav.addObject("keyword", keyword);

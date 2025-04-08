@@ -134,6 +134,7 @@ if (!window.submitBound) {
 		    processData: !config.userFormData,
             contentType: config.userFormData ? false : 'application/x-www-form-urlencoded',
 		    success: function (html) {
+		    	console.log('서버응답:',html);
 		      const $newForm = $('<div>').html(html).find('form');
 
 		      if ($newForm.length > 0) {
@@ -154,6 +155,7 @@ if (!window.submitBound) {
 		            url: redirectPage,
 		            method: 'GET',
 		            success: function (html) {
+		            	 console.log('리디렉션 응답:', html);
 		              $('.main-content').html(html);
 		              handleSidebarByTarget(targetPage,page);
 		            },

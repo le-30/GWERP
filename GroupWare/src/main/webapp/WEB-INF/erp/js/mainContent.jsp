@@ -224,6 +224,7 @@ window.pageConfig = window.pageConfig || {
 		if (sidebarBtn.length > 0) {
 			handleSidebar(sidebarBtn[0], target); // DOM 요소로 변환 후 전달
 		} else {
+			loadContent(target || page);
 			alert("해당 target을 가진 sidebarBtn을 찾을 수 없습니다.");
 		}
 		handleSidebar(sidebarBtn);
