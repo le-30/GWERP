@@ -3,7 +3,7 @@
 
 <script>
 
-let submitBound = false;
+window.submitBound = false;
 
 window.formSubmitConfig = window.formSubmitConfig || {
 	emp_insert: {
@@ -15,8 +15,8 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	emp_update: {
 		url: "emp_update.erp",
 		formId: "empUpdateForm",
-		defaultRedirect: "empUpdate"
-		page : "emp",
+		defaultRedirect: "emp",
+		page : "emp"
 	},
 	dept_insert: {
 		url: "dept_insert.erp",
@@ -27,7 +27,6 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	dept_update: {
 		url: "dept_update.erp",
 		formId: "deptupdateForm",
-		page : "dept",
 		defaultRedirect: "dept"
 	},
 	cmmCode_insert: {
@@ -97,7 +96,8 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	}
 };
 	
-if (!submitBound) {
+if (!window.submitBound) {
+	window.submitBound =true;
 	$(document).off('click', '#submitBtn').on('click', '#submitBtn', function (event) {
 	    const config = formSubmitConfig[$(this).data('modal')];
 	    const $form = $('#' + config.formId);

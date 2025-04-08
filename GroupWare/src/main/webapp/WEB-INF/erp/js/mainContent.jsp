@@ -393,7 +393,8 @@ window.pageConfig = window.pageConfig || {
 	        url = 'emp_detail.erp';
 	    } else if (source === 'notice') {
 	        url = 'notice_content.erp';
-	    } else {
+	    } 
+	    else {
 	        console.log("기본 메시지 상세 조회");
 	    }
 		$.ajax({

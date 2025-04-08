@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- detail에서 작업하는 ajax모음 -->
 <script>
@@ -30,4 +30,4 @@ $(document).on('click','.detail-link',function(e){
 });//detail link로 들어가기 위한 ajax
 
 
-</script>
+</script> --%>

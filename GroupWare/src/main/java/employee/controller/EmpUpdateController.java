@@ -30,7 +30,7 @@ public class EmpUpdateController {
 		
 		@RequestMapping(value=command,method=RequestMethod.GET)
 		public ModelAndView doAction(@RequestParam("id") String emp_no) {
-			
+			System.out.println("id:"+emp_no);
 			ModelAndView mav = new ModelAndView();
 			
 			EmployeeBean empBean = empDao.getOneEmp(emp_no);
@@ -56,7 +56,7 @@ public class EmpUpdateController {
 			
 			authority.defaultAuthor(empBean);
 
-			mav.setViewName(gotoPage+"?id="+empBean.getEmp_no());
+			mav.setViewName(gotoPage+"?no="+empBean.getEmp_no());
 
 			
 			return mav;
