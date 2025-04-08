@@ -119,18 +119,18 @@ div#prof {
         <i class="fas fa-paper-plane sideIcon"></i>메신저
          <span id="msg-badge" style="margin-left: auto; background: red; color: white; padding: 2px 8px; border-radius: 10px; font-size: 12px; display: none;"></span>
     </div>
-    <div class="sideTr" data-action="page" data-target="todo">
+<!--     <div class="sideTr" data-action="page" data-target="todo">
         <i class="fas fa-bell sideIcon"></i>To-Do
-    </div>
+    </div> -->
     <div class="sideTr" data-action="page" data-target="notice">
         <i class="fas fa-flag sideIcon"></i>공지사항
     </div>
     <div class="sideTr" data-action="page" data-target="emp" >
         <i class="fas fa-users sideIcon"></i>구성원
     </div>
-    <div class="sideTr" data-action="page" data-target="calender">
+   <!--  <div class="sideTr" data-action="page" data-target="calender">
         <i class="fas fa-calendar-check sideIcon"></i>캘린더
-    </div>
+    </div> -->
     <div class="sideTr" data-action="page" data-target="commute">
         <i class="fas fa-clock sideIcon"></i>출퇴근
     </div>

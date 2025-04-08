@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="salary.model.SalaryDao">
+
+	<select id="findAllForPresident" parameterType="map"
+		resultType="commute.model.CommuteBean">
+		SELECT * FROM commute
+		<where>
+			<if test="type == 'empNm'"> AND empNm LIKE #{keyword} </if>
+			<if test="type == 'deptNm'"> AND deptNm LIKE #{keyword} </if>
+			<if test="type == 'cmmNm'"> AND cmmNm LIKE #{keyword} </if>
+			<if test="month != null and month != ''">
+				AND TO_CHAR(work_date, 'YYYY-MM') = #{month}
+			</if>
+		</where>
+	</select>
+	<select id="findAllExcludingPresident" parameterType="map"
+		resultType="commute.model.CommuteBean">
+		SELECT *
+		FROM commute
+		WHERE cmmNm != '사장'
+		<if test="type == 'empNm'">
+			AND empNm LIKE #{keyword}
+		</if>
+		<if test="type == 'deptNm'">
+			AND deptNm LIKE #{keyword}
+		</if>
+		<if test="type == 'cmmNm'">
+			AND cmmNm LIKE #{keyword}
+		</if>
+		<if test="month != null and month != ''">
+			AND TO_CHAR(work_date, 'YYYY-MM') = #{month}
+		</if>
+		ORDER BY work_date DESC
+	</select>
+
+	<select id="findByEmpId" parameterType="map"
+		resultType="commute.model.CommuteBean">
+		SELECT *
+		FROM commute
+		WHERE emp_no = #{emp_no}
+		<if test="month != null and month != ''">
+			AND TO_CHAR(work_date, 'YYYY-MM') = #{month}
+		</if>
+		ORDER BY work_date DESC
+	</select>
+
+
+</mapper>

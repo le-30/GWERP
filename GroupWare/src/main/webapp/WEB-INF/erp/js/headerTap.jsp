@@ -38,8 +38,7 @@ window.tabSets = window.tabSets || {
 			    { label: "결재 해야하는 리스트", target: "apprList" }
 		  ],
 		  pay: [
-		    { label: "급여 내역", target: "payHistory" },
-		    { label: "지급 요청", target: "payRequest" }
+		    { label: "급여 내역", target: "salary" }
 		  ],
 		  admin: [
 		    { label: "부서관리", target: "dept" },

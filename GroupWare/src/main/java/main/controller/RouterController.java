@@ -6,34 +6,35 @@ import java.net.URLEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
- 
+
 @Controller
 public class RouterController {
-	
+
 	private final String command ="/router.erp";
 	private final String gotoPage ="main/main";
-	
+
 	@RequestMapping(command)
 	public String doAction(@RequestParam("page") String page,
-							@RequestParam(value="whatColumn", required = false) String whatColumn,
-							@RequestParam(value="keyword", required = false) String keyword,
-							@RequestParam(value="pageNumber", required = false) String pageNumber) throws UnsupportedEncodingException {
-		
+			@RequestParam(value="whatColumn", required = false) String whatColumn,
+			@RequestParam(value="keyword", required = false) String keyword,
+			@RequestParam(value="pageNumber", required = false) String pageNumber) throws UnsupportedEncodingException {
+
 		System.out.println("router whatColumn : " + whatColumn);
 		System.out.println("router keyword : " + keyword);
 		System.out.println("router pageNumber : " + pageNumber);
-		
+
 		String encodedKeyword = (keyword != null) ? URLEncoder.encode(keyword, "UTF-8") : "";
 		String encodedWhatColumn = (whatColumn != null) ? URLEncoder.encode(whatColumn, "UTF-8") : "";
-		    
+
 		String queryParams = String.format("?whatColumn=%s&keyword=%s&pageNumber=%s",
-	            encodedWhatColumn,
-	            encodedKeyword,
-	            pageNumber != null ? pageNumber : "1");
-		
+				encodedWhatColumn,
+				encodedKeyword,
+				pageNumber != null ? pageNumber : "1");
+
 		if ("emp".equals(page)) {
 		    return "redirect:/lsh_list.erp" + queryParams;
 		} else if("dept".equals(page)){
+
 			return "redirect:/dept_list.erp" + queryParams;
 		} else if("cmmCode".equals(page)){
 			return "redirect:/cmm_list.erp" + queryParams;
@@ -64,11 +65,13 @@ public class RouterController {
 		} else if("vacationApproval".equals(page)) {
 			return "redirect:/vacationList.erp" + queryParams;
 		} else if("vacationleave".equals(page)){
-			return "redirect:/employeeVacation.erp" + queryParams;
+			return "redirect:/employeeVacation.erp";
 
+		} else if("salary".equals(page)){
+			return "redirect:/salary/list.erp";
 		}
 		else {
-		    return gotoPage;
+			return gotoPage;
 		}
 	}
 }
