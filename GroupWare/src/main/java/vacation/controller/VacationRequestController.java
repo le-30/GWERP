@@ -20,7 +20,7 @@ public class VacationRequestController {
 	
 	private final String command = "vacation_insert.erp";
 	private final String getPage = "vacation/vacationRequest";
-	private final String gotoPage = "redirect:/vacationList.erp"; // 성공 시 이동할 페이지
+	private final String gotoPage = "redirect:/main.erp?page=vacation"; // 성공 시 이동할 페이지
 	
 	@Autowired
 	private VacationDao vdao;

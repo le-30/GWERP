@@ -93,6 +93,12 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		target: "appr",
 		page : "appr",
 		userFormData: true
+	},
+	vacation_insert: {
+		url: "vacation_insert.erp",
+		formId: "vacationRequest",
+		target: "vacation",
+		page : "vacation",
 	}
 };
 	

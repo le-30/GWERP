@@ -42,7 +42,8 @@ public class EmpUpdateController {
 		}
 		
 		@RequestMapping(value=command,method=RequestMethod.POST)
-		public ModelAndView doActioin(@ModelAttribute("empBean") @Valid EmployeeBean empBean,BindingResult result) {
+		public ModelAndView doActioin(@ModelAttribute("empBean") @Valid EmployeeBean empBean,BindingResult result,
+									  @RequestParam(value = "redirectPage", required = false) String redirectPage) {
 			
 			ModelAndView mav = new ModelAndView();
 			if(result.hasErrors()) {
@@ -56,8 +57,11 @@ public class EmpUpdateController {
 			
 			authority.defaultAuthor(empBean);
 
-			mav.setViewName(gotoPage+"?no="+empBean.getEmp_no());
-
+			if (redirectPage != null && !redirectPage.trim().isEmpty()) {
+				mav.setViewName("redirect:/" + redirectPage);
+			} else {
+				mav.setViewName(gotoPage + "?no=" + empBean.getEmp_no());
+			}
 			
 			return mav;
 		}

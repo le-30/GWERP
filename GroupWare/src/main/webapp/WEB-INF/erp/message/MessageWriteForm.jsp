@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="./../common/common.jsp"%>
+
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/styles/modal.css">
 
@@ -42,10 +43,7 @@
 	font-weight: bold;
 }
 </style>
-<script
-
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js">
-	</script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 
 <div class="custom-modal-overlay"
 	style="display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.3); z-index: 9999;">
