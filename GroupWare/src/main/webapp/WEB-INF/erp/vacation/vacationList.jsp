@@ -1,157 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ include file=".././common/common.jsp"%>
 
-<style>
-    body {
-        background-color: #f5f5f5;
-        font-family: 'Segoe UI', sans-serif;
-    }
+<div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+    <h4 style="margin-bottom: 20px;">📝 휴가 신청 목록</h4>
 
-    .container {
-        max-width: 1100px;
-        margin: 40px auto;
-        padding: 20px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    h2 {
-        font-weight: bold;
-        font-size: 24px;
-        color: #333;
-        border-left: 6px solid #007bff;
-        padding-left: 15px;
-        margin-bottom: 30px;
-    }
-
-    .search-area {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-
-    .search-area input,
-    .search-area select {
-        padding: 8px 12px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 14px;
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    thead {
-        background: #007bff;
-        color: white;
-        text-transform: uppercase;
-    }
-
-    th, td {
-        padding: 12px;
-        text-align: center;
-        border: 1px solid #e0e0e0;
-    }
-
-    tbody tr:nth-child(odd) {
-        background-color: #f9f9f9;
-    }
-
-    tbody tr:hover {
-        background-color: #e3f2fd;
-    }
-
-    .badge {
-        display: inline-block;
-        padding: 6px 12px;
-        font-size: 13px;
-        border-radius: 12px;
-        font-weight: bold;
-    }
-
-    .bg-success { background-color: #28a745; color: white; }
-    .bg-danger { background-color: #dc3545; color: white; }
-    .bg-secondary { background-color: #6c757d; color: white; }
-
-    .btn {
-        padding: 6px 10px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: bold;
-        transition: background-color 0.2s ease-in-out;
-    }
-
-    .btn-approve {
-        background-color: #28a745;
-        color: white;
-    }
-
-    .btn-approve:hover {
-        background-color: #218838;
-    }
-
-    .btn-reject {
-        background-color: #dc3545;
-        color: white;
-    }
-
-    .btn-reject:hover {
-        background-color: #c82333;
-    }
-
-    .paging {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    /* 모달 */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0; top: 0;
-        width: 100%; height: 100%;
-        background-color: rgba(0,0,0,0.4);
-    }
-
-    .modal-content {
-        background-color: #fff;
-        margin: 15% auto;
-        padding: 20px;
-        border-radius: 10px;
-        width: 400px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-
-    .modal-header {
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .modal-footer {
-        text-align: right;
-        margin-top: 20px;
-    }
-
-    .modal-footer .btn {
-        margin-left: 10px;
-    }
-</style>
-
-<div class="container">
-    <h2>📝 휴가 신청 목록</h2>
-
-    <div class="search-area">
-        <input type="text" id="searchInput" placeholder="신청자 검색...">
-        <select id="statusFilter">
+    <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+        <input type="text" id="searchInput" placeholder="신청자 검색..." style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 5px;">
+        <select id="statusFilter" style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 5px;">
             <option value="">상태 선택</option>
             <option value="✔ 승인">승인</option>
             <option value="❌ 반려">반려</option>
@@ -159,81 +14,66 @@
         </select>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>휴가 번호</th>
-                <th>휴가 유형</th>
-                <th>신청자</th>
-                <th>휴가 기간</th>
-                <th>총 휴가일수</th>
-                <th>상태</th>
-                <th>승인자</th>
-                <th>승인</th>
-                <th>반려</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:if test="${empty vacationList}">
-                <tr>
-                    <td colspan="9" style="color: #888;">현재 신청된 휴가가 없습니다.</td>
-                </tr>
-            </c:if>
+    <c:if test="${empty vacationList}">
+        <div style="text-align: center; padding: 20px; border: 1px solid #eee;">현재 신청된 휴가가 없습니다.</div>
+    </c:if>
 
-            <c:if test="${not empty vacationList}">
-                <c:forEach var="vacation" items="${vacationList}">
-                    <tr>
-                        <td>${vacation.vacation_no}</td>
-                        <td>${vacation.vacation_type}</td>
-                        <td>${vacation.req_emp_no}</td>
-                        <td>
-                            <span style="color: #007bff;">
-                                <fmt:formatDate value="${vacation.start_dt}" pattern="yyyy-MM-dd"/>
-                            </span> ~ 
-                            <span style="color: #dc3545;">
-                                <fmt:formatDate value="${vacation.end_dt}" pattern="yyyy-MM-dd"/>
-                            </span>
-                        </td>
-                        <td>${vacation.total_days}</td>
-                        <td>
-                            <span class="badge 
-                                <c:choose>
-                                    <c:when test="${vacation.vacation_status == '승인'}">bg-success</c:when>
-                                    <c:when test="${vacation.vacation_status == '반려'}">bg-danger</c:when>
-                                    <c:otherwise>bg-secondary</c:otherwise>
-                                </c:choose>
-                            ">
-                                <c:choose>
-                                    <c:when test="${vacation.vacation_status == '승인'}">✔ 승인</c:when>
-                                    <c:when test="${vacation.vacation_status == '반려'}">❌ 반려</c:when>
-                                    <c:otherwise>⌛ 대기</c:otherwise>
-                                </c:choose>
-                            </span>
-                        </td>
-                        <td>${vacation.appr_emp_no}</td>
-                        <td><button class="btn btn-approve" onclick="confirmApproval(${vacation.vacation_no})">✔ 승인</button></td>
-                        <td><button class="btn btn-reject" onclick="confirmRejection(${vacation.vacation_no})">❌ 반려</button></td>
-                    </tr>
-                </c:forEach>
-            </c:if>
-        </tbody>
-    </table>
+    <c:if test="${not empty vacationList}">
+        <!-- 헤더 -->
+        <div style="display: grid; grid-template-columns: 1fr 1.2fr 1.2fr 2.5fr 1fr 1fr 1fr 0.8fr 0.8fr; font-weight: bold; background: #f0f0f0; padding: 10px; border-bottom: 2px solid #ccc;">
+            <div>번호</div>
+            <div>유형</div>
+            <div>신청자</div>
+            <div>기간</div>
+            <div>일수</div>
+            <div>상태</div>
+            <div>승인자</div>
+            <div>승인</div>
+            <div>반려</div>
+        </div>
 
-    <div class="paging">
+        <!-- 목록 -->
+        <c:forEach var="vacation" items="${vacationList}">
+            <div style="display: grid; grid-template-columns: 1fr 1.2fr 1.2fr 2.5fr 1fr 1fr 1fr 0.8fr 0.8fr; padding: 10px; border-bottom: 1px solid #eee; align-items: center;">
+                <div>${vacation.vacation_no}</div>
+                <div>${vacation.vacation_type}</div>
+                <div>${vacation.req_emp_no}</div>
+                <div>
+                    <span style="color: #007bff;">
+                        <fmt:formatDate value="${vacation.start_dt}" pattern="yyyy-MM-dd"/>
+                    </span> ~ 
+                    <span style="color: #dc3545;">
+                        <fmt:formatDate value="${vacation.end_dt}" pattern="yyyy-MM-dd"/>
+                    </span>
+                </div>
+                <div>${vacation.total_days}</div>
+                <div>
+                    <c:choose>
+                        <c:when test="${vacation.vacation_status == '승인'}">✔ 승인</c:when>
+                        <c:when test="${vacation.vacation_status == '반려'}">❌ 반려</c:when>
+                        <c:otherwise>⌛ 대기</c:otherwise>
+                    </c:choose>
+                </div>
+                <div>${vacation.appr_emp_no}</div>
+                <div><a href="javascript:void(0)" onclick="confirmApproval(${vacation.vacation_no})" style="color: green; font-weight: bold;">✔</a></div>
+                <div><a href="javascript:void(0)" onclick="confirmRejection(${vacation.vacation_no})" style="color: red; font-weight: bold;">❌</a></div>
+            </div>
+        </c:forEach>
+    </c:if>
+
+    <div style="margin-top: 20px; text-align: center;">
         ${pageInfo.pagingHtml}
     </div>
 </div>
 
 <!-- 모달 -->
-<div id="confirmModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">확인</div>
-        <div class="modal-body">
-            <p id="modalMessage"></p>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-reject" onclick="closeModal()">취소</button>
-            <a id="confirmAction" class="btn btn-approve">확인</a>
+<div id="confirmModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4);">
+    <div style="background: white; width: 400px; margin: 15% auto; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+        <div style="font-weight: bold; margin-bottom: 10px;">확인</div>
+        <div style="margin-bottom: 20px;"><p id="modalMessage"></p></div>
+        <div style="text-align: right;">
+            <button onclick="closeModal()" style="margin-right: 10px; padding: 5px 10px;">취소</button>
+            <a id="confirmAction" style="padding: 5px 10px; background: green; color: white; text-decoration: none; border-radius: 5px;">확인</a>
         </div>
     </div>
 </div>
@@ -264,16 +104,24 @@
 
     document.getElementById("searchInput").addEventListener("input", function () {
         let searchText = this.value.toLowerCase();
-        document.querySelectorAll("tbody tr").forEach(row => {
-            row.style.display = row.innerText.toLowerCase().includes(searchText) ? "" : "none";
+        document.querySelectorAll("div[style*='grid-template-columns']").forEach(row => {
+            if (!row.innerText.toLowerCase().includes(searchText)) {
+                row.style.display = "none";
+            } else {
+                row.style.display = "grid";
+            }
         });
     });
 
     document.getElementById("statusFilter").addEventListener("change", function () {
         let filter = this.value;
-        document.querySelectorAll("tbody tr").forEach(row => {
-            let status = row.querySelector(".badge")?.innerText.trim();
-            row.style.display = (filter === "" || status === filter) ? "" : "none";
+        document.querySelectorAll("div[style*='grid-template-columns']").forEach(row => {
+            let statusCell = row.children[5]?.innerText.trim();
+            if (filter === "" || statusCell === filter) {
+                row.style.display = "grid";
+            } else {
+                row.style.display = "none";
+            }
         });
     });
 </script>

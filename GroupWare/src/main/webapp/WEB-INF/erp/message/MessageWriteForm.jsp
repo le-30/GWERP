@@ -97,8 +97,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<input type="button" value="메일 전송" id="submitBtn"
-					data-modal="mail_insert">
+				<input type="button" value="메일 전송" id="submitBtn" data-modal="mail_insert" class="btn btn-primary">
 			</div>
 		</form>
 	</div>

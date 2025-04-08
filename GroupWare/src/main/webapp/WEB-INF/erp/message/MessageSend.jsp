@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="./../common/common.jsp" %>
-<%
-	String path = request.getContextPath();
-%>
 
 <!-- 상단 검색 영역 -->
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
