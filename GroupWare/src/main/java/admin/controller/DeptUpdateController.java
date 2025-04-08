@@ -30,7 +30,9 @@ public class DeptUpdateController {
 	@RequestMapping(value=command, method=RequestMethod.GET)
 	public ModelAndView doAction(@RequestParam("id") String dept_cd) {
 		
+
 		System.out.println("id:"+dept_cd);
+
 		ModelAndView mav = new ModelAndView();
 		DeptBean deptBean = deptDao.getOneDept(dept_cd);
 		
@@ -56,7 +58,9 @@ public class DeptUpdateController {
 			return mav;
 		}
 		int cnt = deptDao.updateDept(deptBean);
+
 		   System.out.println("업데이트 성공 여부: " + cnt);
+
 		mav.setViewName(gotoPage);
 		
 		return mav;

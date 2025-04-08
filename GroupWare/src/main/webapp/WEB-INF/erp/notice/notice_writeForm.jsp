@@ -27,6 +27,9 @@
       <input type="hidden" name="emp_no" value="${sessionScope.emp_no}">
       <input type="hidden" name="emp_nm" value="${sessionScope.emp_nm}">
 
+      <input type="hidden" name="redirectPage" value="notice_mlist.erp">
+
+
       <div class="form-group">
         <label for="dept_nm">부서선택</label>
         <select name="dept_nm" id="dept_nm" class="form-control">

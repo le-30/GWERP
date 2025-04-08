@@ -3,6 +3,7 @@
     <%@include file="./../common/common.jsp" %>
 
 
+
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/modal.css">
 
 <div class="custom-modal-overlay">
@@ -26,11 +27,13 @@
       </div>
       <form:errors path="auth_nm" cssClass="err" />
 <div class="modal-footer">
+
 <button 
 		id="submitBtn"
 		type="button"
 		class="back-form"
 		data-url="auth_update.erp"
+
 		data-id="${authInfoBean.auth_cd}"
 		data-modal="auth_update">
 		수정하기</button>
@@ -38,4 +41,5 @@
 </form:form>
 </div>
 </div>
+
 <%@include file = "./../js/validCheck.jsp"%>

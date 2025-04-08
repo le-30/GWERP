@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@include file="./../common/common.jsp" %>
+
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/modal.css">
 
 <div class="custom-modal-overlay"
@@ -40,15 +41,18 @@
 </div>
 <form:errors path="gender"/>
 <div class="form-group">
+
 부서: <select name="dept_cd">
 		<option value="">선택</option>
 		<option value="1100" <c:if test="${empBean.dept_cd == '1100' }">selected</c:if>>인사팀</option>
 		<option value="1200" <c:if test="${empBean.dept_cd == '1200' }">selected</c:if>>경영팀</option>
 		<option value="1300" <c:if test="${empBean.dept_cd == '1300' }">selected</c:if>>관리팀</option>
 	</select>
+
 	</div>
 <form:errors path="dept_cd"/>
 <div class="form-group">
+
 직위: <select name="position_cd">
 		<option value="">선택</option>
 		<option value="4" <c:if test="${empBean.position_cd == '4' }">selected</c:if>>사원</option>
@@ -56,6 +60,7 @@
 		<option value="2" <c:if test="${empBean.position_cd == '2' }">selected</c:if>>부장</option>
 		<option value="1" <c:if test="${empBean.position_cd == '1' }">selected</c:if>>사장</option>
 	</select>  
+
 	</div>
 <form:errors path="position_cd"/>
 
@@ -70,6 +75,7 @@
 </div>
 <form:errors path="email"/>
 <div class="modal-footer">
+
 <button 
 		id="submitBtn"
 		type="button"
@@ -82,4 +88,5 @@
 </form:form>
 </div>
 </div>
+
 <%@include file = "./../js/validCheck.jsp"%>

@@ -90,6 +90,7 @@
   overflow-y: auto;
 }
 
+<<<<<<< HEAD
 .modal-box.vacation-size {
   width: 500px;
   background: #fff;
@@ -101,6 +102,8 @@
   overflow-y: auto;
 }
 
+=======
+>>>>>>> origin/ymh2
 
 .modal-header {
   display: flex;
@@ -171,6 +174,7 @@ textarea {
   resize: none; /* ✅ 크기 조절 방지 */
 }
 
+<<<<<<< HEAD
 /* 🔥 휴가 유형 radio 전용 override */
 .form-group.radio-group {
   display: flex;
@@ -197,3 +201,5 @@ textarea {
 
 
 
+=======
+>>>>>>> origin/ymh2

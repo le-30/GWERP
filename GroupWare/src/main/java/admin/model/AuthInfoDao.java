@@ -51,6 +51,7 @@ public class AuthInfoDao {
 			return authlists;
 		}
 
+
 		public AuthInfoBean getOneAuthCode(String auth_cd) {
 			AuthInfoBean authInfoBean = sqlSessionTemplate.selectOne(namespace+".getOneAuthCode",auth_cd);
 			
@@ -63,4 +64,5 @@ public class AuthInfoDao {
 			
 			return cnt;
 		}
+
 }

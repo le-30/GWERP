@@ -31,5 +31,3 @@
 </div>
 
 <%@include file="./../js/validCheck.jsp"%>
-
-

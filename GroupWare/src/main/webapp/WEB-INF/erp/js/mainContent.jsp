@@ -211,9 +211,7 @@ window.pageConfig = window.pageConfig || {
 	
 	function handleSidebarByTarget(target,page) { // validCheck
 		
-		console.log("handleSidebarByTarget 호출됨!");
-		console.log("받은 target:", target);
-		console.log("받은 page:", page);
+
 		
 		const sidebarBtn = $(".sideTr").filter(function() {
 			return $(this).data("target") === page;
@@ -291,6 +289,14 @@ window.pageConfig = window.pageConfig || {
             url = 'empAuthInfo.erp';
         }else if (formId === '#authSearchForm'){
             url = 'auth_list.erp';
+
+        }else if (formId === '#notice_aSearchForm'){
+            url = 'notice_alist.erp';
+        }else if (formId === '#notice_dSearchForm'){
+            url = 'notice_dlist.erp';
+        }else if (formId === '#notice_mSearchForm'){
+            url = 'notice_mlist.erp';
+
         }
         
 			$.ajax({
@@ -336,6 +342,11 @@ window.pageConfig = window.pageConfig || {
 	    addSearchEventListener('#cmmCodeSearchForm', '#cmmCodeSearchBtn', '#cmmCodeKeywordInput');
 	    addSearchEventListener('#deptSearchForm', '#deptSearchBtn', '#deptkeywordInput');
 	    addSearchEventListener('#authSearchForm', '#authSearchBtn', '#authkeywordInput');
+
+	    addSearchEventListener('#notice_aSearchForm', '#notice_aSearchBtn', '#notice_akeywordInput');
+	    addSearchEventListener('#notice_dSearchForm', '#notice_dSearchBtn', '#notice_dkeywordInput');
+	    addSearchEventListener('#notice_mSearchForm', '#notice_mSearchBtn', '#notice_mkeywordInput');
+
 	});//검색 클릭이나 엔터 누를식 본문만 바뀌는 함수
 
 

@@ -33,8 +33,8 @@
 
 
 
-
 <div class="modal-footer">
+
 <button 
 		id="submitBtn"
 		type="button"
@@ -43,8 +43,10 @@
 		data-id="${cmmCodeBean.cmm_nm}"
 		data-modal="cmmCode_update">
 		수정하기</button>
+
 </div>
 </form:form>
 </div>
 </div>
+
 <%@include file = "./../js/validCheck.jsp"%>

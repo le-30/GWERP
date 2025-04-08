@@ -52,19 +52,21 @@ public class RouterController {
 		}else if("myNotice".equals(page)){
 			return "redirect:/notice_mlist.erp" + queryParams;
 		} else if("appr".equals(page)){
-			return "redirect:/approvalList.erp";
+
+			return "redirect:/approvalList.erp" + queryParams;
 		} else if("apprList".equals(page)) {
-			return "redirect:/approvalSignList.erp";
+			return "redirect:/approvalSignList.erp" + queryParams;
 		}else if("commute".equals(page)) {
-			return "redirect:/list/commute.erp";
+			return "redirect:/list/commute.erp" + queryParams;
 		} else if("apprSuc".equals(page)) {
-			return "redirect:/approvalComplete.erp";
+			return "redirect:/approvalComplete.erp" + queryParams;
 		}if("vacation".equals(page)) {
-			return "redirect:/vacationList.erp";
+			return "redirect:/vacationList.erp" + queryParams;
 		} else if("vacationApproval".equals(page)) {
-			return "redirect:/vacationList.erp";
+			return "redirect:/vacationList.erp" + queryParams;
 		} else if("vacationleave".equals(page)){
-			return "redirect:/employeeVacation.erp";
+			return "redirect:/employeeVacation.erp" + queryParams;
+
 		}
 		else {
 		    return gotoPage;

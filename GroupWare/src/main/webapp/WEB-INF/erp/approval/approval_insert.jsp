@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>  
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/modal.css">
+<%@include file="./../common/common.jsp" %>
+
 <% String ctxPath = request.getContextPath(); %>
+
 <% 
     String emp_no = (String) session.getAttribute("emp_no"); 
     String dept_cd = (String) session.getAttribute("dept_cd");
@@ -10,150 +13,6 @@
     System.out.println("dept_cd : " +  dept_cd);
 
 %>
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-Bootstrap CSS
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-FontAwesome for Icons
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-	rel="stylesheet">
-
-<style type="text/css">
-* {
-	font-family: 'Pretendard', sans-serif !important;
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-
-
-body {
-	display: flex;
-	height: 100%;
-	overflow: hidden;
-}
-
-
-/* 메인 콘텐츠 스타일 */
-#mainContent {
-	flex-grow: 1;
-	padding: 30px;
-	background-color: #ffffff;
-	overflow-y: auto;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	margin-left: 10px;
-}
-
-h2 {
-	margin-bottom: 20px;
-	font-size: 1.8rem;
-	font-weight: bold;
-	color: #333;
-}
-
-.form-label {
-	font-weight: 600;
-	color: #555;
-}
-
-.form-control {
-	border-radius: 5px;
-	border: 1px solid #ccc;
-	padding: 10px;
-	font-size: 1rem;
-	margin-bottom: 15px;
-	transition: border-color 0.3s ease;
-}
-
-.form-control:focus {
-	border-color: #3498db;
-	box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-}
-
-textarea.form-control {
-	height: 150px;
-	resize: none;
-}
-
-.btn-submit {
-	background-color: #3498db;
-	border: none;
-	color: white;
-	font-size: 1.1rem;
-	font-weight: 600;
-	padding: 12px 30px;
-	border-radius: 5px;
-	transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-submit:hover {
-	background-color: #2980b9;
-	cursor: pointer;
-	transform: scale(1.05);
-}
-
-.btn-submit:active {
-	transform: scale(0.98);
-}
-
-.btn-outline-secondary {
-	font-weight: 600;
-}
-
-.file-info {
-	font-size: 0.9rem;
-	color: gray;
-}
-
-.form-group {
-	margin-bottom: 25px;
-}
-
-/* 전체 입력 필드 스타일 */
-.form-control::placeholder {
-	color: #aaa;
-	font-style: italic;
-}
-
-.form-control:focus::placeholder {
-	color: transparent;
-}
-
-
-/* 폼 스타일 */
-.form-container {
-	background-color: #ffffff;
-	border-radius: 10px;
-	padding: 30px;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	max-width: 800px;
-	margin: 0 auto;
-	border: 1px solid #ddd;
-	background-color: #f9f9f9;
-}
-
-.icon-container {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 20px;
-}
-
-.icon-container i {
-	font-size: 40px;
-	color: #3498db;
-}
-</style>
-</head> -->
 
 <!-- 결제 서류 제출 폼 -->
 <div class="custom-modal-overlay" style="display: flex;">
@@ -162,7 +21,9 @@ textarea.form-control {
       <span class="modal-title">📄 결재 문서 제출</span>
       <button type="button" class="close-btn" onclick="closeModal()">✕</button>
     </div>
-<form id="paymentForm" enctype="multipart/form-data" action="approval_insert.erp" method="post" >
+
+<form:form commandName="document" enctype="multipart/form-data" id="approval_insert" action="approval_insert.erp" method="post" >
+	<input type="hidden" name="redirectPage" value="approvalList.erp">
 
     <!-- 문서 제목 -->
     <div class="form-group">
@@ -190,12 +51,16 @@ textarea.form-control {
     <input type="hidden" name="dept_cd" value='${sessionScope.dept_cd }'>
 
     <!-- 제출 버튼 -->
-    <div class="modal-footer">
+
+    <!-- <div class="modal-footer">
     <input type="submit" value="추가하기" class="btn btn-submit">
-    </div>
-</form>
+    </div> -->
+    <div class="modal-footer">
+		<input type="button" value="결재신청" id="submitBtn" data-modal="approval_insert" class="btn btn-primary">
+	</div>
+</form:form>
 </div>
-</div>>
-<!-- Bootstrap JS -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+</div>
 </html>
+
+<%@include file="./../js/validCheck.jsp"%>

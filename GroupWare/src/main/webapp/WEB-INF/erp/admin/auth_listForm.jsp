@@ -40,6 +40,7 @@
 				<div style="text-align: center;">
 					<button class="open-edit-modal"
 							data-url="auth_update.erp"
+
 							data-id="${auth.auth_cd}"
 							style="padding: 6px 14px; background-color: #ffc107; border: none; color: #212529; border-radius: 6px; cursor: pointer;">
 						수정

@@ -152,6 +152,7 @@
 	WHERE B.emp_no = #{emp_no}
 </select>
 
+
 	<select id="getOneAuthCode" resultType="admin.model.AuthInfoBean">
 	select * from auth_info
 	where auth_cd = #{auth_cd}
@@ -161,4 +162,5 @@
 		update auth_info set auth_cd = #{auth_cd},auth_nm = #{auth_nm}
 		where auth_cd = #{auth_cd}
 	</update>
+
 </mapper>

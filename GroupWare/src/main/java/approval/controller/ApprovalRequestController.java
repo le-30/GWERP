@@ -27,7 +27,9 @@ public class ApprovalRequestController {
     // URL 경로 정의
     private final String command = "approval_insert.erp"; // 결제 요청 폼 제출 경로
     private final String getPage = "approval/approval_insert"; // 결제 요청 폼 페이지
-    private final String gotoPage = "approval/approvalList"; // 결제 요청 완료 후 리디렉션할 페이지
+
+    private final String gotoPage = "redirect:/approvalList.erp?page=appr"; // 결제 요청 완료 후 리디렉션할 페이지
+    
 
     @Autowired
     private DocumentDao documentDao; // 문서 관련 DAO

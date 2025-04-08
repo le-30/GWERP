@@ -1,8 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file=".././common/common.jsp" %>
 
+
+<!-- 🔍 공지 검색 영역 -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+	<h4 style="margin-bottom: 0; font-size: 18px; font-weight: bold; color: #2c3e50;">
+		📝 등록된 공지 <span style="color: #e67e22;">(${totalCount})</span>
+	</h4>
+	<form id="notice_aSearchForm" style="display: flex; gap: 10px; align-items: center;">
+		<select name="whatColumn" style="padding: 5px;">
+			<option value="">전체 선택</option>
+			<option value="notice_title">제목</option>
+			<option value="emp_nm">작성자</option>
+		</select>
+		<input type="text" name="keyword" id="notice_akeywordInput" placeholder="검색어 입력" style="padding: 5px;">
+		<input type="button" value="검색" id="notice_aSearchBtn" style="padding: 6px 12px;">
+	</form>
+</div>
+
+<!-- 📋 공지 리스트 전체 영역 -->
 <div id="anoticeListContainer" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-	<h4 style="margin-bottom: 20px;">📝 등록된 공지 (${totalCount})</h4>
+
 
 	<c:if test="${totalCount == 0 }">
 		<div style="text-align: center; padding: 20px; border: 1px solid #eee;">공지사항이 없습니다.</div>

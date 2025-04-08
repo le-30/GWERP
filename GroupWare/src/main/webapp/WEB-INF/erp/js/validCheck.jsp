@@ -2,46 +2,56 @@
 	pageEncoding="UTF-8"%>
 
 <script>
+
+let submitBound = false;
+
 window.formSubmitConfig = window.formSubmitConfig || {
 	emp_insert: {
 		url: "lsh_insert.erp",
 		formId: "empinsertForm",
+		page : "emp",
 		defaultRedirect: "emp"
 	},
 	emp_update: {
 		url: "emp_update.erp",
 		formId: "empUpdateForm",
-		defaultRedirect: "emp"
+		defaultRedirect: "empUpdate"
+		page : "emp",
 	},
 	dept_insert: {
 		url: "dept_insert.erp",
 		formId: "deptinsertForm",
+		page : "dept",
 		defaultRedirect: "dept"
-	
 	},
 	dept_update: {
 		url: "dept_update.erp",
 		formId: "deptupdateForm",
+		page : "dept",
 		defaultRedirect: "dept"
 	},
 	cmmCode_insert: {
 		url: "cmmCode_insert.erp",
 		formId: "cmmCodeinsertForm",
+		page : "cmmCode",
 		defaultRedirect: "cmmCode"
 	},
 	cmmCode_update: {
 		url: "cmmCode_update.erp",
 		formId: "cmmCodeupdateForm",
+		page : "cmmCode",
 		defaultRedirect: "cmmCode"
 	},
 	auth_insert: {
 		url: "auth_insert.erp",
 		formId: "authinsertForm",
+		page : "auth",
 		defaultRedirect: "auth"
 	},
 	auth_update: {
 		url: "auth_update.erp",
 		formId: "authupdateForm",
+		page : "auth",
 		defaultRedirect: "auth"
 	},
 	mail_insert : {
@@ -55,50 +65,60 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		url : "ymh_messageReply.erp",
 		formId : "MessageReplyForm",
 		target : "received",
+		page : "msg",
 		userFormData: true
 	},
 	mail_pass : {
 		url : "ymh_messagePass.erp",
 		formId : "MessagePassForm",
 		target : "received",
+		page : "msg",
 	},
 	notice_insert: {
 		url: "notice_write.erp",
 		formId: "notice_writeForm",
-		target: "totalNotice",
+		target: "myNotice",
 		page : "notice",
 		userFormData: true
 	},
 	notice_update: {
 		url: "notice_update.erp",
 		formId: "notice_updateform",
-		target: "totalNotice",
+		target: "myNotice",
 		page : "notice",
+		userFormData: true
+	},
+	approval_insert: {
+		url: "approval_insert.erp",
+		formId: "approval_insert",
+		target: "appr",
+		page : "appr",
 		userFormData: true
 	}
 };
+	
+if (!submitBound) {
+	$(document).off('click', '#submitBtn').on('click', '#submitBtn', function (event) {
+	    const config = formSubmitConfig[$(this).data('modal')];
+	    const $form = $('#' + config.formId);
+		
+	    const skipFileCheckTargets = ["myNotice"];
+	    const skipFileCheck = skipFileCheckTargets.includes(config.target);
+	    
+	    let formData;
+	    if (config.userFormData) {
+	        const fileInput = $('input[type="file"]', $form)[0];
+	        
+	        if (!skipFileCheck && fileInput && (!fileInput.files || fileInput.files.length === 0)) {
+	            alert("파일을 첨부해야 합니다.");
+	            event.preventDefault();
+	            return;
+	        }
+	        formData = new FormData($form[0]);
+	    } else {
+	        formData = $form.serialize();
+    }
 
-	$(document).off('click', '#submitBtn').on('click', '#submitBtn', function () {
-		const config = formSubmitConfig[$(this).data('modal')];
-		const $form = $('#' + config.formId);
-		  
-		const requiredFileForms = ["MessageWriteForm", "MessageReplyForm"];
-		if (requiredFileForms.includes(config.formId)) {  
-			const fileInput = $('input[name="file"]', $form)[0];
-
-		if (!fileInput.files || fileInput.files.length === 0) {
-			alert("파일을 첨부해야 합니다.");
-			event.preventDefault(); // 폼 전송 방지
-			return;
-		}
-	}
-		  
-		let formData;
-	if(config.userFormData){
-			  formData = new FormData($form[0]);
-		  }else{
-			formData = $form.serialize();  
-		  }
 		  
 
 		  $.ajax({
@@ -122,8 +142,6 @@ window.formSubmitConfig = window.formSubmitConfig || {
 				   const targetPage = config.target || config.defaultRedirect;
 				   const page = config.page;
 				
-				  
-				   console.log("page : " + page);
 				   
 		        if (redirectPage) {
 		          $.ajax({
@@ -151,6 +169,10 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		    }
 		  });
 		});
+
+	submitBound = true;
+}
+
 	
 	$(document).off('click', '#modalContent').on('click', '#modalContent #toggleCheckboxList', function () {
 	    const checkboxList = $('#checkboxList');

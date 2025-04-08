@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@include file="./../common/common.jsp" %>
+
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/modal.css">
 
 <div class="custom-modal-overlay">
@@ -11,7 +12,7 @@
     </div>
 <form:form commandName="deptBean" action="dept_update.erp" method="post" id="deptupdateForm">
 
-<input type="hidden" name="redirectPage" value="dept_list.erp?dept_cd=${deptBean.dept_cd}">
+<%-- <input type="hidden" name="redirectPage" value="dept_list.erp?dept_cd=${deptBean.dept_cd}"> --%>
 
   <div class="form-group">
         <label>부서코드</label>
@@ -38,6 +39,7 @@
       </div>
 
 <div class="modal-footer">
+
 <button 
 		id="submitBtn"
 		type="button"
@@ -46,9 +48,11 @@
 		data-id="${deptBean.dept_cd}"
 		data-modal="dept_update">
 		수정하기</button>
+
 </div>
 </form:form>
 </div>
 </div>
+
 
 <%@include file = "./../js/validCheck.jsp"%>
