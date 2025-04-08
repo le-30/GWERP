@@ -18,13 +18,13 @@
       <form:errors path="cmm_class" cssClass="err" />
 
       <div class="form-group">
-        <label>코드</label>
+        <label>공통 코드</label>
         <input type="text" name="cmm_cd" value="${cmmCodeBean.cmm_cd}">
       </div>
       <form:errors path="cmm_cd" cssClass="err" />
 
       <div class="form-group">
-        <label>이름</label>
+        <label>공통코드 이름</label>
         <input type="text" name="cmm_nm" value="${cmmCodeBean.cmm_nm}">
       </div>
       <form:errors path="cmm_nm" cssClass="err" />

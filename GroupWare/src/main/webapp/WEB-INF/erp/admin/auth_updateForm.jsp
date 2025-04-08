@@ -2,24 +2,28 @@
     pageEncoding="UTF-8"%>
     <%@include file="./../common/common.jsp" %>
 
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/modal.css">
+
+<div class="custom-modal-overlay">
+  <div class="modal-box auth-size">
+    <div class="modal-header">
+      <span class="modal-title">🔐 권한 수정</span>
+      <button type="button" class="close-btn" onclick="closeModal()">✕</button>
+    </div>
 <form:form commandName="authBean" action="auth_update.erp" method="post" id="authupdateForm">
+ <div class="form-group">
+        <label>권한코드</label>
+        <input type="text" name="auth_cd" value="${authBean.auth_cd}">
+      </div>
+      <form:errors path="auth_cd" cssClass="err" />
 
-
-
-
-권한코드:<input type="text" name="auth_cd" value="${authBean.auth_cd }">
-<form:errors path="auth_cd"/>
-<br><br>
-
-
-권한코드 이름:<input type="text" name="auth_nm" value="${authBean.auth_nm }">
-<form:errors path="auth_nm"/>
-<br><br>
-
-
-
-
-
+      <div class="form-group">
+        <label>권한 이름</label>
+        <input type="text" name="auth_nm" value="${authBean.auth_nm}">
+      </div>
+      <form:errors path="auth_nm" cssClass="err" />
+<div class="modal-footer">
 <button 
 		id="submitBtn"
 		type="button"
@@ -28,6 +32,8 @@
 		data-id="${authBean.auth_cd}"
 		data-modal="auth_update">
 		수정하기</button>
+		</div>
 </form:form>
-
+</div>
+</div>
 <%@include file = "./../js/validCheck.jsp"%>

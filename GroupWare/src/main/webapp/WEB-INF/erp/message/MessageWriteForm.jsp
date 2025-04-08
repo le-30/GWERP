@@ -43,7 +43,8 @@
 }
 </style>
 <script
-	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js">
+	</script>
 <div class="custom-modal-overlay"
 	style="display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.3); z-index: 9999;">
 

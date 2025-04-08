@@ -1,48 +1,67 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<% 
-    String emp_no = (String) session.getAttribute("emp_no"); 
-    System.out.println("emp_no : " +  emp_no);
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="./../common/common.jsp"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/styles/modal.css">
+
+<!-- ëª¨ë‹¬ ë‚´ë¶€ ìŠ¤íƒ€ì¼ ì§ì ‘ ì •ì˜ -->
+
+
 <script>
 function validateCheckbox() {
     let vacationType = document.querySelector('input[name="vacation_type"]:checked');
-    
     if (!vacationType) {
-        alert("ÈŞ°¡ À¯ÇüÀ» ¼±ÅÃÇÏ¼¼¿ä.");
+        alert("íœ´ê°€ ìœ í˜•ì„ ì„ íƒí•˜ì„¸ìš”.");
         return false;
     }
     return true;
 }
+
+function closeModal() {
+    document.querySelector(".custom-modal-overlay").style.display = "none";
+}
 </script>
 
-<!-- ÈŞ°¡ ½ÅÃ» Æû -->
+<!-- ëª¨ë‹¬ HTML -->
+<div class="custom-modal-overlay" style="display: flex;">
+	<div class="modal-box vacation-size">
+		<div class="modal-header">
+			<span class="modal-title">ğŸŒ´ íœ´ê°€ ì‹ ì²­</span>
+			<button type="button" class="close-btn" onclick="closeModal()">âœ•</button>
+		</div>
 
-<form action="vacation_insert.erp" method="post" onsubmit="return validateCheckbox()">
-    <!-- hidden ÇÊµå·Î »ç¿ø ¹øÈ£ Àü´Ş -->
-    <input type="hidden" name="emp_no" value="${sessionScope.emp_no}">
-    <h2>ÈŞ°¡ ½ÅÃ»</h2>
+		<form action="vacation_insert.erp" method="post" onsubmit="return validateCheckbox()">
+			<input type="hidden" name="emp_no" value="${sessionScope.emp_no}">
 
-    <label>ÈŞ°¡ À¯Çü</label><br>
-    <input type="radio" name="vacation_type" value="¿¬Â÷"> ¿¬Â÷
-    <input type="radio" name="vacation_type" value="¹İÂ÷"> ¹İÂ÷
-    <input type="radio" name="vacation_type" value="º´°¡"> º´°¡
-    <input type="radio" name="vacation_type" value="±âÅ¸"> ±âÅ¸ <br><br>
-    
-    <label>»ç¿ø ¹øÈ£ : </label>
-    <input type="text" name="req_emp_no" value="${sessionScope.emp_no}" readonly><br><br>
+			<!-- radio ê·¸ë£¹ -->
+			<div class="form-group radio-group">
+  				<label><input type="radio" name="vacation_type" value="ì—°ì°¨"> ì—°ì°¨</label>
+  				<label><input type="radio" name="vacation_type" value="ë°˜ì°¨"> ë°˜ì°¨</label>
+  				<label><input type="radio" name="vacation_type" value="ë³‘ê°€"> ë³‘ê°€</label>
+  				<label><input type="radio" name="vacation_type" value="ê¸°íƒ€"> ê¸°íƒ€</label>
+			</div>
 
-    <label>ÈŞ°¡ »çÀ¯:</label><br>
-    <textarea name="vacation_reason" rows="4" cols="50"></textarea><br><br>
+			<div class="form-group">
+				<label>ì‚¬ì› ë²ˆí˜¸</label>
+				<input type="text" name="req_emp_no" value="${sessionScope.emp_no}" readonly>
+			</div>
 
-    <label>½ÃÀÛÀÏ:</label>
-    <input type="date" name="start_dt"><br><br>
+			<div class="form-group">
+				<label>íœ´ê°€ ì‚¬ìœ </label>
+				<textarea name="vacation_reason" class="form-control"></textarea>
+			</div>
 
-    <label>Á¾·áÀÏ:</label>
-    <input type="date" name="end_dt"><br><br>
+			<div class="form-group">
+				<label>ì‹œì‘ì¼</label>
+				<input type="date" name="start_dt">
+			</div>
 
-    <!-- Á¦Ãâ ¹öÆ° -->
-    <input type="submit" value="½ÅÃ»">
-</form>
+			<div class="form-group">
+				<label>ì¢…ë£Œì¼</label>
+				<input type="date" name="end_dt">
+			</div>
 
-
+			<div class="modal-footer">
+				<input type="submit" value="ì‹ ì²­" class="btn btn-primary">
+			</div>
+		</form>
+	</div>
+</div>

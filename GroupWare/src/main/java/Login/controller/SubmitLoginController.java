@@ -82,7 +82,6 @@ public class SubmitLoginController {
 			mav.setViewName("redirect:/check_in/commute.erp?access_token="+accessToken);
 			
 			
-			mav.setViewName(gotoPage);
 			return mav;
 		}else {
 			mav.setViewName(getPage);

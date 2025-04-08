@@ -90,6 +90,17 @@
   overflow-y: auto;
 }
 
+.modal-box.vacation-size {
+  width: 500px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
 
 .modal-header {
   display: flex;
@@ -159,4 +170,30 @@ textarea {
   box-sizing: border-box;
   resize: none; /* ✅ 크기 조절 방지 */
 }
+
+/* 🔥 휴가 유형 radio 전용 override */
+.form-group.radio-group {
+  display: flex;
+  flex-direction: row;   /* 가로 정렬 */
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-group.radio-group label {
+  width: auto !important;  /* 기존 100px 강제 해제 */
+  font-size: 14px;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+}
+
+.form-group.radio-group input[type="radio"] {
+  margin: 0;
+}
+
+
 
