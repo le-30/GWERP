@@ -34,10 +34,8 @@
 	<select id="getServerFileNameByMessageNo" resultType="string">
 		SELECT a.server_file_name
 		FROM attach a
-
 		JOIN message m ON a.con_key1 = m.msg_no
 		WHERE m.msg_no = #{msg_no}
-
 	</select>
 	
 	<select id="getOneSelect" resultType="attach.model.AttachBean">

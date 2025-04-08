@@ -20,7 +20,6 @@
 
 <div id="dnoticeListContainer" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
 
-
 	<c:if test="${totalCount == 0}">
 		<div style="text-align: center; padding: 20px; border: 1px solid #eee;">공지사항이 없습니다.</div>
 	</c:if>
@@ -83,6 +82,7 @@
 			</form>
 
 		</div>
+
 	</c:if>
 
 	<!-- 페이징 -->

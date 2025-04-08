@@ -40,10 +40,10 @@ public class ApprovalSignListController {
     	map.put("emp_no", emp_no);
     	map.put("position_cd", position_cd);
     	
-    	int totalCount = adao.getTotalCount(map);
+    	int totalCount = adao.getSignTotalCount(map);
         String url  = request.getContextPath() + "/" + command;
         
-        Paging pageInfo = new Paging(pageNumber, "5", totalCount, url, whatColumn, keyword);
+        Paging pageInfo = new Paging(pageNumber, "3", totalCount, url, whatColumn, keyword);
         
         List<ApprovalBean> getApprovalSignList = adao.getApprovalSignList(pageInfo, map);
         

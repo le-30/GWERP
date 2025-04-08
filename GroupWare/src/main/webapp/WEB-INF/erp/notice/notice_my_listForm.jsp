@@ -37,7 +37,6 @@
 		<c:if test="${hasDraft}">
 
 			<h5 style="margin: 10px 0 10px; font-weight: bold; color: #e67e22;">📌 작성 중인 공지</h5>
-
 			<!-- 헤더 -->
 			<div style="display: grid; grid-template-columns: 1fr 3fr 1.5fr 1.5fr 1fr; font-weight: bold; background: #f9f9f9; padding: 10px; border-bottom: 2px solid #ddd;">
 				<div style="text-align: left;">구분</div>
@@ -107,8 +106,6 @@
 				</c:if>
 			</c:forEach>
 		</c:if>
-
-
 	</c:if>
 
 	<!-- 페이징 -->

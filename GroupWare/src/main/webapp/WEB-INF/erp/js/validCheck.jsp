@@ -17,6 +17,7 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		formId: "empUpdateForm",
 		defaultRedirect: "emp",
 		page : "emp"
+
 	},
 	dept_insert: {
 		url: "dept_insert.erp",
@@ -124,7 +125,6 @@ if (!window.submitBound) {
 	    } else {
 	        formData = $form.serialize();
     }
-
 		  
 
 		  $.ajax({
@@ -180,6 +180,7 @@ if (!window.submitBound) {
 
 	submitBound = true;
 }
+
 
 	
 	$(document).off('click', '#modalContent').on('click', '#modalContent #toggleCheckboxList', function () {

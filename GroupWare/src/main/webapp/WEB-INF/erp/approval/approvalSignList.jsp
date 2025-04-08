@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./../common/common.jsp"%>
-
+<div id = "approvalmustDoContainer">
 <div style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
     <h4 style="margin-bottom: 20px; text-align: center;">📝 결재 승인 목록</h4>
 
@@ -19,7 +19,7 @@
         <div>반려</div>
         <div>승인</div>
     </div>
-
+  
     <!-- 리스트 -->
     <c:forEach var="approval" items="${getApprovalSignList}">
         <div style="display: grid; grid-template-columns: repeat(12, 1fr); padding: 12px 10px; border-bottom: 1px solid #eee; align-items: center; text-align: center;">
@@ -48,4 +48,5 @@
     <div id="paging" style="margin-top: 20px; text-align: center;">
         ${pageInfo.pagingHtml}
     </div>
+</div>
 </div>

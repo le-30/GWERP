@@ -32,18 +32,27 @@
 
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*)
-		FROM appr_line a
-		JOIN document d ON a.doc_no = d.doc_no
-		<where>
-			<if test="whatColumn == 'doc_content'">
-				d.doc_content LIKE CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="whatColumn == 'doc_title'">
-				d.doc_title LIKE CONCAT('%', #{keyword}, '%')
-			</if>
-		</where>
+		FROM
+		appr_line
+		where emp_no = #{emp_no}
+
 	</select>
 
+	<select id="getSignTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		appr_line
+		WHERE appr_order = #{position_cd}
+	</select>
+
+	<select id="getCompleteTotalCount"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM appr_line
+		WHERE emp_no = #{emp_no} and
+		appr_order = 0
+	</select>
+	
 	<select id="getApprovalList"
 		resultType="approval.model.ApprovalBean">
 		SELECT *
@@ -55,6 +64,7 @@
 	<update id="companionApprovalStatus">
 		UPDATE appr_line
 		SET appr_status = '반려',  <!-- 결제 상태 변경 -->
+		appr_order = 0,
 		appr_refuse_op = #{appr_refuse_op}  <!-- 반려 사유 저장 -->
 		WHERE appr_no = #{appr_no}
 	</update>
@@ -91,10 +101,13 @@
 		FROM appr_line
 		WHERE appr_order = #{position_cd}
 	</select>
-		<select id = "getApprovalCompleteList" resultType = "approval.model.ApprovalBean">
+	<select id="getApprovalCompleteList"
+		resultType="approval.model.ApprovalBean">
 		select * from appr_line
 		where appr_order = 0
-		and emp_no = #{emp_no}
+		and emp_no =
+		#{emp_no}
 	</select>
+
 </mapper>
 

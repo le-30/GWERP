@@ -21,16 +21,16 @@ import utility.Paging;
 public class ApprovalCompleteListController {
 
     private final String command = "/approvalComplete.erp";
-    private final String getPage = "approval/approvalCompleteList"; // JSP �뙆�씪 �씠由�
+    private final String getPage = "approval/approvalCompleteList"; // JSP 占쎈솁占쎌뵬 占쎌뵠�뵳占�
 
     @Autowired
-    ApprovalDao adao; // ApprovalDao 二쇱엯
+    ApprovalDao adao; // ApprovalDao 雅뚯눘�뿯
 
     @RequestMapping(command)
     public ModelAndView approvalList(HttpSession session, HttpServletRequest request, @RequestParam(value = "pageNumber", required = false) String pageNumber,
     		@RequestParam(value = "whatColumn", required = false) String whatColumn,
 			@RequestParam(value = "keyword", required = false) String keyword) {
-        // ApprovalDao瑜� �궗�슜�빐 �뜲�씠�꽣 媛��졇�삤湲�
+        // ApprovalDao�몴占� 占쎄텢占쎌뒠占쎈퉸 占쎈쑓占쎌뵠占쎄숲 揶쏉옙占쎌죬占쎌궎疫뀐옙
     	String emp_no = (String) session.getAttribute("emp_no");
       
     	Map<String, String> map = new HashMap<String,String>();
@@ -38,10 +38,10 @@ public class ApprovalCompleteListController {
     	map.put("keyword", "%" + keyword + "%");
     	map.put("emp_no", emp_no);
     	
-    	int totalCount = adao.getTotalCount(map);
+    	int totalCount = adao.getCompleteTotalCount(map);
         String url  = request.getContextPath() + "/" + command;
         
-        Paging pageInfo = new Paging(pageNumber, "5", totalCount, url, whatColumn, keyword);
+        Paging pageInfo = new Paging(pageNumber, "2", totalCount, url, whatColumn, keyword);
         
         List<ApprovalBean> ApprovalCompleteList = adao.getApprovalCompleteList(pageInfo, map);
            
@@ -50,7 +50,8 @@ public class ApprovalCompleteListController {
         mav.addObject("ApprovalCompleteList", ApprovalCompleteList);
         mav.addObject("pageInfo", pageInfo); 
         
-        mav.setViewName(getPage); // JSP �럹�씠吏� �꽕�젙
+        mav.setViewName(getPage); // JSP 占쎈읂占쎌뵠筌욑옙 占쎄퐬占쎌젟
         return mav;
     }
 }
+

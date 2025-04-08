@@ -30,7 +30,6 @@ public class ApprovalRequestController {
 
     private final String gotoPage = "redirect:/approvalList.erp?page=appr"; // 결제 요청 완료 후 리디렉션할 페이지
     
-
     @Autowired
     private DocumentDao documentDao; // 문서 관련 DAO
     

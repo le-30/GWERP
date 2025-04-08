@@ -29,7 +29,6 @@
 
       <input type="hidden" name="redirectPage" value="notice_mlist.erp">
 
-
       <div class="form-group">
         <label for="dept_nm">부서선택</label>
         <select name="dept_nm" id="dept_nm" class="form-control">
@@ -66,5 +65,6 @@
     </form:form>
   </div>
 </div>
+
 
 <%@include file="./../js/validCheck.jsp"%>

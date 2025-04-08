@@ -90,9 +90,8 @@
 			<label>첨부파일</label> <input type="file" name="file" required />
 		</div>
 	</div>
-	<div class="modal-footer">
-	<input type="button" value="메일 전송" id="submitBtn" data-modal="mail_reply">
-	</div>
+
+	<input type="button" value="답장 보내기" id="submitBtn" data-modal="mail_reply" class="btn btn-primary">
 </form>
 </div>
 </div>

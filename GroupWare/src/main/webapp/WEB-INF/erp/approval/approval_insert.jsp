@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>  
+	pageEncoding="UTF-8"%>
+<%@ include file=".././common/common.jsp"%>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/modal.css">
-<%@include file="./../common/common.jsp" %>
-
-<% String ctxPath = request.getContextPath(); %>
-
 <% 
     String emp_no = (String) session.getAttribute("emp_no"); 
     String dept_cd = (String) session.getAttribute("dept_cd");
@@ -24,7 +21,6 @@
 
 <form:form commandName="document" enctype="multipart/form-data" id="approval_insert" action="approval_insert.erp" method="post" >
 	<input type="hidden" name="redirectPage" value="approvalList.erp">
-
     <!-- 문서 제목 -->
     <div class="form-group">
         <label for="doc_title" class="form-label">문서 제목</label>

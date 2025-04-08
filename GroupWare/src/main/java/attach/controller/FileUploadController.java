@@ -19,9 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FileUploadController {
-		
 	
-	 
+	    
 	@ResponseBody
 	public String uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
 		System.out.println("file : " + file);
