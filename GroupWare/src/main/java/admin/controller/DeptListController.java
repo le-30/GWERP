@@ -62,6 +62,7 @@ public class DeptListController {
 			List<DeptBean> lists = deptDao.getAllDept(pageInfo,map);
 			System.out.println("lists : " + lists.size());
 			
+
 			mav.addObject("lists",lists);
 			mav.addObject("pageInfo", pageInfo);
 	        mav.addObject("totalCount", totalCount);

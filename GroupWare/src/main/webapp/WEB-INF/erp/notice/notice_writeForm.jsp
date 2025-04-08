@@ -3,6 +3,18 @@
 <%@ include file=".././common/common.jsp"%>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/modal.css">
 
+<script>
+    function saveNotice() {
+        var form = document.getElementById("notice_writeForm");
+        form.action = "notice_save.erp";
+        form.submit();
+    }
+
+    function closeModal() {
+        document.getElementById("customModal").style.display = "none";
+        document.getElementById("modalContent").innerHTML = "";
+    }
+</script>
 
 <div class="custom-modal-overlay" style="display: flex;">
   <div class="modal-box notice-size">
@@ -14,6 +26,7 @@
     <form:form commandName="notice" method="post" action="notice_write.erp" id="notice_writeForm" enctype="multipart/form-data">
       <input type="hidden" name="emp_no" value="${sessionScope.emp_no}">
       <input type="hidden" name="emp_nm" value="${sessionScope.emp_nm}">
+      <input type="hidden" name="redirectPage" value="notice_mlist.erp">
 
       <div class="form-group">
         <label for="dept_nm">부서선택</label>
@@ -51,46 +64,6 @@
     </form:form>
   </div>
 </div>
-
-<script>
-  // 임시저장 버튼 클릭 시 호출
-  function saveNotice() {
-    var form = document.getElementById("notice_writeForm");
-    if (!form) {
-      console.error("폼을 찾을 수 없습니다. (saveNotice)");
-      return;
-    }
-    form.action = "notice_save.erp";
-    form.submit();
-  }
-
-  // 추가하기 버튼 클릭 시 호출
-  function handleSidebar() {
-    var form = document.getElementById("notice_writeForm");
-    if (!form) {
-      console.error("폼을 찾을 수 없습니다. (handleSidebar)");
-      return;
-    }
-    form.action = "notice_write.erp"; // 또는 필요한 경우 다른 action
-    form.submit();
-  }
-
-  // 모달 닫기
-  function closeModal() {
-    document.getElementById("customModal").style.display = "none";
-    document.getElementById("modalContent").innerHTML = "";
-  }
-
-  // DOM이 모두 로드된 후 이벤트 바인딩
-  window.onload = function () {
-    var submitBtn = document.getElementById("submitBtn");
-    if (submitBtn) {
-      submitBtn.addEventListener("click", handleSidebar);
-    } else {
-      console.error("submitBtn 버튼을 찾을 수 없습니다.");
-    }
-  };
-</script>
 
 
 <%@include file="./../js/validCheck.jsp"%>

@@ -58,4 +58,11 @@ public class VacationDao {
         return sqlSessionTemplate.selectOne(namespace + ".getVacationDays", vacation_no);
     }
 
+
+	public int VacationReject(String vacation_no) {
+		int cnt = sqlSessionTemplate.update(namespace + ".VacationReject" + vacation_no);
+		
+		return cnt;
+	}
+
 }

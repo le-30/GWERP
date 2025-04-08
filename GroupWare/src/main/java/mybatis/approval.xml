@@ -42,10 +42,17 @@
 		SELECT COUNT(*)
 		FROM
 		appr_line
-		WHERE emp_no = #{emp_no} AND appr_order = #{position_cd}
+		WHERE appr_order = #{position_cd}
 	</select>
 
-
+	<select id="getCompleteTotalCount"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM appr_line
+		WHERE emp_no = #{emp_no} and
+		appr_order = 0
+	</select>
+	
 	<select id="getApprovalList"
 		resultType="approval.model.ApprovalBean">
 		SELECT *
@@ -101,11 +108,5 @@
 		and emp_no =
 		#{emp_no}
 	</select>
-	<select id="getCompleteTotalCount"
-		resultType="int">
-		SELECT COUNT(*)
-		FROM appr_line
-		WHERE emp_no = #{emp_no} and
-		appr_order = 0
-	</select>
+
 </mapper>

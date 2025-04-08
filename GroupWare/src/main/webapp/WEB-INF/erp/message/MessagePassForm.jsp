@@ -83,7 +83,7 @@
 			<label>${attach2.org_file_name }</label>	
 		</div>
 	</div>
-	<input type="button" value="메일 전송" id="submitBtn" data-modal="mail_pass">
+	<input type="button" value="메일 전달" id="submitBtn" data-modal="mail_pass" class="btn btn-primary">
 </form:form>
 
 <%@include file = "./../js/validCheck.jsp"%>

@@ -66,6 +66,17 @@ public class ApprovalDao {
 		int cnt = sqlSessionTemplate.selectOne(namespace + ".getTotalCount" , map);
 		return cnt;
 	}
+	
+	public int getSignTotalCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".getSignTotalCount", map);
+		
+		return cnt;
+	}
+
+	public int getCompleteTotalCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".getCompleteTotalCount", map);
+		return cnt;
+	}
 
 
 	public List<ApprovalBean> getApprovalSignList(Paging pageInfo, Map<String, String> map) {
@@ -83,15 +94,6 @@ public class ApprovalDao {
 	}
 
 
-	public int getSignTotalCount(Map<String, String> map) {
-		int cnt = sqlSessionTemplate.selectOne(namespace + ".getSignTotalCount", map);
-		
-		return cnt;
-	}
 
 
-	public int getCompleteTotalCount(Map<String, String> map) {
-		int cnt = sqlSessionTemplate.selectOne(namespace + ".getCompleteTotalCount", map);
-		return cnt;
-	}
 }

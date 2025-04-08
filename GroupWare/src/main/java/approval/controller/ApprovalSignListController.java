@@ -21,16 +21,16 @@ import utility.Paging;
 public class ApprovalSignListController {
 
     private final String command = "/approvalSignList.erp";
-    private final String getPage = "approval/approvalSignList"; // JSP �뙆�씪 �씠由�
+    private final String getPage = "approval/approvalSignList"; // JSP 파일 이름
 
     @Autowired
-    ApprovalDao adao; // ApprovalDao 二쇱엯
+    ApprovalDao adao; // ApprovalDao 주입
 
     @RequestMapping(command)
     public ModelAndView approvalList(HttpSession session, HttpServletRequest request, @RequestParam(value = "pageNumber", required = false) String pageNumber,
     		@RequestParam(value = "whatColumn", required = false) String whatColumn,
 			@RequestParam(value = "keyword", required = false) String keyword) {
-        // ApprovalDao瑜� �궗�슜�빐 �뜲�씠�꽣 媛��졇�삤湲�
+        // ApprovalDao를 사용해 데이터 가져오기
     	String emp_no = (String) session.getAttribute("emp_no");
     	String position_cd = (String) session.getAttribute("position_cd");
       
@@ -43,8 +43,8 @@ public class ApprovalSignListController {
     	int totalCount = adao.getSignTotalCount(map);
         String url  = request.getContextPath() + "/" + command;
         
-        Paging pageInfo = new Paging(pageNumber, "1", totalCount, url, whatColumn, keyword);
-        System.out.println(totalCount);
+        Paging pageInfo = new Paging(pageNumber, "3", totalCount, url, whatColumn, keyword);
+        
         List<ApprovalBean> getApprovalSignList = adao.getApprovalSignList(pageInfo, map);
         
         ModelAndView mav = new ModelAndView();
@@ -52,7 +52,7 @@ public class ApprovalSignListController {
         mav.addObject("getApprovalSignList", getApprovalSignList);
         mav.addObject("pageInfo", pageInfo); 
         
-        mav.setViewName(getPage); // JSP �럹�씠吏� �꽕�젙
+        mav.setViewName(getPage); // JSP 페이지 설정
         return mav;
     }
 }

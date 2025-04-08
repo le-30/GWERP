@@ -1,8 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file=".././common/common.jsp" %>
 
+
+<!-- 🔍 공지 검색 영역 -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+	<h4 style="margin-bottom: 0; font-size: 18px; font-weight: bold; color: #2c3e50;">
+		📝 내가 쓴 공지 <span style="color: #e67e22;">(${totalCount})</span>
+	</h4>
+	<form id="notice_mSearchForm" style="display: flex; gap: 10px; align-items: center;">
+		<select name="whatColumn" style="padding: 5px;">
+			<option value="">전체 선택</option>
+			<option value="notice_title">제목</option>
+			<option value="emp_nm">작성자</option>
+		</select>
+		<input type="text" name="keyword" id="notice_mkeywordInput" placeholder="검색어 입력" style="padding: 5px;">
+		<input type="submit" value="검색" id="notice_mSearchBtn" style="padding: 6px 12px;">
+	</form>
+</div>
 <div id="mnoticeListContainer" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-	<h4 style="margin-bottom: 20px;">📝 내가 쓴 공지 (${totalCount})</h4>
+	<h4 style="margin-bottom: 20px;"></h4>
 
 	<c:if test="${totalCount == 0}">
 		<div style="text-align: center; padding: 20px; border: 1px solid #eee;">공지사항이 없습니다.</div>
@@ -18,7 +34,7 @@
 		</c:forEach>
 
 		<c:if test="${hasDraft}">
-			<h5 style="margin: 30px 0 10px; font-weight: bold; color: #e67e22;">📌 작성 중인 공지</h5>
+			<h5 style="margin: 10px 0 10px; font-weight: bold; color: #e67e22;">📌 작성 중인 공지</h5>
 			<!-- 헤더 -->
 			<div style="display: grid; grid-template-columns: 1fr 3fr 1.5fr 1.5fr 1fr; font-weight: bold; background: #f9f9f9; padding: 10px; border-bottom: 2px solid #ddd;">
 				<div style="text-align: left;">구분</div>
@@ -88,19 +104,6 @@
 				</c:if>
 			</c:forEach>
 		</c:if>
-
-		<!-- 검색 -->
-		<div style="margin-top: 30px; text-align: center;">
-			<form action="notice_list.erp" method="get" style="display: flex; justify-content: center; gap: 10px; align-items: center;">
-				<select name="whatColumn" style="padding: 6px;">
-					<option value="">전체 검색</option>
-					<option value="emp_nm">작성자</option>
-					<option value="notice_title">제목</option>
-				</select>
-				<input type="text" name="keyword" style="padding: 6px;">
-				<input type="submit" value="검색" style="padding: 6px 12px;">
-			</form>
-		</div>
 	</c:if>
 
 	<!-- 페이징 -->

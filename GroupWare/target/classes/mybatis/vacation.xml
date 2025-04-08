@@ -55,8 +55,17 @@
 		WHERE vacation_no = #{vacation_no,
 		jdbcType=INTEGER}
 	</update>
-  
 
+	<update id="VacationReject">
+		UPDATE vacation
+		SET
+		vacation_status = '반려',
+		appr_emp_no
+		= #{appr_emp_no, jdbcType=VARCHAR}
+		where vacation_no = #{vacation_no,
+		jdbcType=INTEGER}
+
+	</update>
 	<select id="getVacationDays" resultType="int">
 		SELECT total_days
 		FROM (
@@ -67,12 +76,11 @@
 		) WHERE
 		rnk = 1
 	</select>
-  
 
-    <!-- 신청자의 emp_no 조회 -->
-    <select id="getApplicantEmpNo" resultType="String">
-        SELECT req_emp_no
-        FROM vacation
-        WHERE vacation_no = #{vacation_no}
-    </select>
+	<!-- 신청자의 emp_no 조회 -->
+	<select id="getApplicantEmpNo" resultType="String">
+		SELECT req_emp_no
+		FROM vacation
+		WHERE vacation_no = #{vacation_no}
+	</select>
 </mapper>

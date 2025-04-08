@@ -55,5 +55,6 @@
 		<div id="paging" style="margin-top: 20px; text-align: center;">
 			${pageInfo.pagingHtml}
 		</div>
+
 	</div>
 </div>

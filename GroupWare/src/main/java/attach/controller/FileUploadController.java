@@ -22,7 +22,8 @@ public class FileUploadController {
 
     private static final String GITHUB_API_URL = ""; // GitHub API 疫꿸퀡�궚 URL
 
-	private static final String GITHUB_TOKEN = "";  
+	private static final String GITHUB_TOKEN = "";   
+
 
 
 	@ResponseBody
