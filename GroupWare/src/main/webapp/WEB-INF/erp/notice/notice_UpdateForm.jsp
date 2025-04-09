@@ -61,7 +61,8 @@
         </tr>
         <tr>
             <td colspan="2" align="center" class="notice-form-buttons">
-                <input type="submit" value="수정">
+            	<a href="javascript:void(0)" onclick="noticeUpdate('${notice.notice_no},${pageNumber},${whatColumn},${keyword},${fn:trim(kind)}', 'notice')"
+               	style="padding: 6px 14px; background-color: #17a2b8; color: white; text-decoration: none; border-radius: 5px;">수정</a>
             </td>
         </tr>
     </table>

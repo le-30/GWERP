@@ -18,7 +18,6 @@
       <span class="modal-title">📄 결재 문서 제출</span>
       <button type="button" class="close-btn" onclick="closeModal()">✕</button>
     </div>
-
 <form:form commandName="document" enctype="multipart/form-data" id="approval_insert" action="approval_insert.erp" method="post" >
 	<input type="hidden" name="redirectPage" value="approvalList.erp">
     <!-- 문서 제목 -->
@@ -47,7 +46,6 @@
     <input type="hidden" name="dept_cd" value='${sessionScope.dept_cd }'>
 
     <!-- 제출 버튼 -->
-
     <!-- <div class="modal-footer">
     <input type="submit" value="추가하기" class="btn btn-submit">
     </div> -->

@@ -65,6 +65,7 @@ public class RouterController {
 		} else if("vacationApproval".equals(page)) {
 			return "redirect:/vacationList.erp" + queryParams;
 		} else if("vacationleave".equals(page)){
+
 			return "redirect:/employeeVacation.erp";
 
 		} else if("salary".equals(page)){

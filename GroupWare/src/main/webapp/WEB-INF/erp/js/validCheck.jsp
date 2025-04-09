@@ -125,7 +125,6 @@ if (!window.submitBound) {
 	    } else {
 	        formData = $form.serialize();
     }
-		  
 
 		  $.ajax({
 		    url: config.url,

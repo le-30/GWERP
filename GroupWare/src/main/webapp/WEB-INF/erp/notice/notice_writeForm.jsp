@@ -26,7 +26,6 @@
     <form:form commandName="notice" method="post" action="notice_write.erp" id="notice_writeForm" enctype="multipart/form-data">
       <input type="hidden" name="emp_no" value="${sessionScope.emp_no}">
       <input type="hidden" name="emp_nm" value="${sessionScope.emp_nm}">
-
       <input type="hidden" name="redirectPage" value="notice_mlist.erp">
 
       <div class="form-group">
