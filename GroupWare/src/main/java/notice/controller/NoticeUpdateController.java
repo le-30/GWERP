@@ -73,6 +73,8 @@ public class NoticeUpdateController {
 	                             @RequestParam(value="kind", required = false) String kind,
 								 HttpServletResponse response) {
 		
+		String fileName = adao.selectFile(Integer.parseInt(no));
+		System.out.println("기존파일이름:"+fileName);
 		String savedFileName = fileUploadController.uploadFile(file, response);
 		
 		ModelAndView mav = new ModelAndView();
@@ -94,26 +96,14 @@ public class NoticeUpdateController {
 		String notice_no_seq = ndao.selectOneNum();
 		
 		System.out.println("notice_no_seq : " + notice_no_seq);
-		
-		if (file != null && !file.isEmpty()) {
-				
+		if(fileName != null) {
 			int cnt2 = adao.deleteFail(notice_no_seq);
 			
+		}
+		if (file != null && !file.isEmpty()) {
+				
+			
             AttachBean attach = new AttachBean();
-            attach.setCon_key2(notice_no_seq);
-            attach.setOrg_file_name(file.getOriginalFilename());
-            attach.setServer_file_name(savedFileName);
-            attach.setFile_size(file.getSize());
-            
-
-            int attachInsertCount = adao.insertAttach(attach);
-            if (attachInsertCount > 0) {
-                System.out.println("첨부 파일 정보 저장 성공");
-            } else {
-                System.out.println("첨부 파일 정보 저장 실패");
-            }
-		}else {
-			AttachBean attach = new AttachBean();
             attach.setCon_key2(notice_no_seq);
             attach.setOrg_file_name(file.getOriginalFilename());
             attach.setServer_file_name(savedFileName);

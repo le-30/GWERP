@@ -40,9 +40,10 @@
 				<div style="text-align: center;">${cmmCode.cmm_cd}</div>
 				<div style="text-align: center;">${cmmCode.cmm_nm}</div>
 				<div style="text-align: center;">
-					<button class="open-edit-modal"
+					<button class="open-edit-modal2"
 							data-url="cmmCode_update.erp"
-							data-id="${cmmCode.cmm_nm}"
+							data-cmm_cd="${cmmCode.cmm_cd}"
+							data-cmm_class="${cmmCode.cmm_class}"
 							style="padding: 6px 14px; background-color: #ffc107; color: #212529; border: none; border-radius: 6px; cursor: pointer;">
 						수정
 					</button>

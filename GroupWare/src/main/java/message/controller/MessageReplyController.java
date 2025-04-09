@@ -59,10 +59,6 @@ public class MessageReplyController {
 		
 		String savedFileName = fileUploadController.uploadFile(file, response);
 		
-		if (!file.isEmpty()) {
-		    System.out.println("���� �̸�: " + file.getOriginalFilename());
-		    System.out.println("���� ũ��: " + file.getSize());
-		}
 		
 		ModelAndView mav = new ModelAndView();
 		

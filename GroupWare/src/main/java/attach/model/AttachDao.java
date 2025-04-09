@@ -11,9 +11,8 @@ public class AttachDao {
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
-    // 泥⑤��뙆�씪 �궫�엯 硫붿꽌�뱶
     public int insertAttach(AttachBean attach) {
-        // 泥⑤��뙆�씪 �젙蹂대�� �뜲�씠�꽣踰좎씠�뒪�뿉 �궫�엯
+    	
         return sqlSessionTemplate.insert(namespace + ".insertAttach", attach);
     }
 
