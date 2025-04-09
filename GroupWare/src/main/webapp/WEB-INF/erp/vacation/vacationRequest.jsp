@@ -22,7 +22,7 @@ function closeModal() {
 		</div>
 		<form:form commandName="vacation" action="vacation_insert.erp" method="post" id="vacationRequest">
 			<input type="hidden" name="emp_no" value="${sessionScope.emp_no}">
-
+		<input type="hidden" name="redirectPage" value="router.erp?page=vacation">
 			<!-- radio 洹몃９ -->
 			<div class="form-group radio-group">
   				<label><input type="radio" name="vacation_type" value="연차">연차</label>

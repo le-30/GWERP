@@ -14,7 +14,7 @@ public class VacationApprovalController {
 
     // 요청 URL과 리다이렉트할 페이지 정의
     private final String command = "vacationApproval.erp";  // 요청 URL 매핑
-    private final String gotoPage = "vacation/vacationList";  // 승인 후 이동할 페이지
+    private final String gotoPage = "redirect:/vacationList.erp";  // 승인 후 이동할 페이지
 
     // VacationDao 객체 자동 주입
     @Autowired

@@ -112,6 +112,7 @@ window.pageConfig = window.pageConfig || {
     vacation: {
 	      button: "휴가 신청",
 	      modal: "vacation_insert",
+	      container:"vacationContainer",
 	      tabs: [
 	        { label: "휴가 관리", target: "vacation" }
 	      ]
@@ -769,7 +770,40 @@ window.pageConfig = window.pageConfig || {
 		}
 
 
-
+	//휴가 승인 반려 메서드
+	function vacationConfirm(vacation_no,source) {
+  
+  		  
+		let url = '';
+	    
+	    if (source === 'appr') {  
+	        url = 'vacationApproval.erp';
+	    } else if (source === 'reject') {
+	        url = 'vacationReject.erp';
+	    } else {
+	        console.log("기본 승인 반려");
+	    }
+    
+    $.ajax({
+      url: url,
+      type: "GET",
+      data: {vacation_no : vacation_no},
+      success: function(html) {
+			$('.main-content').html(html);
+			if(source == 'appr'){
+			alert("승인 성공했습니다.");
+				
+			}else{
+			alert("반려 성공했습니다.");
+				
+			}
+		},
+		error: function() {
+			alert("오류가 발생했습니다.");
+		}
+	});
+ 
+}
 
 
 </script>

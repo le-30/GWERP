@@ -109,7 +109,7 @@
 	
 	<update id="updateNotice">
 		update notice set
-		notice_title = #{notice_title}, notice_content = #{notice_content}, dept_nm = #{dept_nm}, notice_level = #{notice_level}
+		notice_title = #{notice_title}, notice_content = #{notice_content}, dept_nm = #{dept_nm}, notice_level = #{notice_level}, temporary_save = 0
 		where notice_no = #{notice_no}
 	</update>
 	

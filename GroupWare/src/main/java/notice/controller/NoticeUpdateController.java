@@ -85,6 +85,10 @@ public class NoticeUpdateController {
 			return mav;
 		}
 		
+		int save = notice.getTemporary_save();
+		System.out.println("save:"+ save);
+	
+		
 		int cnt = ndao.updateNotice(notice);
 		
 		String notice_no_seq = ndao.selectOneNum();
@@ -92,17 +96,29 @@ public class NoticeUpdateController {
 		System.out.println("notice_no_seq : " + notice_no_seq);
 		
 		if (file != null && !file.isEmpty()) {
-			
+				
 			int cnt2 = adao.deleteFail(notice_no_seq);
 			
             AttachBean attach = new AttachBean();
-            attach.setCon_key2(notice_no_seq); // 臾몄꽌 踰덊샇 �뿰寃�
-            attach.setOrg_file_name(file.getOriginalFilename());// �썝蹂� �뙆�씪紐�
-            attach.setServer_file_name(savedFileName); // ���옣�맂 �뙆�씪紐�
-            attach.setFile_size(file.getSize()); // �뙆�씪 �겕湲�
+            attach.setCon_key2(notice_no_seq);
+            attach.setOrg_file_name(file.getOriginalFilename());
+            attach.setServer_file_name(savedFileName);
+            attach.setFile_size(file.getSize());
             
-            System.out.println("�썝蹂� �뙆�씪 �씠由� : " + file.getOriginalFilename());
-            System.out.println("�꽌踰� �뙆�씪 �씠由�: " + attach.getServer_file_name());  // �뙆�씪 �씠由꾩쓣 異쒕젰
+
+            int attachInsertCount = adao.insertAttach(attach);
+            if (attachInsertCount > 0) {
+                System.out.println("첨부 파일 정보 저장 성공");
+            } else {
+                System.out.println("첨부 파일 정보 저장 실패");
+            }
+		}else {
+			AttachBean attach = new AttachBean();
+            attach.setCon_key2(notice_no_seq);
+            attach.setOrg_file_name(file.getOriginalFilename());
+            attach.setServer_file_name(savedFileName);
+            attach.setFile_size(file.getSize());
+            
 
             int attachInsertCount = adao.insertAttach(attach);
             if (attachInsertCount > 0) {
@@ -123,14 +139,19 @@ public class NoticeUpdateController {
 		ndao.downReadcount(notice.getNotice_no());
 		
 		
-		
+		if(save == 1) {
+			System.out.println("save:"+save);
+			mav.setViewName("redirect:/notice_mlist.erp");
+		}else {
+			mav.setViewName(gotoPage);
+			
+		}
 		
 		mav.addObject("no", notice.getNotice_no());
 		mav.addObject("kind", kind);
         mav.addObject("pageNumber", pageNumber);
         mav.addObject("whatColumn", whatColumn);
         mav.addObject("keyword", keyword);
-        mav.setViewName(gotoPage);
         
 		return mav;
 	}

@@ -100,6 +100,12 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		formId: "vacationRequest",
 		target: "vacation",
 		page : "vacation",
+	},
+	notice_save: {
+		url: "notice_save.erp",
+		formId: "notice_writeForm",
+		target: "myNotice",
+		page : "notice"
 	}
 };
 	

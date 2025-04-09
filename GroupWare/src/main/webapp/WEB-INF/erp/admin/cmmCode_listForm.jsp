@@ -23,7 +23,7 @@
 	</c:if>
 
 	<!-- 목록 있는 경우 -->
-	<c:if test="${not empty lists}">
+	<c:if test="${not empty lists}">  
 		<!-- 헤더 -->
 		<div style="display: grid; grid-template-columns: 2fr 2fr 2fr 1fr 1fr; font-weight: bold; background: #f9f9f9; padding: 12px 10px; border-bottom: 2px solid #ddd; text-align: center;">
 			<div>공통코드 class</div>

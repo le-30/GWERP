@@ -98,7 +98,27 @@ div#prof {
   margin-left: 6px;
   vertical-align: middle;
 }
+/* 로그아웃 버튼 스타일 */
+.sideTr.logout {
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    align-items: center;
+    padding-left: 20px; /* 다른 메뉴와 맞추기 */
+    font-size: 12px; /* 사이드바보다 작게 */
+    font-weight: normal;
+    cursor: pointer;
+}
 
+.sideTr.logout a {
+    text-decoration: none;
+    color: #687482;
+    padding: 8px 0; /* 높이 조절 */
+    width: 100%;
+}
+
+.sideTr.logout:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* 연한 회색 */
+}
 </style>
 
 <div id="sideBar">
@@ -148,6 +168,10 @@ div#prof {
         <i class="fas fa-dollar-sign sideIcon"></i>관리자페이지  
     </div>
     </c:if>
+    
+     <div class="sideTr logout">
+    <a href="#" id="logoutBtn">로그아웃</a>
+	 </div>
     
 </div>
 </div>  
