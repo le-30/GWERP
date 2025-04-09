@@ -5,6 +5,7 @@ eclipse.preferences.version=1
 encoding//src/main/java/Login/controller/FindPassword.java=UTF-8
 encoding//src/main/java/Login/controller/LoginController.java=UTF-8
 encoding//src/main/java/Login/controller/SubmitLoginController.java=UTF-8
+encoding//src/main/java/approval/controller/ApprovalCompanionController.java=UTF-8
 encoding//src/main/java/approval/controller/ApprovalCompleteListController.java=UTF-8
 encoding//src/main/java/approval/controller/ApprovalRequestController.java=UTF-8
 encoding//src/main/java/approval/controller/ApprovalSignListController.java=UTF-8

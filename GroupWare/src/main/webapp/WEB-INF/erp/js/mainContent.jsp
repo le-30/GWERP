@@ -120,6 +120,7 @@ window.pageConfig = window.pageConfig || {
 	    commute: {
 		      button: "",
 		      modal: "",
+		      container:"commuteListContainer",
 		      tabs: [
 		        { label: "출퇴근 기록", target: "commute" }
 		      ]
@@ -155,7 +156,6 @@ window.pageConfig = window.pageConfig || {
 		currentPage = page;
 		let data = { page: page };
 		Object.assign(data, params);
-		
 		$.ajax({
 			url: 'router.erp',
 			type: 'GET',
@@ -164,7 +164,6 @@ window.pageConfig = window.pageConfig || {
 				$('.main-content').html(html);
 
 				const config = pageConfig[page];
-
 				if (config) {
 					// 버튼 텍스트와 모달 지정
 					$('#headerBtn').text(config.button || '');
@@ -232,7 +231,7 @@ window.pageConfig = window.pageConfig || {
 	
 	function handleSidebarByTarget(target,page) { // validCheck
 		
-
+		
 		
 		const sidebarBtn = $(".sideTr").filter(function() {
 			return $(this).data("target") === page;
@@ -320,6 +319,9 @@ window.pageConfig = window.pageConfig || {
         }else if (formId === '#salarySearchForm'){
             url = 'salary/list.erp';
 
+        }else if (formId === '#commuteSeaarchForm'){
+            url = 'list/commute.erp';
+
         }
         
 			$.ajax({
@@ -362,7 +364,7 @@ window.pageConfig = window.pageConfig || {
 	    addSearchEventListener('#receiveSearchForm', '#receiveSearchBtn', '#receiveKeywordInput');
 	    addSearchEventListener('#sendSearchForm', '#sendSearchBtn', '#sendKeywordInput');
 	    addSearchEventListener('#authInfoSearchForm', '#authInfoSearchBtn', '#authInfoKeywordInput');
-	    addSearchEventListener('#cmmCodeSearchForm', '#cmmCodeSearchBtn', '#cmmCodeKeywordInput');
+	    addSearchEventListener('#cmmCodeSearchForm', '#cmmCodeSearchBtn', '#cmmCodekeywordInput');
 	    addSearchEventListener('#deptSearchForm', '#deptSearchBtn', '#deptkeywordInput');
 	    addSearchEventListener('#authSearchForm', '#authSearchBtn', '#authkeywordInput');
 
@@ -370,6 +372,7 @@ window.pageConfig = window.pageConfig || {
 	    addSearchEventListener('#notice_dSearchForm', '#notice_dSearchBtn', '#notice_dkeywordInput');
 	    addSearchEventListener('#notice_mSearchForm', '#notice_mSearchBtn', '#notice_mkeywordInput');
 	    addSearchEventListener('#salarySearchForm', '#salarySearchBtn', '#salaryKeywrodInput');
+	    addSearchEventListener('#commuteSeaarchForm', '#commuteSearchBtn', '#commutekeywordInput');
 
 	});//검색 클릭이나 엔터 누를식 본문만 바뀌는 함수
 

@@ -29,13 +29,13 @@
 	<!-- 사장 -->
 	<select id="findAll" resultType="commute.model.CommuteBean">
 		select * from commute
-		<if test="type == 'empNm'">
+		<if test="whatColumn == 'empNm'">
 			where empNm like #{keyword}
 		</if>
-		<if test="type== 'deptNm'">
+		<if test="whatColumn == 'deptNm'">
 			where deptNm like #{keyword}
 		</if>
-		<if test="type== 'cmmNm'">
+		<if test="whatColumn == 'cmmNm'">
 			where cmmNm like #{keyword}
 		</if>
 		ORDER BY work_date DESC
@@ -46,13 +46,13 @@
 		resultType="commute.model.CommuteBean">
 		select * from commute
 		<where>
-			<if test="type == 'empNm'">
+			<if test="whatColumn == 'empNm'">
 				empNm like #{keyword}
 			</if>
-			<if test="type== 'deptNm'">
+			<if test="whatColumn == 'deptNm'">
 				deptNm like #{keyword}
 			</if>
-			<if test="type== 'cmmNm'">
+			<if test="whatColumn == 'cmmNm'">
 				cmmNm like #{keyword}
 			</if>
 			and cmmNm != '사장'
@@ -65,13 +65,13 @@
 		resultType="commute.model.CommuteBean">
 		select *from commute
 		<where>
-			<if test="type == 'empNm'">
+			<if test="whatColumn == 'empNm'">
 				empNm like #{keyword}
 			</if>
-			<if test="type== 'deptNm'">
+			<if test="whatColumn == 'deptNm'">
 				deptNm like #{keyword}
 			</if>
-			<if test="type== 'cmmNm'">
+			<if test="whatColumn == 'cmmNm'">
 				cmmNm like #{keyword}
 			</if>
 			and deptNm=#{deptNm} and cmmNm != '사장'
@@ -87,13 +87,13 @@
 
 	<select id="getTotalCount" resultType="int">
 		select count(*) from commute
-		<if test="type == 'empNm'">
+		<if test="whatColumn == 'empNm'">
 			where empNm like #{keyword}
 		</if>
-		<if test="type== 'deptNm'">
+		<if test="whatColumn == 'deptNm'">
 			where deptNm like #{keyword}
 		</if>
-		<if test="type== 'cmmNm'">
+		<if test="whatColumn == 'cmmNm'">
 			where cmmNm like #{keyword}
 		</if>
 		ORDER BY work_date DESC

@@ -33,7 +33,9 @@ public class ApprovalSignListController {
         // ApprovalDao를 사용해 데이터 가져오기
     	String emp_no = (String) session.getAttribute("emp_no");
     	String position_cd = (String) session.getAttribute("position_cd");
-      
+    	
+    	//System.out.println("approvalsignList");
+    	
     	Map<String, String> map = new HashMap<String,String>();
     	map.put("whatColumn", whatColumn);
     	map.put("keyword", "%" + keyword + "%");

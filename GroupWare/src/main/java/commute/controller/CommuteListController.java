@@ -66,7 +66,7 @@ public class CommuteListController {
 	@RequestMapping("/list/commute.erp")
 	public String list(HttpServletRequest request,
 			@CookieValue("access_token") String token,
-			@RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "whatColumn", required = false) String whatColumn,
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@RequestParam(value="pageNumber", required = false) String pageNumber,
 			Model model) {
@@ -81,7 +81,7 @@ public class CommuteListController {
 		map.put("empNm", empNm);
 		map.put("cmmNm", cmmNm);
 		map.put("deptNm", deptNm);
-		map.put("type", type); 
+		map.put("whatColumn", whatColumn); 
 		map.put("keyword", "%"+keyword+"%");
 
 		List<CommuteBean> lists;
@@ -98,7 +98,7 @@ public class CommuteListController {
 
 		int totalCount = cdao.getTotalCount(map);
 		String url = request.getContextPath() + "/commute.erp";
-		Paging pageInfo = new Paging(pageNumber,"10",totalCount,url,type,keyword);
+		Paging pageInfo = new Paging(pageNumber,"10",totalCount,url,whatColumn,keyword);
 		model.addAttribute("lists", lists);
 		model.addAttribute("emp_no", emp_no);
 		model.addAttribute("empNm", empNm);

@@ -170,7 +170,7 @@ div#prof {
     </c:if>
     
      <div class="sideTr logout">
-    <a href="#" id="logoutBtn">로그아웃</a>
+    <a href="logout.erp" id="logoutBtn">로그아웃</a>
 	 </div>
     
 </div>

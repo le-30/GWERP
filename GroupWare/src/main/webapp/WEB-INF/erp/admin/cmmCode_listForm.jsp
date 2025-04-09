@@ -13,7 +13,7 @@
 		</select>
 		<input type="text" name="keyword" id="cmmCodekeywordInput" placeholder="검색어 입력"
 			   style="width: 200px; padding: 6px 10px; border-radius: 6px; border: 1px solid #ccc;">
-		<input type="button" value="검색" id="cmmCodesearchBtn"
+		<input type="button" value="검색" id="cmmCodeSearchBtn"
 			   style="padding: 6px 14px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;">
 	</form>
 

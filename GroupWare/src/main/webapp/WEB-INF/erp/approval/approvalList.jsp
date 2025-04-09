@@ -39,7 +39,7 @@
 
     <!-- 페이징 -->
     <div id="paging" style="margin-top: 20px; text-align: center;">
-        ${pageInfo.pagingHtml}
+        ${pageInfo.pagingHtml}  
     </div>
 </div>
 </div>

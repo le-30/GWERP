@@ -106,11 +106,16 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		formId: "notice_writeForm",
 		target: "myNotice",
 		page : "notice"
+	},
+	appr_reject: {
+		url: "rejectForm.erp",
+		formId: "rejectForm",
+		target: "apprList",
+		page :"appr"
 	}
 };
 	
 if (!window.submitBound) {
-	window.submitBound =true;
 	$(document).off('click', '#submitBtn').on('click', '#submitBtn', function (event) {
 	    const config = formSubmitConfig[$(this).data('modal')];
 	    const $form = $('#' + config.formId);
@@ -154,7 +159,6 @@ if (!window.submitBound) {
 				   const targetPage = config.target || config.defaultRedirect;
 				   const page = config.page;
 				
-				   
 		        if (redirectPage) {
 		          $.ajax({
 		            url: redirectPage,

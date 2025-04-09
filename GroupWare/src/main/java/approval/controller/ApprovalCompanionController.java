@@ -19,24 +19,24 @@ public class ApprovalCompanionController {
       
         
     @Autowired
-    private ApprovalDao approvalDao; // DAO 주입
+    private ApprovalDao approvalDao;
 
     @RequestMapping(value = command, method = RequestMethod.GET)
-    public String showRejectForm(@RequestParam("appr_no") int apprNo, Model model) {
-        model.addAttribute("appr_no", apprNo); // appr_no 값을 모델에 담아 JSP로 전달
-        return getPage; // 반려 사유 폼 페이지로 이동
+    public String showRejectForm(@RequestParam("id") int apprNo, Model model) {
+        model.addAttribute("appr_no", apprNo); 
+        return getPage; 
     }
     
     @RequestMapping(value = command, method = RequestMethod.POST)
     public String rejectApproval(@RequestParam("appr_no") int apprNo,
                                  @RequestParam("appr_refuse_op") String appr_refuse_op,
                                  HttpServletRequest request) {
-        // 반려 상태로 업데이트
+        
     	System.out.println("appr_refuse_op : " + appr_refuse_op);
     	System.out.println("appr_no : " + apprNo);
         approvalDao.companionApprovalStatus(apprNo, appr_refuse_op); 
  
-        // 반려 완료 후 승인 목록 페이지로 이동
+       
         return gotoPage;  
     }
 }
