@@ -69,6 +69,8 @@ public class NoticeUpdateController {
 								 @RequestParam(value="whatColumn",required = false) String whatColumn,
 								 @RequestParam(value="keyword",required = false) String keyword,
 								 @RequestParam("file") MultipartFile file,
+								 @RequestParam(value="no", required = false) String no,
+	                             @RequestParam(value="kind", required = false) String kind,
 								 HttpServletResponse response) {
 		
 		String savedFileName = fileUploadController.uploadFile(file, response);
@@ -124,6 +126,7 @@ public class NoticeUpdateController {
 		
 		
 		mav.addObject("no", notice.getNotice_no());
+		mav.addObject("kind", kind);
         mav.addObject("pageNumber", pageNumber);
         mav.addObject("whatColumn", whatColumn);
         mav.addObject("keyword", keyword);

@@ -23,6 +23,9 @@
 	             </c:choose>
 	             onclick="handleSidebar(this)"
 	             style="cursor: pointer; color: #007bff; font-weight: bold; display: inline-block; padding: 6px 12px;">
+	            <input type="hidden" value="${whatColumn}" name="whatColumn">
+				<input type="hidden" value="${keyword}" name="keyword">
+				<input type="hidden" value="${pageNumber}" name="pageNumber">
 	            <i class="fas fa-flag sideIcon"></i> 글목록
 	        </div>
 	    </div>

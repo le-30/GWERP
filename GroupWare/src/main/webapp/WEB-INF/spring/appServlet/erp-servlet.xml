@@ -15,5 +15,5 @@
 	</bean>
 
 	<context:component-scan base-package="employee, main, admin, utility, message,notice,attach,document,approval,Login,commute,qrGenerator,jwt,reply,vacation,salary" />
-</beans>
+</beans> 
 <!-- *.erp => erp-servlet.xml -->  

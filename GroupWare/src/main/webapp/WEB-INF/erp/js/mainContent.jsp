@@ -398,9 +398,6 @@ window.pageConfig = window.pageConfig || {
     	});
 	});//페이징 클릭시 본문만 바뀌는함수
 		
-
-	
-	
 	
 	function Detail(detail, source) { // detail
 	    		
@@ -443,8 +440,43 @@ window.pageConfig = window.pageConfig || {
 	} // loadMessageDetail
 	
 	
+	function noticeUpdate(update, source) { // detail
+	    		
+  		const params = update.split(',');
+  		const no = params[0]; // msg_no는 첫 번째 값
+		const pageNumber = params[1]; // pageNumber는 두 번째 값
+		const whatColumn = params[2]; // whatColumn은 세 번째 값
+		const keyword = params[3]; // keyword는 네 번째 값
+		const kind = params[4];
+		
+		let url = '';
+	    
+		var formData = new FormData($('#notice_updateform')[0]); // notice_updateform 폼의 모든 데이터를 가져옴
+		formData.append("no", no);  // 추가로 no 파라미터도 포함
+		
+	    if (source === 'notice') {  
+	        url = 'notice_update.erp';
+	    } else {
+	        console.log("기본 메시지 상세 조회");
+	    }
+		$.ajax({
+			url: url,  // 서버에서 메세지 상세 정보를 처리할 URL
+			type: 'POST',
+			data: formData,
+	        processData: false,  // jQuery가 데이터를 처리하지 않도록 설정
+	        contentType: false,  // content-type을 자동으로 설정하지 않도록 설정
+			success: function(html) {
+				$('.main-content').html(html);  // 가져온 HTML을 main-content에 삽입
+			},
+				error: function() {
+					alert('메세지 로딩 중 오류가 발생했습니다.');
+				}
+		});
+	} // notice_update
 	
-	function updateList(detail, kind) { // detail
+	
+	
+	function updateList(detail, kind) { // detail 목록보기
 		
   		const params = detail.split(',');
 		const pageNumber = params[0]; // pageNumber는 두 번째 값
