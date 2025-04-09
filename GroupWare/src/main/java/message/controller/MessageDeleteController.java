@@ -50,7 +50,7 @@ public class MessageDeleteController {
 //			System.out.println("받은사람");
 			mav.setViewName(receivePage);
 			
-			if(mb.getDel_yn() != "O") {
+			if(!mb.getDel_yn().equals("O")) {
 				
 				cnt = mdao.deleteMessage(mb);
 				
@@ -64,7 +64,7 @@ public class MessageDeleteController {
 //			System.out.println("보낸사람");
 			mav.setViewName(sendPage);
 			
-			if(mb.getDel_yn() != "O") {
+			if(!mb.getDel_yn().equals("O")) {
 				
 				cnt = mdao.deleteMessage(mb);
 				

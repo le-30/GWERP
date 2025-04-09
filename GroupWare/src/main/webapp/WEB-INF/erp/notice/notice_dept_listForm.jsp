@@ -55,32 +55,6 @@
 			</c:if>
 		</c:forEach>
 
-		<!-- 검색 영역 -->
-		<div style="margin-top: 30px; text-align: center;">
-
-			<form action="notice_dlist.erp" method="get" style="display: flex; justify-content: center; gap: 10px; align-items: center;">
-
-				<select name="whatColumn" style="padding: 6px;">
-					<option value="">전체 검색</option>
-					<option value="emp_nm">작성자</option>
-					<option value="notice_title">제목</option>
-				</select>
-				<input type="text" name="keyword" style="padding: 6px;">
-				<input type="submit" value="검색" style="padding: 6px 12px;">
-			</form>
-
-			<form id="sendSearchForm" style="display: flex; gap: 10px; align-items: center;">
-				<select name="whatColumn" style="padding: 5px;">
-					<option value="">전체 선택</option>
-					<option value="send_emp_name">받는 사람</option>
-					<option value="msg_title">제목</option>
-				</select>
-				<input type="text" name="keyword" id="sendKeywordInput" placeholder="검색어 입력" style="padding: 5px;">
-				<input type="button" value="검색" id="sendSearchBtn" style="padding: 6px 12px;">
-			</form>
-
-		</div>
-
 	</c:if>
 
 	<!-- 페이징 -->
