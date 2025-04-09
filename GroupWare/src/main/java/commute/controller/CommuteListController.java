@@ -127,28 +127,30 @@ public class CommuteListController {
 	}  
 
 	@RequestMapping("/worktime/commute.erp")
-	public String WorkTime(@CookieValue("access_token") String token,
-			Model model) {
+	   public String WorkTime(@CookieValue("access_token") String token,
+	         Model model) {
 
-		String emp_no = JwtUtil.getEmp_no(token);
-		String workDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new Date());
+	      String emp_no = JwtUtil.getEmp_no(token);
+	      String workDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("emp_no", emp_no);
-		map.put("work_date", workDate);
+	      Map<String, Object> map = new HashMap<String, Object>();
+	      map.put("emp_no", emp_no);
+	      map.put("work_date", workDate);
 
-		CommuteBean cb = cdao.selectOne(map);
-		Date clockIn = cb.getClock_in();
-		Date clockOut = cb.getClock_out();
+	      CommuteBean cb = cdao.selectOne(map);
+	      Date clockIn = cb.getClock_in();
+	      Date clockOut = cb.getClock_out();
 
-		Map<String, Double> timeMap = calculateDecimalWorkTimes(clockIn, clockOut);
+	      Map<String, Double> timeMap = calculateDecimalWorkTimes(clockIn, clockOut);
 
-		map.put("total_hours", timeMap.get("total_hours"));
-		map.put("overtime_hours", timeMap.get("overtime_hours"));
+	      map.put("total_hours", timeMap.get("total_hours"));
+	      map.put("overtime_hours", timeMap.get("overtime_hours"));
 
-		cdao.wortktime(map);
-		return "commute/closeWindow";
-	}
+	      cdao.wortktime(map);
+	      return "redirect:/logout.erp";
+	   }
+
+
 
 
 	private Map<String, Double> calculateDecimalWorkTimes(Date clockIn, Date clockOut) {

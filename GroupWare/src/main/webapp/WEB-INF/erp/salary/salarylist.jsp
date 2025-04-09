@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./../common/common.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 
 <!-- 제목 -->
 <div style="text-align: center; margin-bottom: 20px; font-size: 28px; font-weight: bold; color: #34495e;">
@@ -10,7 +10,7 @@
 
 <!-- 검색 폼 -->
 <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
-    <form method="get" action="${pageContext.request.contextPath}/salary/list.erp" style="display: flex; gap: 10px; align-items: center;">
+    <form id="salarySearchForm" style="display: flex; gap: 10px; align-items: center;">
         <div>
             <label for="month" style="font-size: 16px; font-weight: bold;">급여월:</label>
             <input type="month" name="month" value="${param.month}" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px;">
@@ -19,7 +19,7 @@
         <c:if test="${cmmNm eq '사장' or deptNm eq '인사팀'}">
             <div>
                 <label for="type" style="font-size: 16px; font-weight: bold;">검색조건:</label>
-                <select name="type" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px;">
+                <select name="type" name="whatColumn" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px;">
                     <option value="">선택하세요</option>
                     <option value="empNm" ${param.type == 'empNm' ? 'selected' : ''}>사원명</option>
                     <option value="deptNm" ${param.type == 'deptNm' ? 'selected' : ''}>부서명</option>
@@ -29,11 +29,11 @@
         </c:if>
 
         <div>
-            <input type="text" name="keyword" value="${param.keyword}" placeholder="검색어 입력" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px;">
+            <input type="text" name="keyword" id="salaryKeywrodInput" value="${param.keyword}" placeholder="검색어 입력" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px;">
         </div>
 
         <div>
-            <button type="submit" style="padding: 8px 16px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+            <button type="button"  id="salarySearchBtn" style="padding: 8px 16px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
                 조회
             </button>
         </div>

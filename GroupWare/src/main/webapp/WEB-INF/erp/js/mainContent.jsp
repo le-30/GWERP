@@ -245,7 +245,7 @@ window.pageConfig = window.pageConfig || {
 			handleSidebar(sidebarBtn[0], target); // DOM 요소로 변환 후 전달
 		} else {
 			loadContent(target || page);
-			alert("해당 target을 가진 sidebarBtn을 찾을 수 없습니다.");
+			/* alert("해당 target을 가진 sidebarBtn을 찾을 수 없습니다."); */
 		}
 		handleSidebar(sidebarBtn);
 	} // insert 이후 헤더 자동 변환
@@ -318,6 +318,9 @@ window.pageConfig = window.pageConfig || {
         }else if (formId === '#notice_mSearchForm'){
             url = 'notice_mlist.erp';
 
+        }else if (formId === '#salarySearchForm'){
+            url = 'salary/list.erp';
+
         }
         
 			$.ajax({
@@ -367,6 +370,7 @@ window.pageConfig = window.pageConfig || {
 	    addSearchEventListener('#notice_aSearchForm', '#notice_aSearchBtn', '#notice_akeywordInput');
 	    addSearchEventListener('#notice_dSearchForm', '#notice_dSearchBtn', '#notice_dkeywordInput');
 	    addSearchEventListener('#notice_mSearchForm', '#notice_mSearchBtn', '#notice_mkeywordInput');
+	    addSearchEventListener('#salarySearchForm', '#salarySearchBtn', '#salaryKeywrodInput');
 
 	});//검색 클릭이나 엔터 누를식 본문만 바뀌는 함수
 
