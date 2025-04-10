@@ -69,6 +69,9 @@ public class MessageReplyController {
 		    mb.setMsg_content(file.getOriginalFilename());
 		}
 		
+		int cnt = -1;
+		cnt = mdao.SendMessage(mb);
+		
 		String msg_no_seq = mdao.selectOneNum();
 		
 		System.out.println("msg_no_seq : " + msg_no_seq);
@@ -90,9 +93,7 @@ public class MessageReplyController {
 		 * return mav; }
 		 */
 
-		int cnt = -1;
 
-		cnt = mdao.SendMessage(mb);
 		
 		System.out.println("reply cnt : " + cnt);
 		

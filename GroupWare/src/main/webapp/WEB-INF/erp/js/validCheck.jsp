@@ -99,7 +99,7 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		url: "vacation_insert.erp",
 		formId: "vacationRequest",
 		target: "vacation",
-		page : "vacation",
+		page : "vacation"
 	},
 	notice_save: {
 		url: "notice_save.erp",
@@ -115,7 +115,7 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	}
 };
 	
-if (!window.submitBound) {
+if (!submitBound) {
 	$(document).off('click', '#submitBtn').on('click', '#submitBtn', function (event) {
 	    const config = formSubmitConfig[$(this).data('modal')];
 	    const $form = $('#' + config.formId);

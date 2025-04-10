@@ -1,5 +1,7 @@
 package attach.controller;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import org.json.JSONObject;
@@ -24,6 +26,7 @@ public class FileDownloadController {
     private final String command = "download.erp";
     private final String getPage = "approval.approvalList";
     
+   
     @Autowired
     private AttachDao attachDao;
 
@@ -73,8 +76,12 @@ public class FileDownloadController {
             String cleanedBase64Content = base64Content.replaceAll("\\s+", "");
             byte[] decodedBytes = Base64.getDecoder().decode(cleanedBase64Content);
 
+            String encodedFileName = URLEncoder.encode(serverFileName, StandardCharsets.UTF_8.toString());
+
+            
             HttpHeaders downloadHeaders = new HttpHeaders();
-            downloadHeaders.add("Content-Disposition", "attachment; filename=\"" + serverFileName + "\"");
+//            downloadHeaders.add("Content-Disposition", "attachment; filename=\"" + serverFileName + "\"");
+            downloadHeaders.add("Content-Disposition", "attachment; filename*=UTF-8''" + encodedFileName);
             downloadHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 
             return new ResponseEntity<byte[]>(decodedBytes, downloadHeaders, HttpStatus.OK);

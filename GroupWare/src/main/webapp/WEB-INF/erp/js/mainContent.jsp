@@ -3,6 +3,7 @@
 <!-- 본문,헤더버튼 관리 페이지 -->
 <script>
 
+
 window.pageConfig = window.pageConfig || {
 	emp: {
 		button: "사원 등록",
@@ -151,7 +152,9 @@ window.pageConfig = window.pageConfig || {
 
 	window.currentModal = '';
 	window.currentPage ='';
-	
+
+
+		
 	function loadContent(page, params = {}) {
 		currentPage = page;
 		let data = { page: page };
@@ -200,17 +203,21 @@ window.pageConfig = window.pageConfig || {
 					currentModal = '';
 					$('#headerBtn').hide();
 				}
-
+		
 				if (page === 'authInfo') {
 					bindAuthorityEvents();
 				}
+			
 				bindDeleteEvent(); // 삭제 이벤트 바인딩
+				bindSignAppr();//승인이벤트 바인딩
+			
 			},
 			error: function () {
 				alert('본문을 불러오는 중 오류가 발생했습니다.');
 			}
 		});
 	}
+
 	
 	
 	
@@ -367,7 +374,6 @@ window.pageConfig = window.pageConfig || {
 	    addSearchEventListener('#cmmCodeSearchForm', '#cmmCodeSearchBtn', '#cmmCodekeywordInput');
 	    addSearchEventListener('#deptSearchForm', '#deptSearchBtn', '#deptkeywordInput');
 	    addSearchEventListener('#authSearchForm', '#authSearchBtn', '#authkeywordInput');
-
 	    addSearchEventListener('#notice_aSearchForm', '#notice_aSearchBtn', '#notice_akeywordInput');
 	    addSearchEventListener('#notice_dSearchForm', '#notice_dSearchBtn', '#notice_dkeywordInput');
 	    addSearchEventListener('#notice_mSearchForm', '#notice_mSearchBtn', '#notice_mkeywordInput');
@@ -712,6 +718,7 @@ window.pageConfig = window.pageConfig || {
 
 	//삭제 메서드
 	function bindDeleteEvent() {
+		
   $(document).off("click", ".deleteBtn").on("click", ".deleteBtn", function () {
     const url = $(this).data("url");
     const name = $(this).data("name") || "항목";
@@ -736,6 +743,36 @@ window.pageConfig = window.pageConfig || {
       },
       error: function () {
         alert(name + " 삭제 실패");
+      }
+    });
+  });
+}
+	function bindSignAppr() {
+		
+  $(document).off("click", ".signBtn").on("click", ".signBtn", function () {
+    const url = $(this).data("url");
+    const name = $(this).data("name") || "항목";
+    let params = {};
+
+    try {
+      params = JSON.parse($(this).attr("data-params"));//JSON.parse 문자열을 객체로바꿔서 쓰고 싶을때 사용
+    } catch (e) {
+      alert("승인 파라미터 오류");
+      return;
+    }
+
+    if (!confirm(name + "을(를) 승인하시겠습니까?")) return;
+    
+    $.ajax({
+      url: url,
+      type: "GET",
+      data: params,
+      success: function () {
+        alert(name + " 승인 완료");
+        loadContent(currentPage);
+      },
+      error: function () {
+        alert(name + " 승인 실패");
       }
     });
   });
