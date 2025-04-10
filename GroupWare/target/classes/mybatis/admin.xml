@@ -81,14 +81,14 @@
 	
 	<select id="getOneCmmCode" resultType="admin.model.CmmCodeBean">
 	select * from cmm_code
-	where cmm_nm = #{cmm_nm}
+	where cmm_cd = #{cmm_cd} and cmm_class = #{cmm_class}
 	
 	</select>
 	
 	<update id="updateCmmCode">
 	
-	update cmm_code set cmm_class = #{cmm_class},cmm_nm = #{cmm_nm}
-	where cmm_cd = #{cmm_cd}
+	update cmm_code set cmm_nm = #{cmm_nm}
+	where cmm_cd = #{cmm_cd} and cmm_class = #{cmm_class}
 	
 	</update>
 	<delete id="deleteCmmCode">

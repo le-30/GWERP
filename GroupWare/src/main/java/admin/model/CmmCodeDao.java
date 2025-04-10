@@ -1,5 +1,6 @@
 package admin.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +33,11 @@ public class CmmCodeDao {
 			return cnt;
 		}
 
-		public CmmCodeBean getOneCmmCode(String cmm_nm) {
-			
-			CmmCodeBean cmmCodeBean = sqlSessionTemplate.selectOne(namespace+".getOneCmmCode",cmm_nm);
+		public CmmCodeBean getOneCmmCode(String cmm_cd, String cmm_class) {
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("cmm_class", cmm_class);
+			map.put("cmm_cd", cmm_cd);
+			CmmCodeBean cmmCodeBean = sqlSessionTemplate.selectOne(namespace+".getOneCmmCode",map);
 			
 			return cmmCodeBean;
 		}

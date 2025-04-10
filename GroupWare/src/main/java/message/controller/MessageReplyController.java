@@ -59,10 +59,6 @@ public class MessageReplyController {
 		
 		String savedFileName = fileUploadController.uploadFile(file, response);
 		
-		if (!file.isEmpty()) {
-		    System.out.println("���� �̸�: " + file.getOriginalFilename());
-		    System.out.println("���� ũ��: " + file.getSize());
-		}
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -72,6 +68,9 @@ public class MessageReplyController {
 		if (mb.getMsg_content() == null || mb.getMsg_content().trim().isEmpty()) {
 		    mb.setMsg_content(file.getOriginalFilename());
 		}
+		
+		int cnt = -1;
+		cnt = mdao.SendMessage(mb);
 		
 		String msg_no_seq = mdao.selectOneNum();
 		
@@ -94,9 +93,7 @@ public class MessageReplyController {
 		 * return mav; }
 		 */
 
-		int cnt = -1;
 
-		cnt = mdao.SendMessage(mb);
 		
 		System.out.println("reply cnt : " + cnt);
 		

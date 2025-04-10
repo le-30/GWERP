@@ -3,6 +3,7 @@
 <!-- 본문,헤더버튼 관리 페이지 -->
 <script>
 
+
 window.pageConfig = window.pageConfig || {
 	emp: {
 		button: "사원 등록",
@@ -112,6 +113,7 @@ window.pageConfig = window.pageConfig || {
     vacation: {
 	      button: "휴가 신청",
 	      modal: "vacation_insert",
+	      container:"vacationContainer",
 	      tabs: [
 	        { label: "휴가 관리", target: "vacation" }
 	      ]
@@ -119,6 +121,7 @@ window.pageConfig = window.pageConfig || {
 	    commute: {
 		      button: "",
 		      modal: "",
+		      container:"commuteListContainer",
 		      tabs: [
 		        { label: "출퇴근 기록", target: "commute" }
 		      ]
@@ -149,12 +152,13 @@ window.pageConfig = window.pageConfig || {
 
 	window.currentModal = '';
 	window.currentPage ='';
-	
+
+
+		
 	function loadContent(page, params = {}) {
 		currentPage = page;
 		let data = { page: page };
 		Object.assign(data, params);
-		
 		$.ajax({
 			url: 'router.erp',
 			type: 'GET',
@@ -163,7 +167,6 @@ window.pageConfig = window.pageConfig || {
 				$('.main-content').html(html);
 
 				const config = pageConfig[page];
-
 				if (config) {
 					// 버튼 텍스트와 모달 지정
 					$('#headerBtn').text(config.button || '');
@@ -200,17 +203,21 @@ window.pageConfig = window.pageConfig || {
 					currentModal = '';
 					$('#headerBtn').hide();
 				}
-
+		
 				if (page === 'authInfo') {
 					bindAuthorityEvents();
 				}
+			
 				bindDeleteEvent(); // 삭제 이벤트 바인딩
+				bindSignAppr();//승인이벤트 바인딩
+			
 			},
 			error: function () {
 				alert('본문을 불러오는 중 오류가 발생했습니다.');
 			}
 		});
 	}
+
 	
 	
 	
@@ -231,7 +238,7 @@ window.pageConfig = window.pageConfig || {
 	
 	function handleSidebarByTarget(target,page) { // validCheck
 		
-
+		
 		
 		const sidebarBtn = $(".sideTr").filter(function() {
 			return $(this).data("target") === page;
@@ -245,7 +252,7 @@ window.pageConfig = window.pageConfig || {
 			handleSidebar(sidebarBtn[0], target); // DOM 요소로 변환 후 전달
 		} else {
 			loadContent(target || page);
-			alert("해당 target을 가진 sidebarBtn을 찾을 수 없습니다.");
+			/* alert("해당 target을 가진 sidebarBtn을 찾을 수 없습니다."); */
 		}
 		handleSidebar(sidebarBtn);
 	} // insert 이후 헤더 자동 변환
@@ -316,6 +323,12 @@ window.pageConfig = window.pageConfig || {
             url = 'notice_dlist.erp';
         }else if (formId === '#notice_mSearchForm'){
             url = 'notice_mlist.erp';
+        }else if (formId === '#salarySearchForm'){
+            url = 'salary/list.erp';
+
+        }else if (formId === '#commuteSeaarchForm'){
+            url = 'list/commute.erp';
+
         }
         
 			$.ajax({
@@ -358,13 +371,14 @@ window.pageConfig = window.pageConfig || {
 	    addSearchEventListener('#receiveSearchForm', '#receiveSearchBtn', '#receiveKeywordInput');
 	    addSearchEventListener('#sendSearchForm', '#sendSearchBtn', '#sendKeywordInput');
 	    addSearchEventListener('#authInfoSearchForm', '#authInfoSearchBtn', '#authInfoKeywordInput');
-	    addSearchEventListener('#cmmCodeSearchForm', '#cmmCodeSearchBtn', '#cmmCodeKeywordInput');
+	    addSearchEventListener('#cmmCodeSearchForm', '#cmmCodeSearchBtn', '#cmmCodekeywordInput');
 	    addSearchEventListener('#deptSearchForm', '#deptSearchBtn', '#deptkeywordInput');
 	    addSearchEventListener('#authSearchForm', '#authSearchBtn', '#authkeywordInput');
-
 	    addSearchEventListener('#notice_aSearchForm', '#notice_aSearchBtn', '#notice_akeywordInput');
 	    addSearchEventListener('#notice_dSearchForm', '#notice_dSearchBtn', '#notice_dkeywordInput');
 	    addSearchEventListener('#notice_mSearchForm', '#notice_mSearchBtn', '#notice_mkeywordInput');
+	    addSearchEventListener('#salarySearchForm', '#salarySearchBtn', '#salaryKeywrodInput');
+	    addSearchEventListener('#commuteSeaarchForm', '#commuteSearchBtn', '#commutekeywordInput');
 
 	});//검색 클릭이나 엔터 누를식 본문만 바뀌는 함수
 
@@ -704,6 +718,7 @@ window.pageConfig = window.pageConfig || {
 
 	//삭제 메서드
 	function bindDeleteEvent() {
+		
   $(document).off("click", ".deleteBtn").on("click", ".deleteBtn", function () {
     const url = $(this).data("url");
     const name = $(this).data("name") || "항목";
@@ -728,6 +743,36 @@ window.pageConfig = window.pageConfig || {
       },
       error: function () {
         alert(name + " 삭제 실패");
+      }
+    });
+  });
+}
+	function bindSignAppr() {
+		
+  $(document).off("click", ".signBtn").on("click", ".signBtn", function () {
+    const url = $(this).data("url");
+    const name = $(this).data("name") || "항목";
+    let params = {};
+
+    try {
+      params = JSON.parse($(this).attr("data-params"));//JSON.parse 문자열을 객체로바꿔서 쓰고 싶을때 사용
+    } catch (e) {
+      alert("승인 파라미터 오류");
+      return;
+    }
+
+    if (!confirm(name + "을(를) 승인하시겠습니까?")) return;
+    
+    $.ajax({
+      url: url,
+      type: "GET",
+      data: params,
+      success: function () {
+        alert(name + " 승인 완료");
+        loadContent(currentPage);
+      },
+      error: function () {
+        alert(name + " 승인 실패");
       }
     });
   });
@@ -765,7 +810,40 @@ window.pageConfig = window.pageConfig || {
 		}
 
 
-
+	//휴가 승인 반려 메서드
+	function vacationConfirm(vacation_no,source) {
+  
+  		  
+		let url = '';
+	    
+	    if (source === 'appr') {  
+	        url = 'vacationApproval.erp';
+	    } else if (source === 'reject') {
+	        url = 'vacationReject.erp';
+	    } else {
+	        console.log("기본 승인 반려");
+	    }
+    
+    $.ajax({
+      url: url,
+      type: "GET",
+      data: {vacation_no : vacation_no},
+      success: function(html) {
+			$('.main-content').html(html);
+			if(source == 'appr'){
+			alert("승인 성공했습니다.");
+				
+			}else{
+			alert("반려 성공했습니다.");
+				
+			}
+		},
+		error: function() {
+			alert("오류가 발생했습니다.");
+		}
+	});
+ 
+}
 
 
 </script>

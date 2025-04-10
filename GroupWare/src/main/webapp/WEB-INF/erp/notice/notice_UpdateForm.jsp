@@ -11,6 +11,7 @@
 	<input type="hidden" name="whatColumn" value="${whatColumn }">
 	<input type="hidden" name="keyword" value="${keyword }">
 	<input type="hidden" name="kind" value="${kind }">
+	<input type="hidden" name="temporary_save" value="${notice.temporary_save}">
 	
 	<c:if test="${fn:trim(kind) == 'total'}">
 		<c:set var="list" value="notice_alist.erp"/>
@@ -61,8 +62,15 @@
         </tr>
         <tr>
             <td colspan="2" align="center" class="notice-form-buttons">
+            	<c:if test="${notice.temporary_save == 0 }">
             	<a href="javascript:void(0)" onclick="noticeUpdate('${notice.notice_no},${pageNumber},${whatColumn},${keyword},${fn:trim(kind)}', 'notice')"
                	style="padding: 6px 14px; background-color: #17a2b8; color: white; text-decoration: none; border-radius: 5px;">수정</a>
+            	</c:if>
+            	
+            	<c:if test="${notice.temporary_save != 0 }">
+            	<a href="javascript:void(0)" onclick="noticeUpdate('${notice.notice_no},${pageNumber},${whatColumn},${keyword},${fn:trim(kind)}', 'notice')"
+               	style="padding: 6px 14px; background-color: #17a2b8; color: white; text-decoration: none; border-radius: 5px;">작성</a>
+            	</c:if>
             </td>
         </tr>
     </table>

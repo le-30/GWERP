@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
-<%@include file="./../common/common.jsp" %>
+<%@include file="./../common/common.jsp" %>  
 
 <form id="empSearchForm" style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center;">
 	<select name="whatColumn" style="padding: 5px;">

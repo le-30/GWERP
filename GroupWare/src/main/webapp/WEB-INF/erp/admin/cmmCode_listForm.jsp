@@ -13,7 +13,7 @@
 		</select>
 		<input type="text" name="keyword" id="cmmCodekeywordInput" placeholder="검색어 입력"
 			   style="width: 200px; padding: 6px 10px; border-radius: 6px; border: 1px solid #ccc;">
-		<input type="button" value="검색" id="cmmCodesearchBtn"
+		<input type="button" value="검색" id="cmmCodeSearchBtn"
 			   style="padding: 6px 14px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;">
 	</form>
 
@@ -23,7 +23,7 @@
 	</c:if>
 
 	<!-- 목록 있는 경우 -->
-	<c:if test="${not empty lists}">
+	<c:if test="${not empty lists}">  
 		<!-- 헤더 -->
 		<div style="display: grid; grid-template-columns: 2fr 2fr 2fr 1fr 1fr; font-weight: bold; background: #f9f9f9; padding: 12px 10px; border-bottom: 2px solid #ddd; text-align: center;">
 			<div>공통코드 class</div>
@@ -40,9 +40,10 @@
 				<div style="text-align: center;">${cmmCode.cmm_cd}</div>
 				<div style="text-align: center;">${cmmCode.cmm_nm}</div>
 				<div style="text-align: center;">
-					<button class="open-edit-modal"
+					<button class="open-edit-modal2"
 							data-url="cmmCode_update.erp"
-							data-id="${cmmCode.cmm_nm}"
+							data-cmm_cd="${cmmCode.cmm_cd}"
+							data-cmm_class="${cmmCode.cmm_class}"
 							style="padding: 6px 14px; background-color: #ffc107; color: #212529; border: none; border-radius: 6px; cursor: pointer;">
 						수정
 					</button>

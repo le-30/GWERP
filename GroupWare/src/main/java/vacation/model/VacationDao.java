@@ -41,10 +41,10 @@ public class VacationDao {
 
 
     // �ް� ���� �޼��� (�������� emp_no �߰�)
-    public void vacationApproval(String vacation_no, String approver_emp_no) {
+    public void vacationApproval(String vacation_no, String appr_emp_no) {
         java.util.Map<String, Object> param = new java.util.HashMap<String, Object>();
         param.put("vacation_no", vacation_no);
-        param.put("approver_emp_no", approver_emp_no);
+        param.put("appr_emp_no", appr_emp_no);
         sqlSessionTemplate.update(namespace + ".vacationApproval", param);
     }
 
@@ -59,8 +59,11 @@ public class VacationDao {
     }
 
 
-	public int VacationReject(String vacation_no) {
-		int cnt = sqlSessionTemplate.update(namespace + ".VacationReject" + vacation_no);
+	public int VacationReject(String vacation_no,String appr_emp_no) {
+		 java.util.Map<String, Object> param = new java.util.HashMap<String, Object>();
+	        param.put("vacation_no", vacation_no);
+	        param.put("appr_emp_no", appr_emp_no);
+		int cnt = sqlSessionTemplate.update(namespace + ".VacationReject",param);
 		
 		return cnt;
 	}

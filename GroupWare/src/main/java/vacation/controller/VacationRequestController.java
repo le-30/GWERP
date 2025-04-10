@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import employee.model.EmployeeDao;
 import vacation.model.VacationBean;
 import vacation.model.VacationDao;
 
@@ -25,6 +26,9 @@ public class VacationRequestController {
 	@Autowired
 	private VacationDao vdao;
 	
+	@Autowired
+	EmployeeDao empDao;
+	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String showVacationForm() {
 		return getPage;
@@ -35,7 +39,8 @@ public class VacationRequestController {
 			BindingResult result, HttpSession session) {  
 		
 		ModelAndView mav = new ModelAndView();
-
+		
+		
 		// 유효성 검사 체크
 		if (result.hasErrors()) {
 			mav.setViewName(getPage);
@@ -44,6 +49,7 @@ public class VacationRequestController {
 
 		// 세션에서 emp_no 가져와서 Bean에 저장
 		String emp_no = (String) session.getAttribute("emp_no");
+		
 		
 
 	

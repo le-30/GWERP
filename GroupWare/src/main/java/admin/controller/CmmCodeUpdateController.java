@@ -27,10 +27,11 @@ public class CmmCodeUpdateController {
 	
 	
 	@RequestMapping(value=command, method=RequestMethod.GET)
-	public ModelAndView doAction(@RequestParam("id") String cmm_nm) {
+	public ModelAndView doAction(@RequestParam("cmm_cd") String cmm_cd,
+								 @RequestParam("cmm_class") String cmm_class) {
 		
 		ModelAndView mav = new ModelAndView();
-		CmmCodeBean cmmCodeBean = cmmCodeDao.getOneCmmCode(cmm_nm);
+		CmmCodeBean cmmCodeBean = cmmCodeDao.getOneCmmCode(cmm_cd,cmm_class);
 		
 		mav.addObject("cmmCodeBean",cmmCodeBean);
 		mav.setViewName(getPage);

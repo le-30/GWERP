@@ -60,6 +60,7 @@
     </c:if>
 
     <!-- 댓글 작성 -->
+   <c:if test="${notice.temporary_save == 0}">
     <form:form commandName="reply" method="post" action="reply_write.erp" id="norice_write_reply">
         <input type="hidden" name="emp_no" value="${sessionScope.emp_no}">
         <input type="hidden" name="emp_nm" value="${sessionScope.emp_nm}">
@@ -68,6 +69,7 @@
         <input type="hidden" name="whatColumn" value="${whatColumn}">
         <input type="hidden" name="keyword" value="${keyword}">
         <input type="hidden" name="kind" value="${kind}">
+  
 
         <div style="display: flex; gap: 10px; margin-top: 20px;">
             <textarea name="reply_content" rows="4" cols="60" style="flex-grow: 1;">${reply.reply_content}</textarea>
@@ -94,4 +96,5 @@
             </c:if>
         </c:forEach>
     </div>
+  </c:if>
 </div>

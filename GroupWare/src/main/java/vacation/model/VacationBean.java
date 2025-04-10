@@ -12,6 +12,23 @@ public class VacationBean {
     private Integer total_days;
     private String vacation_status;
     private String appr_emp_no;
+    private String req_emp_nm;
+   
+    
+    
+    public String getReq_emp_nm() {
+		return req_emp_nm;
+	}
+	public void setReq_emp_nm(String req_emp_nm) {
+		this.req_emp_nm = req_emp_nm;
+	}
+	public String getAppr_emp_nm() {
+		return appr_emp_nm;
+	}
+	public void setAppr_emp_nm(String appr_emp_nm) {
+		this.appr_emp_nm = appr_emp_nm;
+	}
+	private String appr_emp_nm;
     
 	public String getVacation_no() {
 		return vacation_no;

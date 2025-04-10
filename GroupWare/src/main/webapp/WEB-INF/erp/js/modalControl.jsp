@@ -44,4 +44,24 @@ function openModal(page) {
 			    }
 			  });
 			});//상세페이지 들어가서 수정,전달,답장 등을 위한 모달
+		
+			$(document).on('click', '.open-edit-modal2', function () {  
+			  const url = $(this).data('url');
+			  const cmm_cd = $(this).data('cmm_cd');
+			  const cmm_class = $(this).data('cmm_class');
+
+			  $.ajax({
+			    url: url,
+			    method: 'GET',
+			    data: { cmm_cd: cmm_cd,
+			    		cmm_class : cmm_class},
+			    success: function (html) {
+			      $('#modalContent').html(html);
+			      $('#customModal').show();
+			    },
+			    error: function () {
+			      alert('수정 모달 로딩 실패');
+			    }
+			  });
+			});//상세페이지 들어가서 수정,전달,답장 등을 위한 모달
 </script>

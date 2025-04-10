@@ -3,7 +3,7 @@
 
 <script>
 
-window.submitBound = false;
+let submitBound = false;
 
 window.formSubmitConfig = window.formSubmitConfig || {
 	emp_insert: {
@@ -64,15 +64,15 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	mail_reply : {
 		url : "ymh_messageReply.erp",
 		formId : "MessageReplyForm",
-		target : "received",
+		target : "send",
 		page : "msg",
 		userFormData: true
 	},
 	mail_pass : {
 		url : "ymh_messagePass.erp",
 		formId : "MessagePassForm",
-		target : "received",
-		page : "msg",
+		target : "send",
+		page : "msg"
 	},
 	notice_insert: {
 		url: "notice_write.erp",
@@ -99,12 +99,23 @@ window.formSubmitConfig = window.formSubmitConfig || {
 		url: "vacation_insert.erp",
 		formId: "vacationRequest",
 		target: "vacation",
-		page : "vacation",
+		page : "vacation"
+	},
+	notice_save: {
+		url: "notice_save.erp",
+		formId: "notice_writeForm",
+		target: "myNotice",
+		page : "notice"
+	},
+	appr_reject: {
+		url: "rejectForm.erp",
+		formId: "rejectForm",
+		target: "apprList",
+		page :"appr"
 	}
 };
 	
-if (!window.submitBound) {
-	window.submitBound =true;
+if (!submitBound) {
 	$(document).off('click', '#submitBtn').on('click', '#submitBtn', function (event) {
 	    const config = formSubmitConfig[$(this).data('modal')];
 	    const $form = $('#' + config.formId);
@@ -148,7 +159,6 @@ if (!window.submitBound) {
 				   const targetPage = config.target || config.defaultRedirect;
 				   const page = config.page;
 				
-				   
 		        if (redirectPage) {
 		          $.ajax({
 		            url: redirectPage,

@@ -5,19 +5,19 @@
 <h4 style="margin-bottom: 20px; font-size: 20px; font-weight: bold; color: #2c3e50;">
     🕘 출근표
 </h4>
-
+<div id="commuteListContainer">
 <!-- 권한 있는 사람만 검색 -->
 <c:if test="${cmmNm eq '사장' or deptNm eq '인사팀' or cmmNm eq '부장'}">
-    <form method="get" action="list/commute.erp" style="display: flex; gap: 10px; margin-bottom: 20px;">
-        <select name="type" style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 5px;">
+    <form id="commuteSeaarchForm" style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <select name="whatColumn" style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 5px;">
             <option value="">선택</option>
             <option value="empNm">사원이름</option>
             <option value="deptNm">부서</option>
             <option value="cmmNm">직급</option>
         </select>
-        <input type="text" name="keyword" placeholder="검색어 입력"
+        <input type="text" name="keyword" id="commutekeywordInput" placeholder="검색어 입력"
                style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 5px;">
-        <input type="submit" value="검색"
+        <input type="button" value="검색" id="commuteSearchBtn"
                style="padding: 6px 14px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
     </form>
 </c:if>
@@ -57,7 +57,7 @@
         ${pageInfo.pagingHtml}
     </div>
 </div>
-
+</div>
 <!-- 퇴근 버튼 -->
 <div style="margin-top: 30px; text-align: right;">
     <a href="check_out/commute.erp"

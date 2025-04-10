@@ -12,16 +12,16 @@
     </div>
 <form:form commandName="cmmCodeBean" action="cmmCode_update.erp" method="post" id="cmmCodeupdateForm">
 
-<input type="hidden" name="redirectPage" value="cmmCode_update.erp?cmm_nm=${cmmCodeBean.cmm_nm}">
+<input type="hidden" name="redirectPage" value="cmmCode_update.erp?cmm_cd=${cmmCodeBean.cmm_cd}&cmm_class=${cmmCodeBean.cmm_class}">
       <div class="form-group">
         <label>코드 Class</label>
-        <input type="text" name="cmm_class" value="${cmmCodeBean.cmm_class}">
+        <input type="text" name="cmm_class" value="${cmmCodeBean.cmm_class}" readonly>
       </div>
       <form:errors path="cmm_class" cssClass="err" />
 
       <div class="form-group">
         <label> 공통 코드</label>
-        <input type="text" name="cmm_cd" value="${cmmCodeBean.cmm_cd}">
+        <input type="text" name="cmm_cd" value="${cmmCodeBean.cmm_cd}" readonly>
       </div>
       <form:errors path="cmm_cd" cssClass="err" />
 

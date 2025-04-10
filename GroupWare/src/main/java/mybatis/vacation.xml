@@ -25,7 +25,7 @@
 		#{end_dt},
 		(#{end_dt} -
 		#{start_dt} + 1),
-		'승인 대기'
+		'대기'
 		)
 	</insert>
 
@@ -42,8 +42,22 @@
 
 	<select id="getVacationList"
 		resultType="vacation.model.VacationBean">
-		SELECT *
-		FROM vacation
+		SELECT 
+    v.vacation_no,
+    v.vacation_type,
+    v.req_emp_no,
+    req_emp.emp_nm AS req_emp_nm,
+    v.vacation_reason,
+    v.start_dt,
+    v.end_dt,
+    v.total_days,
+    v.vacation_status,
+    v.appr_emp_no,
+    appr_emp.emp_nm AS appr_emp_nm
+	FROM vacation v
+	LEFT JOIN employee req_emp ON v.req_emp_no = req_emp.emp_no
+	LEFT JOIN employee appr_emp ON v.appr_emp_no = appr_emp.emp_no
+	order by vacation_status
 	</select>
 
 	<update id="vacationApproval">

@@ -19,6 +19,7 @@ public class RouterController {
 			@RequestParam(value="keyword", required = false) String keyword,
 			@RequestParam(value="pageNumber", required = false) String pageNumber) throws UnsupportedEncodingException {
 
+		System.out.println("router page : " + page);
 		System.out.println("router whatColumn : " + whatColumn);
 		System.out.println("router keyword : " + keyword);
 		System.out.println("router pageNumber : " + pageNumber);
@@ -34,7 +35,6 @@ public class RouterController {
 		if ("emp".equals(page)) {
 		    return "redirect:/lsh_list.erp" + queryParams;
 		} else if("dept".equals(page)){
-
 			return "redirect:/dept_list.erp" + queryParams;
 		} else if("cmmCode".equals(page)){
 			return "redirect:/cmm_list.erp" + queryParams;
@@ -65,9 +65,7 @@ public class RouterController {
 		} else if("vacationApproval".equals(page)) {
 			return "redirect:/vacationList.erp" + queryParams;
 		} else if("vacationleave".equals(page)){
-
 			return "redirect:/employeeVacation.erp";
-
 		} else if("salary".equals(page)){
 			return "redirect:/salary/list.erp";
 		}

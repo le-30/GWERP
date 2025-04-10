@@ -4,12 +4,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/styles/modal.css">
 
 <script>
-    function saveNotice() {
-        var form = document.getElementById("notice_writeForm");
-        form.action = "notice_save.erp";
-        form.submit();
-    }
-
     function closeModal() {
         document.getElementById("customModal").style.display = "none";
         document.getElementById("modalContent").innerHTML = "";
@@ -58,7 +52,7 @@
       </div>
 
       <div class="modal-footer">
-        <input type="button" value="임시저장" onclick="saveNotice()" class="btn btn-secondary">
+        <input type="button" value="임시저장" id="submitBtn" data-modal="notice_save" class="btn btn-secondary">
         <input type="button" value="추가하기" id="submitBtn" data-modal="notice_insert" class="btn btn-primary">
       </div>
     </form:form>
