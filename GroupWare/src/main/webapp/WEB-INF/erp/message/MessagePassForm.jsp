@@ -53,9 +53,7 @@
 			<span class="modal-title">📨 메일 전달</span>
 			<button type="button" class="close-btn" onclick="closeModal()">✕</button>
 		</div>
-
-<!-- 폼 유지: form:form 사용 -->
-        <form:form action="ymh_messageinsert.erp" commandName="mb" method="post" id="MessagePassForm">
+        <form action="ymh_messageinsert.erp" method="post" id="MessagePassForm">
             <input type="hidden" value="${sessionScope.emp_no}" name="send_emp_no">
             <input type="hidden" value="${mb.msg_no}" name="msg_no">
             <input type="hidden" name="redirectPage" value="messageDetail.erp?no=${mb.msg_no}">
@@ -70,7 +68,7 @@
                         <c:forEach var="eb" items="${list}">
                             <c:if test="${eb.emp_no != sessionScope.emp_no}">
                                 <div class="checkbox-item">
-                                    <input type="checkbox" name="receive_emp_no" value="${eb.emp_no}">
+                                    <input type="checkbox" name="receive_emp_no" value="${eb.emp_no}" required>
                                     <label>${eb.emp_nm}</label>
                                 </div>
                             </c:if>
@@ -96,16 +94,15 @@
             <!-- 첨부파일 추가 (파일 전송 가능) -->
             <div>
                 <div class="form-group">
-                    <label>${attach2.org_file_name }</label> 
+                    <label>첨부파일</label><label style="display: inline-block; width: 300px;">${attach2.org_file_name}</label>
                 </div>
             </div>
 
             <div class="modal-footer">
                 <input type="button" value="메일 전송" id="submitBtn" data-modal="mail_pass" class="btn btn-primary">
             </div>
-        </form:form>
+        </form>
     </div>
 </div>
-
 
 <%@include file = "./../js/validCheck.jsp"%>

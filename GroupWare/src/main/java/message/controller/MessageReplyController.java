@@ -26,7 +26,7 @@ public class MessageReplyController {
 	private final String command = "ymh_messageReply.erp";
 	private String getPage = "message/MessageReplyForm";
 	private final String gotoPage ="redirect:/main.erp?page=send";
-	
+
 	FileUploadController fileUploadController = new FileUploadController(); 
 	@Autowired
 	MessageDao mdao;
@@ -56,35 +56,34 @@ public class MessageReplyController {
 								@RequestParam("file") MultipartFile file) {
 
 		System.out.println("reply receive_no : " + mb.getReceive_emp_no());
-		
+
 		String savedFileName = fileUploadController.uploadFile(file, response);
-		
-		if (!file.isEmpty()) {
-		    System.out.println("���� �̸�: " + file.getOriginalFilename());
-		    System.out.println("���� ũ��: " + file.getSize());
-		}
-		
+
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		if (mb.getMsg_title() == null || mb.getMsg_title().trim().isEmpty()) {
-		    mb.setMsg_title(file.getOriginalFilename());
+			mb.setMsg_title(file.getOriginalFilename());
 		}
 		if (mb.getMsg_content() == null || mb.getMsg_content().trim().isEmpty()) {
-		    mb.setMsg_content(file.getOriginalFilename());
+			mb.setMsg_content(file.getOriginalFilename());
 		}
-		
-		String msg_no_seq = mdao.selectOneNum();
-		
-		System.out.println("msg_no_seq : " + msg_no_seq);
-		
-		AttachBean attach = new AttachBean();
-        attach.setCon_key1(msg_no_seq); 
-        attach.setOrg_file_name(file.getOriginalFilename());
-        attach.setServer_file_name(savedFileName);
-        attach.setFile_size(file.getSize());
 
-        int attachInsertCount = attachDao.insertAttach(attach);
-		
+		int cnt = -1;
+		cnt = mdao.SendMessage(mb);
+
+		String msg_no_seq = mdao.selectOneNum();
+
+		System.out.println("msg_no_seq : " + msg_no_seq);
+
+		AttachBean attach = new AttachBean();
+		attach.setCon_key1(msg_no_seq); 
+		attach.setOrg_file_name(file.getOriginalFilename());
+		attach.setServer_file_name(savedFileName);
+		attach.setFile_size(file.getSize());
+
+		int attachInsertCount = attachDao.insertAttach(attach);
+
 		/*
 		 * if(result.hasErrors()) { MessageBean mb2 = mdao.detailMessage(msg2_no);
 		 * mav.addObject("mb2",mb2);
@@ -94,12 +93,10 @@ public class MessageReplyController {
 		 * return mav; }
 		 */
 
-		int cnt = -1;
 
-		cnt = mdao.SendMessage(mb);
-		
+
 		System.out.println("reply cnt : " + cnt);
-		
+
 		mav.setViewName(gotoPage);
 
 		return mav;

@@ -64,14 +64,14 @@ window.formSubmitConfig = window.formSubmitConfig || {
 	mail_reply : {
 		url : "ymh_messageReply.erp",
 		formId : "MessageReplyForm",
-		target : "received",
+		target : "send",
 		page : "msg",
 		userFormData: true
 	},
 	mail_pass : {
 		url : "ymh_messagePass.erp",
 		formId : "MessagePassForm",
-		target : "received",
+		target : "send",
 		page : "msg",
 	},
 	notice_insert: {
